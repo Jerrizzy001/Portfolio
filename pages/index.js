@@ -93,7 +93,7 @@ export default function Home() {
         >
           {/* ✅ FIXED LINK */}
           <Link
-            href="/#about"
+            href="/about"
             className="inline-block bg-black text-white dark:bg-white dark:text-black font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
           >
             Learn More About Me →

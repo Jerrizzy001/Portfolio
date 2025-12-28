@@ -39,7 +39,6 @@ export default function Navbar() {
             Home
           </Link>
 
-          {/* ✅ UPDATED: Projects now goes to the Projects page */}
           <Link
             href="/project"
             className={`hover:text-blue-500 dark:hover:text-indigo-400 transition ${
@@ -65,6 +64,16 @@ export default function Navbar() {
             }`}
           >
             About
+          </Link>
+
+          {/* ✅ NEW: Contact */}
+          <Link
+            href="/contact"
+            className={`hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+              router.pathname === '/contact' ? 'text-blue-500 dark:text-indigo-400' : ''
+            }`}
+          >
+            Contact
           </Link>
 
           {/* Theme Toggle */}
@@ -114,7 +123,6 @@ export default function Navbar() {
             Home
           </Link>
 
-          {/* ✅ UPDATED: Projects now goes to the Projects page */}
           <Link
             href="/project"
             onClick={closeMenu}
@@ -143,6 +151,19 @@ export default function Navbar() {
             }`}
           >
             About
+          </Link>
+
+          {/* ✅ NEW: Contact */}
+          <Link
+            href="/contact"
+            onClick={closeMenu}
+            className={`py-2 ${
+              router.pathname === '/contact'
+                ? 'text-blue-500 dark:text-indigo-400 font-semibold'
+                : ''
+            }`}
+          >
+            Contact
           </Link>
         </div>
       )}
