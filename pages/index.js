@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Navbar from '../components/Navbar';
-import useTypewriter from '../hooks/useTypewriter';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Navbar from "../components/Navbar";
+import useTypewriter from "../hooks/useTypewriter";
+import Link from "next/link"; // ✅ ADD THIS
 
 const slides = [
   {
@@ -77,8 +78,8 @@ export default function Home() {
               onClick={() => setIndex(i)}
               className={`w-3 h-3 rounded-full transition-all ${
                 index === i
-                  ? 'bg-black dark:bg-white scale-125'
-                  : 'bg-gray-300 dark:bg-gray-600'
+                  ? "bg-black dark:bg-white scale-125"
+                  : "bg-gray-300 dark:bg-gray-600"
               }`}
               aria-label={`Go to slide ${i + 1}`}
             />
@@ -90,18 +91,15 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
         >
-          <a
+          {/* ✅ FIXED LINK */}
+          <Link
             href="/#about"
             className="inline-block bg-black text-white dark:bg-white dark:text-black font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
           >
             Learn More About Me →
-          </a>
+          </Link>
         </motion.div>
       </section>
-
-  
-
-      {/* PROJECTS */}
     </div>
   );
 }
