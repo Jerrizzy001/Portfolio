@@ -36,15 +36,15 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-black dark:bg-gradient-to-br dark:from-black dark:via-purple-900 dark:to-indigo-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 text-black dark:bg-gradient-to-br dark:from-black dark:via-purple-900 dark:to-indigo-900 dark:text-white transition-colors duration-300">
       <Navbar />
 
-      <main className="pt-32 px-6 max-w-4xl mx-auto text-center">
+      <main className="pt-28 sm:pt-32 px-4 sm:px-6 max-w-4xl mx-auto text-center pb-16">
         <motion.h1
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl md:text-6xl font-bold mb-6"
+          className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6"
         >
           Contact Me
         </motion.h1>
@@ -53,13 +53,13 @@ export default function Contact() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-lg text-gray-700 dark:text-gray-300 mb-14"
+          className="text-base sm:text-lg text-gray-700 dark:text-gray-300 mb-10 sm:mb-14"
         >
-          Want to collaborate, connect, or just say hi?  
+          Want to collaborate, connect, or just say hi?
           You can reach me through any of the platforms below.
         </motion.p>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
           {contacts.map((item, i) => (
             <motion.a
               key={item.label}
@@ -69,19 +69,19 @@ export default function Contact() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + i * 0.1 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-4 p-6 rounded-2xl
+              className="flex items-center gap-4 p-5 sm:p-6 rounded-2xl
                          bg-white/80 dark:bg-black/40 backdrop-blur
                          border border-white/10 shadow-lg hover:shadow-xl transition"
             >
-              <div className="text-indigo-600 dark:text-indigo-400">
+              <div className="text-indigo-600 dark:text-indigo-400 shrink-0">
                 {item.icon}
               </div>
 
-              <div className="text-left">
-                <p className="font-semibold text-lg">{item.label}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400 break-all">
+              <div className="text-left min-w-0">
+                <p className="font-semibold text-base sm:text-lg">{item.label}</p>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 truncate">
                   {item.value}
                 </p>
               </div>

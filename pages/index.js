@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "../components/Navbar";
 import useTypewriter from "../hooks/useTypewriter";
-import Link from "next/link"; // ✅ ADD THIS
+import Link from "next/link";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const slides = [
   {
@@ -44,13 +45,13 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-black dark:bg-gradient-to-br dark:from-black dark:via-purple-900 dark:to-indigo-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 text-black dark:bg-gradient-to-br dark:from-black dark:via-purple-900 dark:to-indigo-900 dark:text-white transition-colors duration-300">
       <Navbar />
 
       {/* HERO */}
       <section
         id="home"
-        className="pt-28 px-6 text-center min-h-screen flex flex-col items-center justify-center"
+        className="pt-28 px-4 sm:px-6 text-center min-h-screen flex flex-col items-center justify-center"
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -59,13 +60,13 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.6 }}
-            className="mb-6 max-w-2xl"
+            className="mb-6 max-w-2xl w-full"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-wide">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-wide">
               {typedTitle}
               <span className="animate-pulse">|</span>
             </h1>
-            <p className="text-lg text-gray-700 dark:text-gray-300">
+            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 px-2">
               {slides[index].description}
             </p>
           </motion.div>
@@ -90,14 +91,44 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
+          className="flex flex-col items-center gap-5"
         >
-          {/* ✅ FIXED LINK */}
-          <Link
-            href="/about"
-            className="inline-block bg-black text-white dark:bg-white dark:text-black font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
-          >
-            Learn More About Me →
-          </Link>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/about"
+              className="inline-block bg-black text-white dark:bg-white dark:text-black font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
+            >
+              Learn More About Me →
+            </Link>
+            <Link
+              href="/project"
+              className="inline-block border-2 border-black dark:border-white text-black dark:text-white font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
+            >
+              View My Projects
+            </Link>
+          </div>
+
+          {/* Social quick-links */}
+          <div className="flex items-center gap-4 mt-1">
+            <a
+              href="https://github.com/Jerrizzy001"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition"
+            >
+              <FaGithub size={22} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/jerry-nwachi-398a93258"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
+            >
+              <FaLinkedin size={22} />
+            </a>
+          </div>
         </motion.div>
       </section>
     </div>

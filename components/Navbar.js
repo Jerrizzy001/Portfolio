@@ -19,7 +19,7 @@ export default function Navbar() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav className="fixed w-full bg-white dark:bg-black shadow-md z-50 transition-colors duration-300">
+    <nav className="fixed w-full bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200/60 dark:border-white/10 shadow-sm z-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link
           href="/"
@@ -112,7 +112,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white dark:bg-black border-t dark:border-gray-800 px-4 pb-4 flex flex-col space-y-4 text-gray-800 dark:text-white">
+        <div className="md:hidden bg-white/90 dark:bg-black/90 backdrop-blur-md border-t border-gray-200/60 dark:border-gray-800 px-4 pb-4 flex flex-col space-y-4 text-gray-800 dark:text-white">
           <Link
             href="/"
             onClick={closeMenu}

@@ -30,13 +30,13 @@ export default function About() {
   );
 
   return (
-    <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 text-black dark:bg-black dark:text-white transition-colors duration-300">
       <Navbar />
 
-      <section className="pt-28 px-6 max-w-4xl mx-auto">
+      <section className="pt-28 px-4 sm:px-6 max-w-4xl mx-auto pb-16">
         {/* Title */}
         <motion.h1
-          className="text-4xl md:text-5xl font-bold mb-8 text-center"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -49,7 +49,7 @@ export default function About() {
         {[p1, p2, p3, p4].map((text, i) => (
           <motion.p
             key={i}
-            className="text-lg leading-relaxed mb-6 text-gray-700 dark:text-gray-300"
+            className="text-base sm:text-lg leading-relaxed mb-6 text-gray-700 dark:text-gray-300"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -67,10 +67,10 @@ export default function About() {
           transition={{ delay: 4.2 }}
         >
           <a
-            href="/connect"
-            className="inline-block px-8 py-3 rounded-full 
-                       bg-gradient-to-r from-indigo-600 to-purple-600 
-                       text-white font-semibold shadow-lg 
+            href="/contact"
+            className="inline-block px-8 py-3 rounded-full
+                       bg-gradient-to-r from-indigo-600 to-purple-600
+                       text-white font-semibold shadow-lg
                        hover:scale-105 hover:shadow-xl transition"
           >
             Let’s Connect
