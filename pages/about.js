@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import useTypewriter from '../hooks/useTypewriter';
 
@@ -6,40 +7,61 @@ export default function About() {
   const title = useTypewriter('About Me', 35);
 
   const p1 = useTypewriter(
-    "Hi, I’m Jerry Nwachi, a passionate software development student based in Toronto. I’m currently studying towards a Bachelor’s in Software Development at Seneca Polytechnic, with a strong foundation in full-stack development, cloud platforms, and databases.",
+    "I'm Jerry Nwachi — a Software Development student at Seneca Polytechnic in Toronto, working towards my Honours Bachelor of Technology (expected Aug 2027). I have hands-on experience building full-stack applications, automating data pipelines, and integrating systems via REST APIs.",
     18,
     400
   );
 
   const p2 = useTypewriter(
-    "I’ve built dynamic web applications using Next.js, React, Node.js, and Django. I’m comfortable working across the stack — from reusable UI components to backend logic, REST APIs, and database integration. I value clean, scalable code and continuous improvement.",
+    "I'm comfortable in Python and JavaScript across the full stack — React and Next.js on the frontend, Node.js and FastAPI on the backend, and both MySQL and MongoDB for data. I use AI-assisted tools like GitHub Copilot, Claude, and Cursor in my daily workflow, and I'm familiar with Docker, AWS, and MLflow for building and tracking production-ready systems.",
     18,
-    1400
+    1600
   );
 
   const p3 = useTypewriter(
-    "Beyond development, I’ve worked as a Student Ambassador at Seneca and a Facility Attendant with the City of Markham. These roles strengthened my communication skills, technical troubleshooting, and ability to work in fast-paced environments.",
+    "Professionally, I worked as a Junior IT Support Helpdesk contractor at the City of Markham, where I documented technical procedures, gathered requirements from cross-functional teams, and coordinated system deployments. I also hold certifications in Data Visualization with Power BI (Microsoft) and Harvard's Introduction to AI with Python.",
     18,
-    2400
+    2800
   );
 
   const p4 = useTypewriter(
-    "I’m currently open to internship and entry-level opportunities where I can contribute, learn from experienced developers, and grow through real-world projects.",
+    "Right now, I'm completing an internship at YarlMetal Fabrications Inc. as an AI Systems Integrator. I map manual workflows across their operations, identify repetitive bottlenecks, and build automations that make the team's process easier to track, repeat, and scale.",
     18,
-    3300
+    4000
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 text-black dark:bg-black dark:text-white transition-colors duration-300">
+    <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
       <section className="pt-28 px-4 sm:px-6 max-w-4xl mx-auto pb-16">
+
+        {/* Profile photo */}
+        <motion.div
+          className="flex justify-center mb-8"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+          <div className="relative p-[3px] rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-xl shadow-indigo-300/30 dark:shadow-indigo-900/40">
+            <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden bg-white dark:bg-black">
+              <Image
+                src="/profile.jpg"
+                alt="Jerry Nwachi"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </motion.div>
+
         {/* Title */}
         <motion.h1
           className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
           {title}
           <span className="animate-pulse">|</span>
@@ -64,7 +86,7 @@ export default function About() {
           className="mt-12 text-center"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 4.2 }}
+          transition={{ delay: 5.5 }}
         >
           <a
             href="/contact"
@@ -73,7 +95,7 @@ export default function About() {
                        text-white font-semibold shadow-lg
                        hover:scale-105 hover:shadow-xl transition"
           >
-            Let’s Connect
+            Let's Connect
           </a>
         </motion.div>
       </section>

@@ -7,7 +7,7 @@ import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
@@ -17,15 +17,16 @@ export default function Navbar() {
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+  const isDark = resolvedTheme === 'dark';
+  const toggleTheme = () => setTheme(isDark ? 'light' : 'dark');
 
   return (
-    <nav className="fixed w-full bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200/60 dark:border-white/10 shadow-sm z-50 transition-colors duration-300">
+    <nav className="fixed w-full surface-panel backdrop-blur-md border-b shadow-sm z-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <Link
-          href="/"
-          className="text-xl font-bold text-gray-900 dark:text-white hover:text-blue-500 dark:hover:text-indigo-400 transition"
-        >
-          Jerry Nwachi
+        <Link href="/" className="flex items-center gap-2 group">
+          <span className="text-xl font-extrabold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent tracking-tight">
+            Jerrizzy
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -79,11 +80,12 @@ export default function Navbar() {
           {/* Theme Toggle */}
           {mounted && (
             <button
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              onClick={toggleTheme}
               className="ml-4 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-              aria-label="Toggle Theme"
+              aria-label="Toggle theme"
+              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
-              {theme === 'light' ? <MdDarkMode size={20} /> : <MdLightMode size={20} />}
+              {isDark ? <MdLightMode size={20} /> : <MdDarkMode size={20} />}
             </button>
           )}
         </div>
@@ -92,11 +94,12 @@ export default function Navbar() {
         <div className="md:hidden flex items-center space-x-2">
           {mounted && (
             <button
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              onClick={toggleTheme}
               className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-              aria-label="Toggle Theme"
+              aria-label="Toggle theme"
+              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
-              {theme === 'light' ? <MdDarkMode size={20} /> : <MdLightMode size={20} />}
+              {isDark ? <MdLightMode size={20} /> : <MdDarkMode size={20} />}
             </button>
           )}
 
@@ -112,7 +115,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white/90 dark:bg-black/90 backdrop-blur-md border-t border-gray-200/60 dark:border-gray-800 px-4 pb-4 flex flex-col space-y-4 text-gray-800 dark:text-white">
+        <div className="md:hidden surface-panel backdrop-blur-md border-t px-4 pb-4 flex flex-col space-y-4 text-gray-800 dark:text-white">
           <Link
             href="/"
             onClick={closeMenu}

@@ -45,7 +45,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-black dark:bg-gradient-to-br dark:from-black dark:via-purple-900 dark:to-indigo-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
       {/* HERO */}

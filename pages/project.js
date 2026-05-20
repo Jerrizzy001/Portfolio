@@ -40,16 +40,16 @@ const projects = [
   },
   {
     id: "portfolio-website",
-    title: "Developer Portfolio (This Site)",
+    title: "My Portfolio",
     tech: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "next-themes", "Vercel"],
     description:
-      "A fully responsive personal portfolio built with Next.js 15, Tailwind CSS v4, and Framer Motion — featuring dark/light mode, animated typewriter text, and smooth page transitions.",
+      "A fully responsive personal portfolio built with Next.js, Tailwind CSS v4, and Framer Motion — featuring dark/light mode, animated typewriter text, and smooth page transitions.",
     category: "Web Dev",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001",
-    image: "",
+    image: "/projects/portfolio.png",
     details: [
-      "Built with Next.js 15 and React 19 for fast, server-rendered pages and optimal performance.",
+      "Built with Next.js and React for fast, server-rendered pages and optimal performance.",
       "Tailwind CSS v4 utility-first styling with custom animations (spin-slow, orbit).",
       "Framer Motion for page-entry animations, hover effects, and animated presence transitions.",
       "Dark / light mode toggle powered by next-themes with instant, flash-free switching.",
@@ -67,7 +67,7 @@ const projects = [
     category: "Data Science",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001/Fraud-Detection-System",
-    image: "",
+    image: "/projects/fraud-detection.svg",
     details: [
       "Built a classification model to detect fraudulent transactions from labelled datasets.",
       "Applied data preprocessing techniques including feature scaling, handling class imbalance, and outlier removal.",
@@ -86,7 +86,7 @@ const projects = [
     category: "Data Science",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001/HR-Analysis-Dashboard",
-    image: "",
+    image: "/projects/hr-analytics.png",
     details: [
       "Analysed HR datasets to uncover patterns in employee attrition and retention.",
       "Built visualisations for department-level headcount, salary bands, and tenure distribution.",
@@ -122,7 +122,7 @@ export default function ProjectPage() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 text-black dark:bg-gradient-to-br dark:from-black dark:via-purple-900 dark:to-indigo-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
       <main className="pt-28 px-6 pb-20 max-w-7xl mx-auto">
@@ -226,7 +226,7 @@ export default function ProjectPage() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 10 }}
               transition={{ duration: 0.25 }}
-              className="relative w-full max-w-3xl bg-white dark:bg-black rounded-2xl p-5 sm:p-6 shadow-xl border border-white/10 max-h-[90vh] overflow-y-auto"
+              className="relative w-full max-w-3xl surface-panel rounded-lg p-5 sm:p-6 shadow-xl border max-h-[90vh] overflow-y-auto"
             >
               <div className="flex justify-between items-start mb-4 gap-3">
                 <div className="flex flex-col gap-1.5">
@@ -320,6 +320,7 @@ function CardImage({ project, index }) {
       fill
       className="object-contain"
       priority={index === 0}
+      unoptimized={project.image.endsWith(".svg")}
       onError={() => setImgError(true)}
     />
   );
@@ -337,12 +338,13 @@ function ModalImage({ project }) {
     );
   }
   return (
-    <div className="relative w-full h-40 sm:h-48 rounded-xl overflow-hidden bg-black border border-white/10 mb-5">
+    <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-950 border border-gray-200 dark:border-white/10 mb-5">
       <Image
         src={project.image}
         alt={project.title}
         fill
         className="object-contain"
+        unoptimized={project.image.endsWith(".svg")}
         onError={() => setImgError(true)}
       />
     </div>
@@ -357,7 +359,7 @@ function ProjectCard({ project, onView, index }) {
     <motion.div
       variants={cardIn}
       whileHover={{ y: -10, scale: 1.01 }}
-      className="rounded-2xl overflow-hidden border border-white/10 bg-white/85 dark:bg-black/40 backdrop-blur shadow-lg hover:shadow-2xl transition relative"
+      className="rounded-lg overflow-hidden border surface-panel backdrop-blur shadow-lg hover:shadow-2xl transition relative"
     >
       <motion.div
         animate={{ y: [0, -10, 0] }}
@@ -368,7 +370,7 @@ function ProjectCard({ project, onView, index }) {
           ease: "easeInOut",
         }}
       >
-        <div className="relative w-full h-48 sm:h-56 bg-black">
+        <div className="relative w-full h-48 sm:h-56 bg-slate-100 dark:bg-slate-950">
           <CardImage project={project} index={index} />
         </div>
 

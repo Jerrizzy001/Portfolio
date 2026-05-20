@@ -165,7 +165,7 @@ export default function Skills() {
   const [active, setActive] = useState(null);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-black text-black dark:text-white transition-colors duration-300">
+    <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
       <section className="pt-28 px-4 sm:px-6 max-w-5xl mx-auto pb-16">
@@ -201,7 +201,7 @@ export default function Skills() {
                     <button
                       key={id}
                       onClick={() => setActive(id)}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-sm font-medium transition hover:shadow-md ${
+                      className={`flex items-center gap-3 px-4 py-3 rounded-lg border text-sm font-medium transition hover:shadow-md ${
                         active === id
                           ? 'bg-indigo-600 text-white border-indigo-600 dark:bg-indigo-500 dark:border-indigo-500'
                           : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:border-indigo-400 dark:hover:border-indigo-500'
@@ -233,7 +233,7 @@ export default function Skills() {
                 animate={{ scale: 1, y: 0, opacity: 1 }}
                 exit={{ scale: 0.95, y: 16, opacity: 0 }}
                 transition={{ duration: 0.22 }}
-                className="bg-white dark:bg-gray-900 p-6 rounded-2xl max-w-md w-full shadow-2xl relative border border-gray-100 dark:border-white/10"
+                className="surface-panel p-6 rounded-lg max-w-md w-full shadow-2xl relative border"
                 onClick={(e) => e.stopPropagation()}
               >
                 {(() => {

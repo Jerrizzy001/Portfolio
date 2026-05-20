@@ -1,0 +1,31 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#0B1020"/>
+  <path d="M0 0H1280V720H0V0Z" fill="url(#bg)"/>
+  <rect x="96" y="92" width="1088" height="536" rx="24" fill="#F8FAFC" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  <rect x="142" y="140" width="420" height="70" rx="14" fill="#F8FAFC" fill-opacity="0.11"/>
+  <rect x="165" y="164" width="188" height="14" rx="7" fill="#A7F3D0"/>
+  <rect x="165" y="188" width="294" height="8" rx="4" fill="#CBD5E1" fill-opacity="0.55"/>
+  <rect x="142" y="246" width="420" height="284" rx="18" fill="#020617" fill-opacity="0.5" stroke="#FFFFFF" stroke-opacity="0.1"/>
+  <path d="M186 462L251 388L317 423L383 302L449 340L518 270" stroke="#38BDF8" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M186 476L251 428L317 447L383 374L449 402L518 354" stroke="#F97316" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="518" cy="270" r="16" fill="#38BDF8"/>
+  <circle cx="383" cy="302" r="16" fill="#A7F3D0"/>
+  <rect x="622" y="140" width="516" height="390" rx="18" fill="#020617" fill-opacity="0.5" stroke="#FFFFFF" stroke-opacity="0.1"/>
+  <rect x="670" y="196" width="160" height="28" rx="14" fill="#A7F3D0" fill-opacity="0.88"/>
+  <rect x="670" y="252" width="348" height="16" rx="8" fill="#CBD5E1" fill-opacity="0.52"/>
+  <rect x="670" y="292" width="420" height="16" rx="8" fill="#CBD5E1" fill-opacity="0.36"/>
+  <rect x="670" y="332" width="294" height="16" rx="8" fill="#CBD5E1" fill-opacity="0.44"/>
+  <rect x="670" y="408" width="158" height="54" rx="14" fill="#EF4444" fill-opacity="0.88"/>
+  <rect x="856" y="408" width="158" height="54" rx="14" fill="#22C55E" fill-opacity="0.86"/>
+  <path d="M982 174L1042 210V286C1042 346 1014 395 982 413C950 395 922 346 922 286V210L982 174Z" fill="#38BDF8" fill-opacity="0.18" stroke="#38BDF8" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M961 286L978 303L1007 260" stroke="#A7F3D0" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="604" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="800">Fraud Detection System</text>
+  <text x="142" y="644" fill="#CBD5E1" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="500">Machine learning risk scoring and suspicious-pattern analysis</text>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1020"/>
+      <stop offset="0.48" stop-color="#172554"/>
+      <stop offset="1" stop-color="#064E3B"/>
+    </linearGradient>
+  </defs>
+</svg>

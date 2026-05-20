@@ -36,7 +36,7 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-black dark:bg-gradient-to-br dark:from-black dark:via-purple-900 dark:to-indigo-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
       <main className="pt-28 sm:pt-32 px-4 sm:px-6 max-w-4xl mx-auto text-center pb-16">
@@ -71,9 +71,9 @@ export default function Contact() {
               transition={{ delay: 0.3 + i * 0.1 }}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-4 p-5 sm:p-6 rounded-2xl
-                         bg-white/80 dark:bg-black/40 backdrop-blur
-                         border border-white/10 shadow-lg hover:shadow-xl transition"
+              className="flex items-center gap-4 p-5 sm:p-6 rounded-lg
+                         surface-panel backdrop-blur
+                         border shadow-lg hover:shadow-xl transition"
             >
               <div className="text-indigo-600 dark:text-indigo-400 shrink-0">
                 {item.icon}

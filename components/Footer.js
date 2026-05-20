@@ -2,7 +2,7 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-gray-200 dark:border-white/10 bg-slate-50/80 dark:bg-black/60 backdrop-blur-sm py-6">
+    <footer className="w-full border-t surface-panel backdrop-blur-sm py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-500 dark:text-gray-400">
         <span className="font-medium">© 2025 Jerry Nwachi</span>
         <div className="flex items-center gap-5">

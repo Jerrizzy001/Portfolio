@@ -1,17 +1,33 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #f8fafc;
+  --background: linear-gradient(135deg, #f8fafc 0%, #eef6ff 48%, #fff7ed 100%);
   --foreground: #171717;
+  --surface: rgba(255, 255, 255, 0.82);
+  --surface-border: rgba(15, 23, 42, 0.1);
 }
 
 html.dark {
-  --background: #000000;
+  --background: linear-gradient(135deg, #080a12 0%, #111827 48%, #1f172a 100%);
   --foreground: #ededed;
+  --surface: rgba(8, 10, 18, 0.72);
+  --surface-border: rgba(255, 255, 255, 0.12);
+  color-scheme: dark;
 }
 
 body {
-  background-color: var(--background);
+  min-height: 100vh;
+  background: var(--background);
   color: var(--foreground);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.page-shell {
+  background: var(--background);
+}
+
+.surface-panel {
+  background: var(--surface);
+  border-color: var(--surface-border);
 }
