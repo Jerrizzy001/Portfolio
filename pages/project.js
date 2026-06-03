@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import useTypewriter from "../hooks/useTypewriter";
+import { FaArrowRight, FaExternalLinkAlt, FaGithub, FaTimes } from "react-icons/fa";
 
 const projects = [
   {
     id: "met-art-explorer",
-    title: "Met Art Explorer (Full-Stack Next.js App)",
+    title: "Met Art Explorer",
+    subtitle: "Full-stack Next.js app",
+    category: "Web Dev",
+    status: "Live",
+    role: "Full-stack developer",
+    focus: "API search, auth, saved state",
+    result: "A searchable museum artwork app with protected favourites and search history.",
     tech: [
       "Next.js",
       "React",
@@ -17,83 +22,86 @@ const projects = [
       "SWR",
       "REST API",
       "React Bootstrap",
-      "Jotai (State)",
-      "Auth + Protected Routes",
+      "Jotai",
+      "Auth",
       "Git",
     ],
     description:
-      "An art discovery website powered by The Met Museum API. Search artworks by country/location, use advanced filters, open full detail pages, and (when signed in) save favourites and revisit your search history.",
-    category: "Web Dev",
+      "An art discovery app powered by The Met Museum API. Visitors can search by country or location, refine results, open artwork detail pages, and save favourites after signing in.",
     liveUrl: "https://assignment6-bti.vercel.app",
     repoUrl: "https://github.com/Jerrizzy001/Full-stack-developer-Next.js-project-",
-    image: "/projects/NextJS.png",
+    image: "/projects/NextJS.jpg",
     details: [
-      "What it is: A website that helps you discover art pieces from a large museum collection.",
-      "How it works: You type a country or location and the site shows artworks connected to that place.",
-      "Advanced search: You can narrow results with extra filters (for example: keywords + location) so you get more specific results.",
-      "Artwork pages: Clicking an artwork opens a full page with the artwork’s information (artist, year, type, and other details).",
-      "Accounts: Users can create an account and log in to keep things saved to their profile.",
-      "Favourites: Logged-in users can save artworks they like, so they can come back later and find them easily.",
-      "Search history: Logged-in users can see what they searched before, so they don’t have to repeat the same searches.",
-      "Overall: It’s a complete app experience — search → explore → view details → save favourites → revisit history.",
+      "Built the search and detail flow around The Met Museum API, including location-based queries and filtered results.",
+      "Added account-aware features for favourites and search history, so the app keeps useful context between visits.",
+      "Used Jotai and SWR to keep client state predictable while still fetching fresh artwork data.",
+      "Structured the project as a complete browsing path: search, inspect, save, return.",
     ],
   },
   {
     id: "portfolio-website",
-    title: "My Portfolio",
+    title: "Portfolio Website",
+    subtitle: "Personal site",
+    category: "Web Dev",
+    status: "Active",
+    role: "Designer + developer",
+    focus: "Theme system, responsive UI, deployment",
+    result: "A direct portfolio built to present technical work without over-selling it.",
     tech: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "next-themes", "Vercel"],
     description:
-      "A fully responsive personal portfolio built with Next.js, Tailwind CSS v4, and Framer Motion — featuring dark/light mode, animated typewriter text, and smooth page transitions.",
-    category: "Web Dev",
+      "The site you are reading now: a responsive portfolio with dark and light modes, accessible navigation, project media, and a deployment flow connected to Vercel.",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001",
     image: "/projects/portfolio.png",
     details: [
-      "Built with Next.js and React for fast, server-rendered pages and optimal performance.",
-      "Tailwind CSS v4 utility-first styling with custom animations (spin-slow, orbit).",
-      "Framer Motion for page-entry animations, hover effects, and animated presence transitions.",
-      "Dark / light mode toggle powered by next-themes with instant, flash-free switching.",
-      "Custom useTypewriter React hook for animated text reveal effects across all pages.",
-      "Fully responsive across mobile, tablet, and desktop breakpoints.",
-      "Deployed on Vercel with automatic CI/CD from GitHub.",
+      "Built with Next.js and React for fast static pages and clean route-level structure.",
+      "Uses Tailwind CSS and theme tokens so light and dark modes change the whole surface, not just the text.",
+      "Adds restrained Framer Motion transitions while respecting reduced-motion preferences.",
+      "Keeps the portfolio focused on proof: projects, skills, current role, and contact paths.",
     ],
   },
   {
     id: "fraud-detection-system",
     title: "Fraud Detection System",
+    subtitle: "Machine learning project",
+    category: "Data Science",
+    status: "Repository",
+    role: "ML developer",
+    focus: "Classification, feature prep, evaluation",
+    result: "A supervised model workflow for flagging suspicious transaction patterns.",
     tech: ["Python", "Machine Learning", "Scikit-learn", "Pandas", "NumPy", "Data Analysis"],
     description:
-      "A machine learning-powered fraud detection system that analyses transaction data to identify suspicious patterns and flag potentially fraudulent activity with high accuracy.",
-    category: "Data Science",
+      "A fraud detection workflow that analyses transaction data, prepares features, trains classification models, and evaluates suspicious-activity detection with practical metrics.",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001/Fraud-Detection-System",
     image: "/projects/fraud-detection.svg",
     details: [
-      "Built a classification model to detect fraudulent transactions from labelled datasets.",
-      "Applied data preprocessing techniques including feature scaling, handling class imbalance, and outlier removal.",
-      "Evaluated multiple algorithms (Logistic Regression, Random Forest, etc.) and selected the best performer.",
-      "Used Pandas and NumPy for data manipulation and exploratory data analysis (EDA).",
-      "Measured model performance with precision, recall, F1-score, and ROC-AUC metrics.",
-      "Demonstrated real-world application of supervised learning for financial security.",
+      "Prepared labelled transaction data for supervised classification, including scaling and imbalance handling.",
+      "Compared model options such as Logistic Regression and Random Forest before selecting the strongest performer.",
+      "Used precision, recall, F1-score, and ROC-AUC to judge the model beyond simple accuracy.",
+      "Framed the project around a real operational question: which transactions deserve human review?",
     ],
   },
   {
     id: "hr-analytics-dashboard",
     title: "HR Analytics Dashboard",
+    subtitle: "Analysis notebook",
+    category: "Data Science",
+    status: "Repository",
+    role: "Data analyst",
+    focus: "EDA, visualisation, workforce signals",
+    result: "A dashboard-style analysis for attrition, department patterns, and salary distribution.",
     tech: ["Python", "Data Analysis", "Pandas", "Matplotlib", "Seaborn", "Jupyter Notebook"],
     description:
-      "An interactive HR analytics dashboard that visualises workforce data — covering employee attrition, department performance, salary distribution, and hiring trends to support data-driven HR decisions.",
-    category: "Data Science",
+      "An HR analytics project that turns workforce data into readable charts covering attrition, department performance, salary distribution, and hiring trends.",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001/HR-Analysis-Dashboard",
-    image: "/projects/hr-analytics.png",
+    image: "/projects/hr-analytics.jpg",
     details: [
-      "Analysed HR datasets to uncover patterns in employee attrition and retention.",
-      "Built visualisations for department-level headcount, salary bands, and tenure distribution.",
-      "Identified key attrition drivers using correlation analysis and feature importance.",
-      "Created clear, stakeholder-ready charts using Matplotlib and Seaborn.",
-      "Structured the project in Jupyter Notebook for reproducibility and easy presentation.",
-      "Demonstrates ability to translate raw data into actionable business insights.",
+      "Analysed HR data to identify patterns in attrition, tenure, salary bands, and department-level headcount.",
+      "Built stakeholder-readable charts with Matplotlib and Seaborn instead of leaving insights buried in tables.",
+      "Used correlation analysis and feature importance to point at likely attrition drivers.",
+      "Organised the work in a Jupyter Notebook so the analysis can be reviewed and reproduced.",
     ],
   },
 ];
@@ -102,224 +110,409 @@ const gridWrap = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.08 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
   },
 };
 
 const cardIn = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.42, ease: "easeOut" } },
+};
+
+const categoryTone = {
+  "Data Science":
+    "border-emerald-300/70 bg-emerald-50 text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-200",
+  "Web Dev":
+    "border-sky-300/70 bg-sky-50 text-sky-800 dark:border-sky-500/30 dark:bg-sky-500/10 dark:text-sky-200",
 };
 
 export default function ProjectPage() {
   const [activeProject, setActiveProject] = useState(null);
+  const prefersReducedMotion = useReducedMotion();
+  const modalTitleId = useId();
 
-  const headerTitle = useTypewriter("Projects", 25, 100);
-  const headerSub = useTypewriter(
-    "A selection of projects I’ve built — click a card to explore what it does and how I built it.",
-    14,
-    500
-  );
+  useEffect(() => {
+    if (!activeProject) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setActiveProject(null);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown, true);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown, true);
+    };
+  }, [activeProject]);
 
   return (
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
-      <main className="pt-28 px-6 pb-20 max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
+      <main className="mx-auto max-w-7xl px-5 pb-20 pt-28 sm:px-6 lg:px-8">
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
-          className="mb-12"
+          transition={{ duration: 0.45 }}
+          className="mb-10 grid gap-6 border-b border-slate-950/10 pb-8 dark:border-white/10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end"
         >
-          <h1 className="text-4xl md:text-6xl font-bold tracking-wide">
-            {headerTitle}
-            <span className="animate-pulse">|</span>
-          </h1>
+          <div>
+            <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 text-sm font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+              Selected technical builds
+            </p>
+            <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white sm:text-5xl lg:text-6xl">
+              Projects
+            </h1>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-700 [text-wrap:pretty] dark:text-slate-300 sm:text-lg">
+              Practical apps and analysis work, presented with the decisions that matter:
+              what I built, what it proves, and where to inspect the code.
+            </p>
+          </div>
 
-          <p className="mt-3 text-gray-700 dark:text-gray-300 max-w-3xl text-lg">
-            {headerSub}
-            <span className="animate-pulse">|</span>
-          </p>
-        </motion.div>
+          <div className="border-t border-slate-950/10 pt-4 text-sm leading-6 text-slate-700 dark:border-white/10 dark:text-slate-300 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+            <p className="font-semibold text-slate-950 dark:text-white">Current emphasis</p>
+            <p>
+              Full-stack interfaces, AI and data workflows, and automation-minded systems
+              that reduce manual work.
+            </p>
+          </div>
+        </motion.section>
 
-        {/* PROJECT GRID */}
-        <motion.div
+        <motion.section
           variants={gridWrap}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="grid grid-cols-1 gap-5 lg:grid-cols-2"
+          aria-label="Project list"
         >
-          {projects.map((project, i) => (
+          {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
-              index={i}
+              index={index}
+              isFeatured={index === 0}
+              prefersReducedMotion={prefersReducedMotion}
               onView={() => setActiveProject(project)}
             />
           ))}
-        </motion.div>
+        </motion.section>
 
-        {/* SUBTLE DIVIDER */}
-        <motion.div
-          className="my-24 h-px w-full relative overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-        >
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent"
-            animate={{ opacity: [0.4, 1, 0.4] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </motion.div>
-
-        {/* MORE PROJECTS / GITHUB CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.55 }}
-          className="text-center"
+          transition={{ delay: 0.25, duration: 0.45 }}
+          className="mt-16 flex flex-col gap-5 border-t border-slate-950/10 pt-8 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between"
         >
-          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto mb-6">
-            This page features a curated selection of my strongest work.
-            I’m constantly building new projects and sharing in-progress
-            ideas on GitHub.
-          </p>
+          <div>
+            <h2 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
+              More work lives on GitHub.
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-700 dark:text-slate-300">
+              I keep experiments, coursework, and in-progress builds there. This page stays
+              curated so the strongest work is easy to scan.
+            </p>
+          </div>
 
-          <motion.a
+          <a
             href="https://github.com/Jerrizzy001"
             target="_blank"
             rel="noreferrer"
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-7 py-3 rounded-full
-                       bg-gradient-to-r from-gray-900 to-black
-                       dark:from-white dark:to-gray-200
-                       text-white dark:text-black
-                       font-semibold shadow-lg hover:shadow-xl transition"
+            className="inline-flex min-h-11 items-center justify-center gap-3 rounded-md bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-slate-950"
           >
-            <FaGithub size={22} />
-            View the rest on GitHub →
-          </motion.a>
-        </motion.div>
+            <FaGithub size={18} aria-hidden="true" />
+            View GitHub profile
+          </a>
+        </motion.section>
       </main>
 
-      {/* MODAL */}
       <AnimatePresence>
         {activeProject && (
-          <motion.div
-            className="fixed inset-0 z-[999] flex items-center justify-center px-3 sm:px-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <button
-              className="absolute inset-0 bg-black/60"
-              onClick={() => setActiveProject(null)}
-              aria-label="Close modal"
-            />
-
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 10 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 10 }}
-              transition={{ duration: 0.25 }}
-              className="relative w-full max-w-3xl surface-panel rounded-lg p-5 sm:p-6 shadow-xl border max-h-[90vh] overflow-y-auto"
-            >
-              <div className="flex justify-between items-start mb-4 gap-3">
-                <div className="flex flex-col gap-1.5">
-                  <span
-                    className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full ${
-                      activeProject.category === "Data Science"
-                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400"
-                        : "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-400"
-                    }`}
-                  >
-                    {activeProject.category}
-                  </span>
-                  <h3 className="text-xl sm:text-2xl font-bold leading-snug">{activeProject.title}</h3>
-                </div>
-                <button
-                  onClick={() => setActiveProject(null)}
-                  className="shrink-0 text-xl px-3 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <ModalImage project={activeProject} />
-
-              {/* Tech badges */}
-              <div className="flex flex-wrap gap-2 mb-5">
-                {activeProject.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-1 text-xs rounded-full bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 font-medium"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <ul className="list-disc ml-5 space-y-2 text-gray-700 dark:text-gray-300 text-sm sm:text-base mb-6">
-                {activeProject.details.map((d) => (
-                  <li key={d}>{d}</li>
-                ))}
-              </ul>
-
-              {/* Action buttons */}
-              <div className="flex flex-wrap gap-3">
-                {activeProject.liveUrl && (
-                  <a
-                    href={activeProject.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-semibold shadow hover:shadow-md transition"
-                  >
-                    <FaExternalLinkAlt size={13} />
-                    Live Demo
-                  </a>
-                )}
-                {activeProject.repoUrl && (
-                  <a
-                    href={activeProject.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 dark:border-gray-600 text-sm font-semibold hover:bg-gray-50 dark:hover:bg-white/10 transition"
-                  >
-                    <FaGithub size={15} />
-                    View Code
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
+          <ProjectModal
+            project={activeProject}
+            titleId={modalTitleId}
+            onClose={() => setActiveProject(null)}
+          />
         )}
       </AnimatePresence>
     </div>
   );
 }
 
+function ProjectCard({ project, onView, index, isFeatured, prefersReducedMotion }) {
+  const visibleTech = project.tech.slice(0, isFeatured ? 6 : 4);
+  const remainingTech = project.tech.length - visibleTech.length;
+
+  return (
+    <motion.article
+      variants={cardIn}
+      whileHover={prefersReducedMotion ? undefined : { y: -4 }}
+      className={`group overflow-hidden rounded-lg border border-slate-950/10 bg-white/88 transition-colors hover:border-slate-950/25 dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25 ${
+        isFeatured ? "lg:col-span-2 lg:grid lg:grid-cols-[1.1fr_0.9fr]" : ""
+      }`}
+    >
+      <div className={`relative bg-slate-950 ${isFeatured ? "min-h-[18rem] lg:min-h-full" : "h-52 sm:h-60"}`}>
+        <CardImage project={project} index={index} />
+      </div>
+
+      <div className={`flex h-full flex-col p-5 sm:p-6 ${isFeatured ? "lg:p-8" : ""}`}>
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <Badge className={categoryTone[project.category]}>{project.category}</Badge>
+          <Badge>{project.status}</Badge>
+        </div>
+
+        <div className="mb-4">
+          <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+            {project.subtitle}
+          </p>
+          <h2 className="mt-1 text-2xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white sm:text-3xl">
+            {project.title}
+          </h2>
+        </div>
+
+        <p className="text-sm leading-6 text-slate-700 [text-wrap:pretty] dark:text-slate-300 sm:text-base">
+          {project.description}
+        </p>
+
+        <dl className="mt-5 grid gap-3 border-y border-slate-950/10 py-4 text-sm dark:border-white/10 sm:grid-cols-2">
+          <MetaItem label="Role" value={project.role} />
+          <MetaItem label="Focus" value={project.focus} />
+        </dl>
+
+        <p className="mt-4 text-sm font-medium leading-6 text-slate-900 dark:text-slate-100">
+          {project.result}
+        </p>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          {visibleTech.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-full border border-slate-950/10 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
+            >
+              {tech}
+            </span>
+          ))}
+          {remainingTech > 0 && (
+            <span className="rounded-full border border-slate-950/10 px-2.5 py-1 text-xs font-medium text-slate-600 dark:border-white/10 dark:text-slate-400">
+              +{remainingTech} more
+            </span>
+          )}
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={onView}
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-slate-950"
+          >
+            Open details
+            <FaArrowRight size={13} aria-hidden="true" />
+          </button>
+
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-slate-950/15 px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-950/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:text-white dark:hover:bg-white/10 dark:focus-visible:ring-offset-slate-950"
+            >
+              <FaExternalLinkAlt size={13} aria-hidden="true" />
+              Open live app
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+function ProjectModal({ project, titleId, onClose }) {
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    dialogRef.current?.focus();
+  }, []);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center px-3 py-6 sm:px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <button
+        className="absolute inset-0 bg-slate-950/72"
+        type="button"
+        onClick={onClose}
+        aria-label="Close project details"
+      />
+
+      <motion.div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
+        initial={{ scale: 0.98, opacity: 0, y: 10 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.98, opacity: 0, y: 10 }}
+        transition={{ duration: 0.22, ease: "easeOut" }}
+        className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-lg border border-slate-950/10 bg-white p-5 text-slate-950 shadow-[0_8px_24px_rgba(15,23,42,0.14)] dark:border-white/10 dark:bg-slate-950 dark:text-white sm:p-6"
+      >
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <Badge className={categoryTone[project.category]}>{project.category}</Badge>
+              <Badge>{project.status}</Badge>
+            </div>
+            <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+              {project.subtitle}
+            </p>
+            <h2 id={titleId} className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">
+              {project.title}
+            </h2>
+          </div>
+
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md text-slate-600 transition hover:bg-slate-100 hover:text-slate-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
+            aria-label="Close project details"
+          >
+            <FaTimes size={18} aria-hidden="true" />
+          </button>
+        </div>
+
+        <ModalImage project={project} />
+
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+          <div>
+            <p className="text-base leading-7 text-slate-700 dark:text-slate-300">
+              {project.description}
+            </p>
+
+            <h3 className="mt-6 text-base font-semibold text-slate-950 dark:text-white">
+              Build notes
+            </h3>
+            <ul className="mt-3 space-y-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
+              {project.details.map((detail) => (
+                <li key={detail} className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-950 dark:bg-white" />
+                  <span>{detail}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <aside className="space-y-4 border-t border-slate-950/10 pt-5 dark:border-white/10 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
+            <div>
+              <h3 className="text-sm font-semibold text-slate-950 dark:text-white">
+                Project facts
+              </h3>
+              <dl className="mt-3 space-y-3 text-sm">
+                <MetaItem label="Role" value={project.role} />
+                <MetaItem label="Focus" value={project.focus} />
+                <MetaItem label="Result" value={project.result} />
+              </dl>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-slate-950 dark:text-white">Stack</h3>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full border border-slate-950/10 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-3 pt-1">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
+                >
+                  <FaExternalLinkAlt size={13} aria-hidden="true" />
+                  Open live app
+                </a>
+              )}
+              {project.repoUrl && (
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-slate-950/15 px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-950/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:border-white/15 dark:text-white dark:hover:bg-white/10"
+                >
+                  <FaGithub size={15} aria-hidden="true" />
+                  View source
+                </a>
+              )}
+            </div>
+          </aside>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function Badge({ children, className = "" }) {
+  return (
+    <span
+      className={`inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold ${className || "border-slate-950/10 bg-slate-50 text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"}`}
+    >
+      {children}
+    </span>
+  );
+}
+
+function MetaItem({ label, value }) {
+  return (
+    <div>
+      <dt className="text-xs font-semibold text-slate-500 dark:text-slate-400">{label}</dt>
+      <dd className="mt-1 text-sm font-medium leading-5 text-slate-900 dark:text-slate-100">
+        {value}
+      </dd>
+    </div>
+  );
+}
+
 function CardImage({ project, index }) {
   const [imgError, setImgError] = useState(false);
+
   if (!project.image || imgError) {
     return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-900 to-black gap-2">
-        <span className="text-white/20 text-xs font-medium px-4 text-center tracking-wide">
-          {project.tech.slice(0, 3).join(" · ")}
+      <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-slate-950">
+        <span className="px-4 text-center text-xs font-medium text-white/35">
+          {project.tech.slice(0, 3).join(" / ")}
         </span>
       </div>
     );
   }
+
+  const sizes =
+    index === 0
+      ? "(min-width: 1280px) 672px, (min-width: 1024px) 54vw, calc(100vw - 40px)"
+      : "(min-width: 1280px) 592px, (min-width: 1024px) 48vw, calc(100vw - 40px)";
+
   return (
     <Image
       src={project.image}
-      alt={project.title}
+      alt={`${project.title} project preview`}
       fill
-      className="object-contain"
+      className="object-contain p-2"
+      sizes={sizes}
       priority={index === 0}
+      quality={78}
       unoptimized={project.image.endsWith(".svg")}
       onError={() => setImgError(true)}
     />
@@ -328,95 +521,29 @@ function CardImage({ project, index }) {
 
 function ModalImage({ project }) {
   const [imgError, setImgError] = useState(false);
+
   if (!project.image || imgError) {
     return (
-      <div className="relative w-full h-40 rounded-xl overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-black border border-white/10 mb-5 flex items-center justify-center">
-        <span className="text-white/30 text-sm font-medium px-4 text-center">
-          {project.tech.slice(0, 4).join(" · ")}
+      <div className="my-5 flex h-44 w-full items-center justify-center rounded-lg border border-white/10 bg-slate-950">
+        <span className="px-4 text-center text-sm font-medium text-white/35">
+          {project.tech.slice(0, 4).join(" / ")}
         </span>
       </div>
     );
   }
+
   return (
-    <div className="relative w-full h-40 sm:h-48 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-950 border border-gray-200 dark:border-white/10 mb-5">
+    <div className="relative my-5 h-48 w-full overflow-hidden rounded-lg border border-slate-950/10 bg-slate-950 dark:border-white/10 sm:h-60">
       <Image
         src={project.image}
-        alt={project.title}
+        alt={`${project.title} project preview`}
         fill
-        className="object-contain"
+        className="object-contain p-2"
+        sizes="(min-width: 1024px) 856px, calc(100vw - 40px)"
+        quality={78}
         unoptimized={project.image.endsWith(".svg")}
         onError={() => setImgError(true)}
       />
     </div>
-  );
-}
-
-function ProjectCard({ project, onView, index }) {
-  const typedTitle = useTypewriter(project.title, 16, 200 + index * 250);
-  const typedDesc = useTypewriter(project.description, 10, 550 + index * 250);
-
-  return (
-    <motion.div
-      variants={cardIn}
-      whileHover={{ y: -10, scale: 1.01 }}
-      className="rounded-lg overflow-hidden border surface-panel backdrop-blur shadow-lg hover:shadow-2xl transition relative"
-    >
-      <motion.div
-        animate={{ y: [0, -10, 0] }}
-        transition={{
-          duration: 4.2 + index * 0.15,
-          repeat: Infinity,
-          repeatType: "mirror",
-          ease: "easeInOut",
-        }}
-      >
-        <div className="relative w-full h-48 sm:h-56 bg-slate-100 dark:bg-slate-950">
-          <CardImage project={project} index={index} />
-        </div>
-
-        <div className="p-4 sm:p-6">
-          <div className="mb-2">
-            <span
-              className={`text-xs font-semibold px-2.5 py-1 rounded-full ${
-                project.category === "Data Science"
-                  ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400"
-                  : "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-400"
-              }`}
-            >
-              {project.category}
-            </span>
-          </div>
-          <h2 className="text-xl sm:text-2xl font-bold mb-2">
-            {typedTitle}
-            <span className="animate-pulse">|</span>
-          </h2>
-
-          <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-4">
-            {typedDesc}
-            <span className="animate-pulse">|</span>
-          </p>
-
-          <div className="flex flex-wrap gap-2 mb-4">
-            {project.tech.slice(0, 4).map((t) => (
-              <span key={t} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300">
-                {t}
-              </span>
-            ))}
-          </div>
-
-          <motion.button
-            onClick={onView}
-            whileHover={{ scale: 1.06 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full
-                       bg-gradient-to-r from-indigo-600 to-purple-600
-                       text-white font-semibold shadow-md text-sm sm:text-base"
-          >
-            View Details
-            <FaExternalLinkAlt size={13} />
-          </motion.button>
-        </div>
-      </motion.div>
-    </motion.div>
   );
 }

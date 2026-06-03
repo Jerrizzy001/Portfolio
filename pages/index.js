@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Navbar from "../components/Navbar";
-import useTypewriter from "../hooks/useTypewriter";
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
@@ -35,14 +34,16 @@ const slides = [
 
 export default function Home() {
   const [index, setIndex] = useState(0);
-  const typedTitle = useTypewriter(slides[index].title.toUpperCase(), 50);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
+    if (shouldReduceMotion) return undefined;
+
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [shouldReduceMotion]);
 
   return (
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
@@ -63,8 +64,7 @@ export default function Home() {
             className="mb-6 max-w-2xl w-full"
           >
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-wide">
-              {typedTitle}
-              <span className="animate-pulse">|</span>
+              {slides[index].title.toUpperCase()}
             </h1>
             <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 px-2">
               {slides[index].description}
@@ -115,7 +115,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
-              className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition"
             >
               <FaGithub size={22} />
             </a>
@@ -124,7 +124,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
             >
               <FaLinkedin size={22} />
             </a>

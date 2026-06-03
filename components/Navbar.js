@@ -1,30 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useTheme } from 'next-themes';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
+const subscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
+function useMounted() {
+  return useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
+}
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const router = useRouter();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
-  const isDark = resolvedTheme === 'dark';
+  const isDark = mounted && resolvedTheme === 'dark';
   const toggleTheme = () => setTheme(isDark ? 'light' : 'dark');
+  const themeTitle = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+  const themeIcon = mounted ? (
+    isDark ? <MdLightMode size={20} /> : <MdDarkMode size={20} />
+  ) : (
+    <span className="block h-5 w-5" aria-hidden="true" />
+  );
 
   return (
     <nav className="fixed w-full surface-panel backdrop-blur-md border-b shadow-sm z-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-xl font-extrabold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent tracking-tight">
+        <Link href="/" className="flex min-h-11 items-center gap-2 group">
+          <span className="text-xl font-extrabold text-gray-950 dark:text-white tracking-tight">
             Jerrizzy
           </span>
         </Link>
@@ -33,7 +43,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-6 text-gray-700 dark:text-white font-medium">
           <Link
             href="/"
-            className={`hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+            className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
               router.pathname === '/' ? 'text-blue-500 dark:text-indigo-400' : ''
             }`}
           >
@@ -42,7 +52,7 @@ export default function Navbar() {
 
           <Link
             href="/project"
-            className={`hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+            className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
               router.pathname === '/project' ? 'text-blue-500 dark:text-indigo-400' : ''
             }`}
           >
@@ -51,7 +61,7 @@ export default function Navbar() {
 
           <Link
             href="/skills"
-            className={`hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+            className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
               router.pathname === '/skills' ? 'text-blue-500 dark:text-indigo-400' : ''
             }`}
           >
@@ -60,17 +70,16 @@ export default function Navbar() {
 
           <Link
             href="/about"
-            className={`hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+            className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
               router.pathname === '/about' ? 'text-blue-500 dark:text-indigo-400' : ''
             }`}
           >
             About
           </Link>
 
-          {/* ✅ NEW: Contact */}
           <Link
             href="/contact"
-            className={`hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+            className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
               router.pathname === '/contact' ? 'text-blue-500 dark:text-indigo-400' : ''
             }`}
           >
@@ -78,35 +87,33 @@ export default function Navbar() {
           </Link>
 
           {/* Theme Toggle */}
-          {mounted && (
-            <button
-              onClick={toggleTheme}
-              className="ml-4 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-              aria-label="Toggle theme"
-              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {isDark ? <MdLightMode size={20} /> : <MdDarkMode size={20} />}
-            </button>
-          )}
+          <button
+            onClick={toggleTheme}
+            className="ml-4 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition disabled:opacity-70"
+            aria-label="Toggle theme"
+            title={themeTitle}
+            disabled={!mounted}
+          >
+            {themeIcon}
+          </button>
         </div>
 
         {/* Mobile Hamburger */}
         <div className="md:hidden flex items-center space-x-2">
-          {mounted && (
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-              aria-label="Toggle theme"
-              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {isDark ? <MdLightMode size={20} /> : <MdDarkMode size={20} />}
-            </button>
-          )}
+          <button
+            onClick={toggleTheme}
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition disabled:opacity-70"
+            aria-label="Toggle theme"
+            title={themeTitle}
+            disabled={!mounted}
+          >
+            {themeIcon}
+          </button>
 
           <button
             onClick={toggleMenu}
             aria-label="Toggle menu"
-            className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
           >
             {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
@@ -119,7 +126,7 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={closeMenu}
-            className={`py-2 ${
+            className={`flex min-h-11 items-center py-2 ${
               router.pathname === '/' ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
             }`}
           >
@@ -129,7 +136,7 @@ export default function Navbar() {
           <Link
             href="/project"
             onClick={closeMenu}
-            className={`py-2 ${
+            className={`flex min-h-11 items-center py-2 ${
               router.pathname === '/project' ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
             }`}
           >
@@ -139,7 +146,7 @@ export default function Navbar() {
           <Link
             href="/skills"
             onClick={closeMenu}
-            className={`py-2 ${
+            className={`flex min-h-11 items-center py-2 ${
               router.pathname === '/skills' ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
             }`}
           >
@@ -149,18 +156,17 @@ export default function Navbar() {
           <Link
             href="/about"
             onClick={closeMenu}
-            className={`py-2 ${
+            className={`flex min-h-11 items-center py-2 ${
               router.pathname === '/about' ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
             }`}
           >
             About
           </Link>
 
-          {/* ✅ NEW: Contact */}
           <Link
             href="/contact"
             onClick={closeMenu}
-            className={`py-2 ${
+            className={`flex min-h-11 items-center py-2 ${
               router.pathname === '/contact'
                 ? 'text-blue-500 dark:text-indigo-400 font-semibold'
                 : ''

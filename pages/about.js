@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import useTypewriter from '../hooks/useTypewriter';
 
@@ -43,12 +44,13 @@ export default function About() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <div className="relative p-[3px] rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-xl shadow-indigo-300/30 dark:shadow-indigo-900/40">
+          <div className="relative rounded-full border border-indigo-500/40 p-1 shadow-xl shadow-indigo-300/20 dark:shadow-indigo-900/30">
             <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden bg-white dark:bg-black">
               <Image
                 src="/profile.jpg"
                 alt="Jerry Nwachi"
                 fill
+                sizes="176px"
                 className="object-cover"
                 priority
               />
@@ -64,7 +66,6 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.15 }}
         >
           {title}
-          <span className="animate-pulse">|</span>
         </motion.h1>
 
         {/* Paragraphs */}
@@ -77,7 +78,6 @@ export default function About() {
             transition={{ delay: 0.2 }}
           >
             {text}
-            <span className="animate-pulse">|</span>
           </motion.p>
         ))}
 
@@ -86,17 +86,16 @@ export default function About() {
           className="mt-12 text-center"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 5.5 }}
+          transition={{ delay: 0.35 }}
         >
-          <a
+          <Link
             href="/contact"
             className="inline-block px-8 py-3 rounded-full
-                       bg-gradient-to-r from-indigo-600 to-purple-600
-                       text-white font-semibold shadow-lg
+                       bg-gray-950 text-white dark:bg-white dark:text-black font-semibold shadow-lg
                        hover:scale-105 hover:shadow-xl transition"
           >
-            Let's Connect
-          </a>
+            Let&apos;s Connect
+          </Link>
         </motion.div>
       </section>
     </div>

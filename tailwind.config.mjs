@@ -1,5 +1,5 @@
 // tailwind.config.mjs
-export default {
+const tailwindConfig = {
   darkMode: 'class',
   content: ['./pages/**/*.{js,mjs}', './components/**/*.{js,mjs}'],
   theme: {
@@ -18,3 +18,5 @@ export default {
   },
   plugins: [],
 };
+
+export default tailwindConfig;
