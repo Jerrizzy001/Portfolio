@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
-import { motion, AnimatePresence } from 'framer-motion';
 
 import {
   SiReact,
@@ -25,115 +24,115 @@ const skillsData = [
     id: 'react',
     name: 'React.js',
     description:
-      'I architect component-based user interfaces with React — reusable, clean, and lightning fast. I follow best practices in state management, performance tuning, and accessibility.',
+      'I build reusable interface components, stateful views, and accessible page flows with React.',
     Icon: SiReact,
   },
   {
     id: 'python',
     name: 'Python',
     description:
-      'I use Python to build robust, scalable backend systems. From APIs and authentication to business logic, I write clean, maintainable code for real-world applications.',
+      'I use Python for automation scripts, data work, APIs, and machine learning workflows.',
     Icon: SiPython,
   },
   {
     id: 'node',
     name: 'Node.js',
     description:
-      'I build efficient backend systems with Node.js, focusing on clean architecture, scalability, and API-driven development.',
+      'I use Node.js for API routes, server logic, and JavaScript backends.',
     Icon: SiNodedotjs,
   },
   {
     id: 'next',
     name: 'Next.js',
     description:
-      'I use Next.js to build full-stack applications with server-side rendering, API routes, and production-ready performance.',
+      'I build routed React apps with static pages, API routes, image optimization, and Vercel deployment.',
     Icon: SiNextdotjs,
   },
   {
     id: 'mongodb',
     name: 'MongoDB',
     description:
-      'MongoDB allows me to design flexible, scalable NoSQL data models for modern applications.',
+      'I model document data for apps that need flexible records and fast iteration.',
     Icon: SiMongodb,
   },
   {
     id: 'django',
     name: 'Django',
     description:
-      'Django is my go-to framework for fast, secure, and scalable Python backends, including REST APIs and admin dashboards.',
+      'I use Django for structured Python backends, REST APIs, and admin-style tools.',
     Icon: SiDjango,
   },
   {
     id: 'sql',
     name: 'SQL / MySQL',
     description:
-      'I design relational databases using SQL and MySQL, writing optimized queries and maintaining schema integrity.',
+      'I design relational schemas, write joins, and keep data constraints clear.',
     Icon: SiMysql,
   },
   {
     id: 'js',
     name: 'JavaScript',
     description:
-      'JavaScript is my daily driver across frontend and backend, using modern syntax, async patterns, and clean design.',
+      'I use JavaScript across browser and server code, with async patterns and API work.',
     Icon: SiJavascript,
   },
   {
     id: 'html',
     name: 'HTML / CSS',
     description:
-      'I write semantic HTML and responsive CSS with modern best practices and utility-first styling.',
+      'I write semantic markup and responsive layouts that hold up across screen sizes.',
     Icon: SiHtml5,
   },
   {
     id: 'git',
     name: 'Git',
     description:
-      'Git is central to my workflow for version control, collaboration, and clean project history.',
+      'I use Git to track changes, review diffs, and keep project history clean.',
     Icon: SiGit,
   },
 
-  // 🔥 Software Dev / Infra Skills (SAFE ICONS)
+  // Software development and infrastructure tools.
 
   {
     id: 'github',
     name: 'GitHub',
     description:
-      'I manage repositories, pull requests, and collaboration workflows using GitHub in professional development environments.',
+      'I use GitHub for repositories, issues, pull requests, and deployment-linked workflows.',
     Icon: SiGithub,
   },
   {
     id: 'linux',
     name: 'Linux',
     description:
-      'I work comfortably in Linux environments for backend development, deployment, and terminal-based workflows.',
+      'I use Linux terminals for development, scripts, environment setup, and deployment work.',
     Icon: SiLinux,
   },
   {
     id: 'aws',
     name: 'AWS',
     description:
-      'I deploy and manage applications in cloud environments using AWS, understanding how production systems run beyond local development.',
+      'I understand the basics of deploying and operating apps in AWS-backed environments.',
     Icon: FaAws,
   },
   {
     id: 'rest',
     name: 'REST APIs',
     description:
-      'I design and consume RESTful APIs with clean endpoints, proper HTTP methods, and predictable client–server communication.',
+      'I design and test predictable endpoints with clear methods, payloads, and responses.',
     Icon: FaServer,
   },
   {
     id: 'postman',
     name: 'Postman',
     description:
-      'I use Postman to test, debug, and validate APIs to ensure reliability and correct data flow.',
+      'I use Postman to test endpoints, inspect payloads, and document API behavior.',
     Icon: SiPostman,
   },
   {
     id: 'vscode',
     name: 'VS Code',
     description:
-      'VS Code is my primary development environment. I leverage extensions, debugging tools, and integrated terminals to stay productive across multiple stacks.',
+      'I use VS Code for editing, debugging, terminals, and AI-assisted development.',
     Icon: FaCode,
   },
 ];
@@ -168,35 +167,29 @@ export default function Skills() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
-      <section className="pt-28 px-4 sm:px-6 max-w-5xl mx-auto pb-16">
+      <section className="safe-x pt-28 max-w-5xl mx-auto pb-16">
         {/* Header */}
-        <motion.div
+        <div
           className="mb-12 text-center"
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">My Tech Stack</h1>
-          <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">
-            Click any skill to see how I use it.
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">Technical skills</h1>
+          <p className="mx-auto max-w-xl text-sm sm:text-base text-gray-500 dark:text-gray-400">
+            Select a skill to see where it fits in my work.
           </p>
-        </motion.div>
+        </div>
 
         {/* Grouped skill categories */}
         <div className="space-y-10">
-          {skillCategories.map(({ label, color, ids }, catIndex) => {
+          {skillCategories.map(({ label, color, ids }) => {
             const skills = skillsData.filter(s => ids.includes(s.id));
             return (
-              <motion.div
+              <div
                 key={label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: catIndex * 0.1, duration: 0.45 }}
               >
                 <h2 className={`text-xs font-bold uppercase tracking-widest mb-3 ${color}`}>
                   {label}
                 </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                <div className="grid grid-cols-1 min-[460px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                   {skills.map(({ id, name, Icon }) => (
                     <button
                       key={id}
@@ -212,55 +205,45 @@ export default function Skills() {
                     </button>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
 
         {/* Modal */}
-        <AnimatePresence>
-          {active && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-4"
-              onClick={() => setActive(null)}
+        {active && (
+          <div
+            className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 px-3 pb-3 pt-16 backdrop-blur-sm sm:items-center sm:px-4 sm:py-6"
+            onClick={() => setActive(null)}
+          >
+            <div
+              className="surface-panel relative max-h-[calc(100svh-1.5rem)] w-full max-w-md overflow-y-auto rounded-t-lg border p-6 shadow-2xl sm:rounded-lg"
+              onClick={(e) => e.stopPropagation()}
             >
-              <motion.div
-                initial={{ scale: 0.95, y: 16, opacity: 0 }}
-                animate={{ scale: 1, y: 0, opacity: 1 }}
-                exit={{ scale: 0.95, y: 16, opacity: 0 }}
-                transition={{ duration: 0.22 }}
-                className="surface-panel p-6 rounded-lg max-w-md w-full shadow-2xl relative border"
-                onClick={(e) => e.stopPropagation()}
+              {(() => {
+                const skill = skillsData.find(s => s.id === active);
+                return (
+                  <>
+                    <div className="flex items-center gap-3 mb-3">
+                      {skill && <skill.Icon size={26} className="text-indigo-500 shrink-0" />}
+                      <h2 className="text-xl font-bold">{skill?.name}</h2>
+                    </div>
+                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                      {skill?.description}
+                    </p>
+                  </>
+                );
+              })()}
+              <button
+                onClick={() => setActive(null)}
+                className="absolute right-2 top-2 inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-red-400 dark:hover:bg-white/10"
+                aria-label="Close skill details"
               >
-                {(() => {
-                  const skill = skillsData.find(s => s.id === active);
-                  return (
-                    <>
-                      <div className="flex items-center gap-3 mb-3">
-                        {skill && <skill.Icon size={26} className="text-indigo-500 shrink-0" />}
-                        <h2 className="text-xl font-bold">{skill?.name}</h2>
-                      </div>
-                      <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-                        {skill?.description}
-                      </p>
-                    </>
-                  );
-                })()}
-                <button
-                  onClick={() => setActive(null)}
-                  className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-400 hover:bg-gray-100 dark:hover:bg-white/10 transition"
-                  aria-label="Close"
-                >
-                  ✕
-                </button>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
       </section>
     </div>
   );

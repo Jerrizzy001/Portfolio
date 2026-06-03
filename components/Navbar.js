@@ -31,8 +31,8 @@ export default function Navbar() {
   );
 
   return (
-    <nav className="fixed w-full surface-panel backdrop-blur-md border-b shadow-sm z-50 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <nav className="site-nav fixed inset-x-0 top-0 surface-panel backdrop-blur-md border-b shadow-sm z-50 transition-colors duration-300">
+      <div className="safe-x max-w-7xl mx-auto py-4 flex justify-between items-center">
         <Link href="/" className="flex min-h-11 items-center gap-2 group">
           <span className="text-xl font-extrabold text-gray-950 dark:text-white tracking-tight">
             Jerrizzy
@@ -112,7 +112,8 @@ export default function Navbar() {
 
           <button
             onClick={toggleMenu}
-            aria-label="Toggle menu"
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
             className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
           >
             {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -122,7 +123,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden surface-panel backdrop-blur-md border-t px-4 pb-4 flex flex-col space-y-4 text-gray-800 dark:text-white">
+        <div className="safe-x md:hidden surface-panel backdrop-blur-md border-t pb-4 flex flex-col space-y-2 text-gray-800 dark:text-white">
           <Link
             href="/"
             onClick={closeMenu}

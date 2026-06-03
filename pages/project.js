@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { FaArrowRight, FaExternalLinkAlt, FaGithub, FaTimes } from "react-icons/fa";
+import SignalField from "../components/SignalField";
 
 const projects = [
   {
@@ -154,12 +155,14 @@ export default function ProjectPage() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
-      <main className="mx-auto max-w-7xl px-5 pb-20 pt-28 sm:px-6 lg:px-8">
+      <main className="safe-x relative isolate mx-auto max-w-7xl overflow-hidden pb-20 pt-28">
+        <SignalField fill={false} className="inset-x-0 top-0 z-0 h-[54rem] opacity-60" />
+
         <motion.section
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
-          className="mb-10 grid gap-6 border-b border-slate-950/10 pb-8 dark:border-white/10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end"
+          className="relative z-10 mb-10 grid gap-6 border-b border-slate-950/10 pb-8 dark:border-white/10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end"
         >
           <div>
             <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 text-sm font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
@@ -175,10 +178,10 @@ export default function ProjectPage() {
           </div>
 
           <div className="border-t border-slate-950/10 pt-4 text-sm leading-6 text-slate-700 dark:border-white/10 dark:text-slate-300 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
-            <p className="font-semibold text-slate-950 dark:text-white">Current emphasis</p>
+            <p className="font-semibold text-slate-950 dark:text-white">Current work</p>
             <p>
-              Full-stack interfaces, AI and data workflows, and automation-minded systems
-              that reduce manual work.
+              AI systems integration, full-stack interfaces, and automation workflows that
+              reduce manual handoffs.
             </p>
           </div>
         </motion.section>
@@ -187,7 +190,7 @@ export default function ProjectPage() {
           variants={gridWrap}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 gap-5 lg:grid-cols-2"
+          className="relative z-10 grid grid-cols-1 gap-5 md:grid-cols-2"
           aria-label="Project list"
         >
           {projects.map((project, index) => (
@@ -206,15 +209,15 @@ export default function ProjectPage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.45 }}
-          className="mt-16 flex flex-col gap-5 border-t border-slate-950/10 pt-8 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between"
+          className="relative z-10 mt-16 flex flex-col gap-5 border-t border-slate-950/10 pt-8 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between"
         >
           <div>
             <h2 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
-              More work lives on GitHub.
+              More builds are on GitHub.
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-700 dark:text-slate-300">
               I keep experiments, coursework, and in-progress builds there. This page stays
-              curated so the strongest work is easy to scan.
+              focused on the work most worth reviewing.
             </p>
           </div>
 
@@ -222,7 +225,7 @@ export default function ProjectPage() {
             href="https://github.com/Jerrizzy001"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex min-h-11 items-center justify-center gap-3 rounded-md bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-slate-950"
+            className="inline-flex min-h-11 w-full items-center justify-center gap-3 rounded-md bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-slate-950 sm:w-auto"
           >
             <FaGithub size={18} aria-hidden="true" />
             View GitHub profile
@@ -252,10 +255,10 @@ function ProjectCard({ project, onView, index, isFeatured, prefersReducedMotion 
       variants={cardIn}
       whileHover={prefersReducedMotion ? undefined : { y: -4 }}
       className={`group overflow-hidden rounded-lg border border-slate-950/10 bg-white/88 transition-colors hover:border-slate-950/25 dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25 ${
-        isFeatured ? "lg:col-span-2 lg:grid lg:grid-cols-[1.1fr_0.9fr]" : ""
+        isFeatured ? "md:col-span-2 lg:grid lg:grid-cols-[1.1fr_0.9fr]" : ""
       }`}
     >
-      <div className={`relative bg-slate-950 ${isFeatured ? "min-h-[18rem] lg:min-h-full" : "h-52 sm:h-60"}`}>
+      <div className={`relative bg-slate-950 ${isFeatured ? "h-64 sm:h-72 md:h-80 lg:h-auto lg:min-h-full" : "h-52 sm:h-60"}`}>
         <CardImage project={project} index={index} />
       </div>
 
@@ -303,11 +306,11 @@ function ProjectCard({ project, onView, index, isFeatured, prefersReducedMotion 
           )}
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 grid gap-3 min-[420px]:flex min-[420px]:flex-wrap">
           <button
             type="button"
             onClick={onView}
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-slate-950"
+            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200 dark:focus-visible:ring-offset-slate-950 min-[420px]:w-auto"
           >
             Open details
             <FaArrowRight size={13} aria-hidden="true" />
@@ -318,7 +321,7 @@ function ProjectCard({ project, onView, index, isFeatured, prefersReducedMotion 
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-slate-950/15 px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-950/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:text-white dark:hover:bg-white/10 dark:focus-visible:ring-offset-slate-950"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md border border-slate-950/15 px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-950/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:text-white dark:hover:bg-white/10 dark:focus-visible:ring-offset-slate-950 min-[420px]:w-auto"
             >
               <FaExternalLinkAlt size={13} aria-hidden="true" />
               Open live app
@@ -339,7 +342,7 @@ function ProjectModal({ project, titleId, onClose }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center px-3 py-6 sm:px-4"
+      className="fixed inset-0 z-50 flex items-end justify-center px-3 pb-3 pt-16 sm:items-center sm:px-4 sm:py-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -348,7 +351,7 @@ function ProjectModal({ project, titleId, onClose }) {
         className="absolute inset-0 bg-slate-950/72"
         type="button"
         onClick={onClose}
-        aria-label="Close project details"
+        aria-label="Dismiss project details"
       />
 
       <motion.div
@@ -361,7 +364,7 @@ function ProjectModal({ project, titleId, onClose }) {
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.98, opacity: 0, y: 10 }}
         transition={{ duration: 0.22, ease: "easeOut" }}
-        className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-lg border border-slate-950/10 bg-white p-5 text-slate-950 shadow-[0_8px_24px_rgba(15,23,42,0.14)] dark:border-white/10 dark:bg-slate-950 dark:text-white sm:p-6"
+        className="relative max-h-[calc(100svh-1.5rem)] w-full max-w-4xl overflow-y-auto rounded-t-lg border border-slate-950/10 bg-white p-5 text-slate-950 shadow-[0_8px_24px_rgba(15,23,42,0.14)] dark:border-white/10 dark:bg-slate-950 dark:text-white sm:max-h-[calc(100svh-3rem)] sm:rounded-lg sm:p-6"
       >
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -501,8 +504,8 @@ function CardImage({ project, index }) {
 
   const sizes =
     index === 0
-      ? "(min-width: 1280px) 672px, (min-width: 1024px) 54vw, calc(100vw - 40px)"
-      : "(min-width: 1280px) 592px, (min-width: 1024px) 48vw, calc(100vw - 40px)";
+      ? "(min-width: 1280px) 672px, (min-width: 1024px) 54vw, (min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)"
+      : "(min-width: 1280px) 592px, (min-width: 1024px) 48vw, (min-width: 768px) calc((100vw - 68px) / 2), calc(100vw - 32px)";
 
   return (
     <Image

@@ -18,16 +18,82 @@ html.dark {
 
 body {
   min-height: 100vh;
+  min-height: 100svh;
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
 }
 
 .page-shell {
+  min-height: 100vh;
+  min-height: 100svh;
   background: var(--background);
+}
+
+.safe-x {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+.site-nav {
+  padding-top: env(safe-area-inset-top);
+}
+
+.site-footer {
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
 }
 
 .surface-panel {
   background: var(--surface);
   border-color: var(--surface-border);
+}
+
+@media (min-width: 640px) {
+  .safe-x {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+}
+
+@media (min-width: 1024px) {
+  .safe-x {
+    padding-left: max(2rem, env(safe-area-inset-left));
+    padding-right: max(2rem, env(safe-area-inset-right));
+  }
+}
+
+.signal-field {
+  contain: layout paint;
+  opacity: 0.78;
+}
+
+.signal-field canvas {
+  position: absolute;
+  z-index: 1;
+}
+
+.signal-field__static {
+  z-index: 0;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(14, 165, 233, 0.16), transparent 28%),
+    radial-gradient(circle at 78% 32%, rgba(20, 184, 166, 0.14), transparent 24%),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+  background-size: auto, auto, 42px 42px, 42px 42px;
+  mask-image: radial-gradient(circle at center, black 0%, black 58%, transparent 86%);
+}
+
+html.dark .signal-field__static {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(56, 189, 248, 0.18), transparent 28%),
+    radial-gradient(circle at 78% 32%, rgba(45, 212, 191, 0.14), transparent 24%),
+    linear-gradient(90deg, rgba(226, 232, 240, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(226, 232, 240, 0.06) 1px, transparent 1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-field canvas {
+    display: none;
+  }
 }

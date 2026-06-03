@@ -1,5 +1,4 @@
 import Navbar from "../components/Navbar";
-import { motion } from "framer-motion";
 import {
   FaGithub,
   FaEnvelope,
@@ -39,41 +38,30 @@ export default function Contact() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
-      <main className="pt-28 sm:pt-32 px-4 sm:px-6 max-w-4xl mx-auto text-center pb-16">
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+      <main className="safe-x pt-28 sm:pt-32 max-w-4xl mx-auto text-center pb-16">
+        <h1
           className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6"
         >
-          Contact Me
-        </motion.h1>
+          Contact me
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-base sm:text-lg text-gray-700 dark:text-gray-300 mb-10 sm:mb-14"
+        <p
+          className="mx-auto mb-10 max-w-2xl text-base sm:text-lg text-gray-700 dark:text-gray-300 sm:mb-14"
         >
-          Want to collaborate, connect, or just say hi?
-          You can reach me through any of the platforms below.
-        </motion.p>
+          For internships, project work, or technical collaboration, email me or connect on LinkedIn.
+          I usually respond fastest there.
+        </p>
 
         <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
-          {contacts.map((item, i) => (
-            <motion.a
+          {contacts.map((item) => (
+            <a
               key={item.label}
               href={item.href}
               target="_blank"
               rel="noreferrer"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + i * 0.1 }}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
               className="flex items-center gap-4 p-5 sm:p-6 rounded-lg
                          surface-panel backdrop-blur
-                         border shadow-lg hover:shadow-xl transition"
+                         border shadow-lg transition hover:-translate-y-1 hover:shadow-xl active:translate-y-0"
             >
               <div className="text-indigo-600 dark:text-indigo-400 shrink-0">
                 {item.icon}
@@ -85,7 +73,7 @@ export default function Contact() {
                   {item.value}
                 </p>
               </div>
-            </motion.a>
+            </a>
           ))}
         </div>
       </main>

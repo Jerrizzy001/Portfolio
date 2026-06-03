@@ -3,32 +3,33 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import SignalField from "../components/SignalField";
 
 const slides = [
   {
-    title: "Hi, I'm Jerry 👋",
+    title: "Jerry Nwachi",
     description:
-      "I'm a passionate developer currently studying at Seneca College, Newnham Campus – North York.",
+      "Software Development student building practical web apps, data workflows, and AI automation systems in Toronto.",
   },
   {
-    title: "I LOVE WEB",
+    title: "Current work",
     description:
-      "I've been obsessed with how the web works since I was a kid. I always dreamt of being able to make my own website someday.",
+      "AI Systems Integrator intern at YarlMetal Fabrications Inc., mapping manual workflows and automating repetitive operations.",
   },
   {
-    title: "DISCIPLINE",
+    title: "How I build",
     description:
-      "Discipline is a fundamental necessity — especially in our line of work. I always push myself to learn more and sharpen my skills.",
+      "Clear interfaces, reliable APIs, readable code, and systems that make work easier to repeat.",
   },
   {
-    title: "I LOVE PLAYING",
+    title: "Project focus",
     description:
-      'People in our line of expertise spend most of their day on screens, so I try to make time for fun — like they say, "All work and no play makes Jack a dull boy."',
+      "Full-stack Next.js apps, Python data analysis, machine learning workflows, and deployment-ready portfolio systems.",
   },
   {
-    title: "INTERESTED?",
+    title: "Start here",
     description:
-      "Click the button below to learn more about me — I promise you'll be entertained!",
+      "Review the project case notes, then contact me if the work fits what your team needs.",
   },
 ];
 
@@ -52,8 +53,10 @@ export default function Home() {
       {/* HERO */}
       <section
         id="home"
-        className="pt-28 px-4 sm:px-6 text-center min-h-screen flex flex-col items-center justify-center"
+        className="safe-x relative isolate overflow-hidden pt-28 text-center min-h-screen min-h-[100svh] flex flex-col items-center justify-center"
       >
+        <SignalField density="dense" className="z-0" />
+
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -61,10 +64,10 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
             transition={{ duration: 0.6 }}
-            className="mb-6 max-w-2xl w-full"
+            className="relative z-10 mb-6 max-w-2xl w-full"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-wide">
-              {slides[index].title.toUpperCase()}
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-tight [text-wrap:balance]">
+              {slides[index].title}
             </h1>
             <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 px-2">
               {slides[index].description}
@@ -72,18 +75,23 @@ export default function Home() {
           </motion.div>
         </AnimatePresence>
 
-        <div className="flex items-center justify-center gap-3 mb-8">
+        <div className="relative z-10 flex items-center justify-center gap-1 mb-8" aria-label="Hero slides">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => setIndex(i)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                index === i
-                  ? "bg-black dark:bg-white scale-125"
-                  : "bg-gray-300 dark:bg-gray-600"
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full transition hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:hover:bg-white/10"
+              aria-label={`Show ${slides[i].title}`}
+              aria-pressed={index === i}
+            >
+              <span
+                className={`block h-2.5 w-2.5 rounded-full transition-all ${
+                  index === i
+                    ? "bg-black dark:bg-white scale-125"
+                    : "bg-gray-300 dark:bg-gray-600"
+                }`}
+              />
+            </button>
           ))}
         </div>
 
@@ -91,20 +99,20 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="flex flex-col items-center gap-5"
+          className="relative z-10 flex flex-col items-center gap-5"
         >
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/about"
-              className="inline-block bg-black text-white dark:bg-white dark:text-black font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
-            >
-              Learn More About Me →
-            </Link>
+          <div className="grid w-full max-w-xs gap-3 min-[430px]:max-w-none min-[430px]:grid-cols-2">
             <Link
               href="/project"
-              className="inline-block border-2 border-black dark:border-white text-black dark:text-white font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
+              className="inline-flex min-h-11 items-center justify-center bg-black text-white dark:bg-white dark:text-black font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
             >
-              View My Projects
+              View project notes
+            </Link>
+            <Link
+              href="/about"
+              className="inline-flex min-h-11 items-center justify-center border-2 border-black dark:border-white text-black dark:text-white font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
+            >
+              Read about Jerry
             </Link>
           </div>
 
