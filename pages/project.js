@@ -1,6 +1,5 @@
 import { useId, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { FaArrowRight, FaExternalLinkAlt, FaGithub, FaTimes } from "react-icons/fa";
 import SignalField from "../components/SignalField";
@@ -109,19 +108,6 @@ const projects = [
   },
 ];
 
-const gridWrap = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
-  },
-};
-
-const cardIn = {
-  hidden: { opacity: 0, y: 14 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.42, ease: "easeOut" } },
-};
-
 const categoryTone = {
   "Data Science":
     "border-emerald-300/70 bg-emerald-50 text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-200",
@@ -131,7 +117,6 @@ const categoryTone = {
 
 export default function ProjectPage() {
   const [activeProject, setActiveProject] = useState(null);
-  const prefersReducedMotion = useReducedMotion();
   const modalTitleId = useId();
   const modalDescriptionId = useId();
 
@@ -148,11 +133,8 @@ export default function ProjectPage() {
       <main id="main-content" className="safe-x relative isolate mx-auto max-w-7xl overflow-hidden pb-20 pt-28">
         <SignalField fill={false} className="inset-x-0 top-0 z-0 h-[54rem] opacity-60" />
 
-        <motion.section
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-          className="relative z-10 mb-10 grid gap-6 border-b border-slate-950/10 pb-8 dark:border-white/10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end"
+        <section
+          className="motion-enter relative z-10 mb-10 grid gap-6 border-b border-slate-950/10 pb-8 dark:border-white/10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end"
         >
           <div>
             <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 text-sm font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
@@ -174,12 +156,9 @@ export default function ProjectPage() {
               reduce manual handoffs.
             </p>
           </div>
-        </motion.section>
+        </section>
 
-        <motion.section
-          variants={gridWrap}
-          initial="hidden"
-          animate="show"
+        <section
           className="relative z-10 grid grid-cols-1 gap-5 md:grid-cols-2"
           aria-label="Project list"
         >
@@ -189,17 +168,14 @@ export default function ProjectPage() {
               project={project}
               index={index}
               isFeatured={index === 0}
-              prefersReducedMotion={prefersReducedMotion}
               onView={() => setActiveProject(project)}
             />
           ))}
-        </motion.section>
+        </section>
 
-        <motion.section
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.45 }}
-          className="relative z-10 mt-16 flex flex-col gap-5 border-t border-slate-950/10 pt-8 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between"
+        <section
+          style={{ "--motion-delay": "180ms" }}
+          className="motion-enter relative z-10 mt-16 flex flex-col gap-5 border-t border-slate-950/10 pt-8 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between"
         >
           <div>
             <h2 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
@@ -220,32 +196,29 @@ export default function ProjectPage() {
             <FaGithub size={18} aria-hidden="true" />
             View GitHub profile
           </a>
-        </motion.section>
+        </section>
       </main>
 
-      <AnimatePresence>
-        {activeProject && (
-          <ProjectModal
-            project={activeProject}
-            titleId={modalTitleId}
-            descriptionId={modalDescriptionId}
-            onClose={() => setActiveProject(null)}
-          />
-        )}
-      </AnimatePresence>
+      {activeProject && (
+        <ProjectModal
+          project={activeProject}
+          titleId={modalTitleId}
+          descriptionId={modalDescriptionId}
+          onClose={() => setActiveProject(null)}
+        />
+      )}
     </div>
   );
 }
 
-function ProjectCard({ project, onView, index, isFeatured, prefersReducedMotion }) {
+function ProjectCard({ project, onView, index, isFeatured }) {
   const visibleTech = project.tech.slice(0, isFeatured ? 6 : 4);
   const remainingTech = project.tech.length - visibleTech.length;
 
   return (
-    <motion.article
-      variants={cardIn}
-      whileHover={prefersReducedMotion ? undefined : { y: -4 }}
-      className={`group overflow-hidden rounded-lg border border-slate-950/10 bg-white/88 transition-colors hover:border-slate-950/25 dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25 ${
+    <article
+      style={{ "--motion-delay": `${60 + index * 70}ms` }}
+      className={`motion-enter motion-card group overflow-hidden rounded-lg border border-slate-950/10 bg-white/88 transition-colors hover:border-slate-950/25 dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25 ${
         isFeatured ? "md:col-span-2 lg:grid lg:grid-cols-[1.1fr_0.9fr]" : ""
       }`}
     >
@@ -320,7 +293,7 @@ function ProjectCard({ project, onView, index, isFeatured, prefersReducedMotion 
           )}
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
 
@@ -335,12 +308,7 @@ function ProjectModal({ project, titleId, descriptionId, onClose }) {
   });
 
   return (
-    <motion.div
-      className="fixed inset-0 z-50 flex items-end justify-center px-3 pb-3 pt-16 sm:items-center sm:px-4 sm:py-6"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <div className="motion-modal-backdrop fixed inset-0 z-50 flex items-end justify-center px-3 pb-3 pt-16 sm:items-center sm:px-4 sm:py-6">
       <button
         className="absolute inset-0 bg-slate-950/72"
         type="button"
@@ -348,18 +316,14 @@ function ProjectModal({ project, titleId, descriptionId, onClose }) {
         aria-label="Dismiss project details"
       />
 
-      <motion.div
+      <div
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
         tabIndex={-1}
-        initial={{ scale: 0.98, opacity: 0, y: 10 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.98, opacity: 0, y: 10 }}
-        transition={{ duration: 0.22, ease: "easeOut" }}
-        className="relative max-h-[calc(100svh-1.5rem)] w-full max-w-4xl overflow-y-auto rounded-t-lg border border-slate-950/10 bg-white p-5 text-slate-950 shadow-[0_8px_24px_rgba(15,23,42,0.14)] dark:border-white/10 dark:bg-slate-950 dark:text-white sm:max-h-[calc(100svh-3rem)] sm:rounded-lg sm:p-6"
+        className="motion-modal-panel relative max-h-[calc(100svh-1.5rem)] w-full max-w-4xl overflow-y-auto rounded-t-lg border border-slate-950/10 bg-white p-5 text-slate-950 shadow-[0_8px_24px_rgba(15,23,42,0.14)] dark:border-white/10 dark:bg-slate-950 dark:text-white sm:max-h-[calc(100svh-3rem)] sm:rounded-lg sm:p-6"
       >
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -459,8 +423,8 @@ function ProjectModal({ project, titleId, descriptionId, onClose }) {
             </div>
           </aside>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 

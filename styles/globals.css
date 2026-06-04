@@ -69,6 +69,91 @@ body {
   border-color: var(--surface-border);
 }
 
+.motion-card {
+  transition:
+    border-color 180ms ease-out,
+    transform 180ms ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-enter {
+    animation: motion-enter 420ms ease-out both;
+    animation-delay: var(--motion-delay, 0ms);
+  }
+
+  .motion-hero-slide {
+    animation: motion-hero-slide 560ms ease-out both;
+  }
+
+  .motion-fade-in-delay {
+    animation: motion-fade-in 420ms ease-out 900ms both;
+  }
+
+  .motion-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .motion-modal-backdrop {
+    animation: motion-fade-in 180ms ease-out both;
+  }
+
+  .motion-modal-panel {
+    animation: motion-modal-in 220ms ease-out both;
+  }
+}
+
+@keyframes motion-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes motion-hero-slide {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes motion-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes motion-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-card {
+    transition: border-color 180ms ease-out;
+  }
+}
+
 @media (min-width: 640px) {
   .safe-x {
     padding-left: max(1.5rem, env(safe-area-inset-left));

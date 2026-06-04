@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -34,9 +33,25 @@ const slides = [
   },
 ];
 
+function useReducedMotionPreference() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncPreference = () => setPrefersReducedMotion(media.matches);
+
+    syncPreference();
+    media.addEventListener("change", syncPreference);
+
+    return () => media.removeEventListener("change", syncPreference);
+  }, []);
+
+  return prefersReducedMotion;
+}
+
 export default function Home() {
   const [index, setIndex] = useState(0);
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useReducedMotionPreference();
 
   useEffect(() => {
     if (shouldReduceMotion) return undefined;
@@ -64,23 +79,17 @@ export default function Home() {
       >
         <SignalField density="dense" className="z-0" />
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.6 }}
-            className="relative z-10 mb-6 max-w-2xl w-full"
-          >
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-tight [text-wrap:balance]">
-              {slides[index].title}
-            </h1>
-            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 px-2">
-              {slides[index].description}
-            </p>
-          </motion.div>
-        </AnimatePresence>
+        <div
+          key={index}
+          className="motion-hero-slide relative z-10 mb-6 max-w-2xl w-full"
+        >
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-tight [text-wrap:balance]">
+            {slides[index].title}
+          </h1>
+          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 px-2">
+            {slides[index].description}
+          </p>
+        </div>
 
         <div className="relative z-10 flex items-center justify-center gap-1 mb-8" aria-label="Hero slides">
           {slides.map((_, i) => (
@@ -102,12 +111,7 @@ export default function Home() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="relative z-10 flex flex-col items-center gap-5"
-        >
+        <div className="motion-fade-in-delay relative z-10 flex flex-col items-center gap-5">
           <div className="grid w-full max-w-xs gap-3 min-[430px]:max-w-none min-[430px]:grid-cols-2">
             <Link
               href="/project"
@@ -144,7 +148,7 @@ export default function Home() {
               <FaLinkedin size={22} />
             </a>
           </div>
-        </motion.div>
+        </div>
       </main>
     </div>
   );
