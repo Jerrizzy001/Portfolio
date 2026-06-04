@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 
-const frameMs = 1000 / 32;
+const frameMs = 1000 / 24;
+const maxDevicePixelRatio = 1.25;
 
 export default function SignalField({ className = "", density = "normal", fill = true }) {
   const rootRef = useRef(null);
@@ -16,12 +17,20 @@ export default function SignalField({ className = "", density = "normal", fill =
 
     const motionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
     const pointerMedia = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const canvasMedia = window.matchMedia("(min-width: 768px)");
+    if (motionMedia.matches || !pointerMedia.matches || !canvasMedia.matches) {
+      canvas.hidden = true;
+      return undefined;
+    }
+
     const pointer = { x: 0, y: 0, active: false };
     let idleHandle = 0;
     let idleFallback = 0;
+    let boundsFrame = 0;
     const state = {
       animate: !motionMedia.matches && pointerMedia.matches,
       animationFrame: 0,
+      bounds: { left: 0, top: 0, width: 0, height: 0 },
       dpr: 1,
       finePointer: pointerMedia.matches,
       height: 0,
@@ -49,11 +58,22 @@ export default function SignalField({ className = "", density = "normal", fill =
           };
     };
 
-    const buildPoints = () => {
+    const syncBounds = () => {
       const rect = root.getBoundingClientRect();
+      state.bounds = {
+        left: rect.left,
+        top: rect.top,
+        width: rect.width,
+        height: rect.height,
+      };
+      return rect;
+    };
+
+    const buildPoints = () => {
+      const rect = syncBounds();
       state.width = Math.max(1, Math.round(rect.width));
       state.height = Math.max(1, Math.round(rect.height));
-      state.dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      state.dpr = Math.min(window.devicePixelRatio || 1, maxDevicePixelRatio);
 
       canvas.width = Math.round(state.width * state.dpr);
       canvas.height = Math.round(state.height * state.dpr);
@@ -62,7 +82,7 @@ export default function SignalField({ className = "", density = "normal", fill =
       context.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
 
       const compact = state.width < 640;
-      const spacing = density === "dense" ? (compact ? 38 : 30) : compact ? 48 : 36;
+      const spacing = density === "dense" ? (compact ? 44 : 34) : compact ? 56 : 42;
       const columns = Math.ceil(state.width / spacing) + 2;
       const rows = Math.ceil(state.height / spacing) + 2;
       const points = [];
@@ -100,6 +120,24 @@ export default function SignalField({ className = "", density = "normal", fill =
       const fallbackY = state.height * (0.48 + Math.cos(t * 0.21) * 0.1);
       const targetX = pointer.active ? pointer.x : fallbackX;
       const targetY = pointer.active ? pointer.y : fallbackY;
+      const drawConnection = (point, neighbor) => {
+        if (!neighbor) return;
+
+        const midX = (point.drawX + neighbor.drawX) / 2;
+        const midY = (point.drawY + neighbor.drawY) / 2;
+        const dx = midX - targetX;
+        const dy = midY - targetY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const influence = Math.max(0, 1 - distance / (range * 1.1));
+        const alpha = 0.035 + influence * 0.16;
+
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(${influence > 0.22 ? palette.pulse : palette.ink}, ${alpha})`;
+        ctx.lineWidth = 1 + influence * 0.75;
+        ctx.moveTo(point.drawX, point.drawY);
+        ctx.lineTo(neighbor.drawX, neighbor.drawY);
+        ctx.stroke();
+      };
 
       for (let index = 0; index < state.points.length; index += 1) {
         const point = state.points[index];
@@ -126,24 +164,8 @@ export default function SignalField({ className = "", density = "normal", fill =
         const right = point.rightIndex >= 0 ? state.points[point.rightIndex] : null;
         const below = point.belowIndex >= 0 ? state.points[point.belowIndex] : null;
 
-        [right, below].forEach((neighbor) => {
-          if (!neighbor) return;
-
-          const midX = (point.drawX + neighbor.drawX) / 2;
-          const midY = (point.drawY + neighbor.drawY) / 2;
-          const dx = midX - targetX;
-          const dy = midY - targetY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          const influence = Math.max(0, 1 - distance / (range * 1.1));
-          const alpha = 0.035 + influence * 0.16;
-
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(${influence > 0.22 ? palette.pulse : palette.ink}, ${alpha})`;
-          ctx.lineWidth = 1 + influence * 0.75;
-          ctx.moveTo(point.drawX, point.drawY);
-          ctx.lineTo(neighbor.drawX, neighbor.drawY);
-          ctx.stroke();
-        });
+        drawConnection(point, right);
+        drawConnection(point, below);
       }
 
       const radius = Math.max(90, Math.min(state.width, state.height) * 0.22);
@@ -214,6 +236,15 @@ export default function SignalField({ className = "", density = "normal", fill =
       state.animationFrame = 0;
     };
 
+    const queueBoundsSync = () => {
+      if (boundsFrame) return;
+
+      boundsFrame = window.requestAnimationFrame(() => {
+        boundsFrame = 0;
+        syncBounds();
+      });
+    };
+
     const syncMotion = () => {
       state.reduceMotion = motionMedia.matches;
       state.finePointer = pointerMedia.matches;
@@ -229,14 +260,13 @@ export default function SignalField({ className = "", density = "normal", fill =
     const onPointerMove = (event) => {
       if (!state.finePointer) return;
 
-      const rect = root.getBoundingClientRect();
-      pointer.x = event.clientX - rect.left;
-      pointer.y = event.clientY - rect.top;
+      pointer.x = event.clientX - state.bounds.left;
+      pointer.y = event.clientY - state.bounds.top;
       pointer.active =
         pointer.x >= 0 &&
         pointer.y >= 0 &&
-        pointer.x <= rect.width &&
-        pointer.y <= rect.height;
+        pointer.x <= state.bounds.width &&
+        pointer.y <= state.bounds.height;
     };
 
     const onVisibility = () => {
@@ -269,6 +299,7 @@ export default function SignalField({ className = "", density = "normal", fill =
     resizeObserver.observe(root);
     intersectionObserver.observe(root);
     window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("scroll", queueBoundsSync, { passive: true });
     document.addEventListener("visibilitychange", onVisibility);
     motionMedia.addEventListener("change", syncMotion);
     pointerMedia.addEventListener("change", syncMotion);
@@ -278,7 +309,11 @@ export default function SignalField({ className = "", density = "normal", fill =
       stop();
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
+      if (boundsFrame) {
+        window.cancelAnimationFrame(boundsFrame);
+      }
       window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("scroll", queueBoundsSync);
       document.removeEventListener("visibilitychange", onVisibility);
       motionMedia.removeEventListener("change", syncMotion);
       pointerMedia.removeEventListener("change", syncMotion);
