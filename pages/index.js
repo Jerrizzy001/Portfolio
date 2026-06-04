@@ -111,7 +111,7 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="motion-rise-delay relative z-10 flex flex-col items-center gap-5">
+        <div className="motion-rise relative z-10 flex flex-col items-center gap-5">
           <div className="grid w-full max-w-xs gap-3 min-[430px]:max-w-none min-[430px]:grid-cols-2">
             <Link
               href="/project"

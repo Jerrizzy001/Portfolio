@@ -173,10 +173,7 @@ export default function ProjectPage() {
           ))}
         </section>
 
-        <section
-          style={{ "--motion-delay": "180ms" }}
-          className="motion-enter relative z-10 mt-16 flex flex-col gap-5 border-t border-slate-950/10 pt-8 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between"
-        >
+        <section className="motion-enter relative z-10 mt-16 flex flex-col gap-5 border-t border-slate-950/10 pt-8 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
               More builds are on GitHub.
@@ -217,7 +214,6 @@ function ProjectCard({ project, onView, index, isFeatured }) {
 
   return (
     <article
-      style={{ "--motion-delay": `${60 + index * 70}ms` }}
       className={`motion-enter motion-card group overflow-hidden rounded-lg border border-slate-950/10 bg-white/88 transition-colors hover:border-slate-950/25 dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25 ${
         isFeatured ? "md:col-span-2 lg:grid lg:grid-cols-[1.1fr_0.9fr]" : ""
       }`}

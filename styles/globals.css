@@ -77,16 +77,15 @@ body {
 
 @media (prefers-reduced-motion: no-preference) {
   .motion-enter {
-    animation: motion-enter 420ms ease-out backwards;
-    animation-delay: var(--motion-delay, 0ms);
+    animation: motion-enter 420ms ease-out;
   }
 
   .motion-hero-slide {
     animation: motion-hero-slide 560ms ease-out;
   }
 
-  .motion-rise-delay {
-    animation: motion-rise-delay 420ms ease-out 220ms backwards;
+  .motion-rise {
+    animation: motion-rise 420ms ease-out;
   }
 
   .motion-card:hover {
@@ -122,7 +121,7 @@ body {
   }
 }
 
-@keyframes motion-rise-delay {
+@keyframes motion-rise {
   from {
     transform: translateY(8px);
   }
