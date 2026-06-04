@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import Navbar from '../components/Navbar';
+import useModalA11y from '../hooks/useModalA11y';
 
 import {
   SiReact,
@@ -162,12 +163,15 @@ const skillCategories = [
 
 export default function Skills() {
   const [active, setActive] = useState(null);
+  const modalTitleId = useId();
+  const modalDescriptionId = useId();
+  const activeSkill = skillsData.find((skill) => skill.id === active);
 
   return (
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
-      <section className="safe-x pt-28 max-w-5xl mx-auto pb-16">
+      <main id="main-content" className="safe-x pt-28 max-w-5xl mx-auto pb-16">
         {/* Header */}
         <div
           className="mb-12 text-center"
@@ -211,40 +215,64 @@ export default function Skills() {
         </div>
 
         {/* Modal */}
-        {active && (
-          <div
-            className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 px-3 pb-3 pt-16 backdrop-blur-sm sm:items-center sm:px-4 sm:py-6"
-            onClick={() => setActive(null)}
-          >
-            <div
-              className="surface-panel relative max-h-[calc(100svh-1.5rem)] w-full max-w-md overflow-y-auto rounded-t-lg border p-6 shadow-2xl sm:rounded-lg"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {(() => {
-                const skill = skillsData.find(s => s.id === active);
-                return (
-                  <>
-                    <div className="flex items-center gap-3 mb-3">
-                      {skill && <skill.Icon size={26} className="text-indigo-500 shrink-0" />}
-                      <h2 className="text-xl font-bold">{skill?.name}</h2>
-                    </div>
-                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-                      {skill?.description}
-                    </p>
-                  </>
-                );
-              })()}
-              <button
-                onClick={() => setActive(null)}
-                className="absolute right-2 top-2 inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-red-400 dark:hover:bg-white/10"
-                aria-label="Close skill details"
-              >
-                ✕
-              </button>
-            </div>
-          </div>
+        {activeSkill && (
+          <SkillDialog
+            skill={activeSkill}
+            titleId={modalTitleId}
+            descriptionId={modalDescriptionId}
+            onClose={() => setActive(null)}
+          />
         )}
-      </section>
+      </main>
+    </div>
+  );
+}
+
+function SkillDialog({ skill, titleId, descriptionId, onClose }) {
+  const dialogRef = useRef(null);
+  const closeButtonRef = useRef(null);
+
+  useModalA11y({
+    dialogRef,
+    initialFocusRef: closeButtonRef,
+    onClose,
+  });
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center px-3 pb-3 pt-16 sm:items-center sm:px-4 sm:py-6">
+      <button
+        type="button"
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+        aria-label="Dismiss skill details"
+      />
+
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+        tabIndex={-1}
+        className="surface-panel relative max-h-[calc(100svh-1.5rem)] w-full max-w-md overflow-y-auto rounded-t-lg border p-6 shadow-2xl sm:rounded-lg"
+      >
+        <div className="mb-3 flex items-center gap-3 pr-11">
+          <skill.Icon size={26} className="shrink-0 text-indigo-500" aria-hidden="true" />
+          <h2 id={titleId} className="text-xl font-bold">{skill.name}</h2>
+        </div>
+        <p id={descriptionId} className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 sm:text-base">
+          {skill.description}
+        </p>
+        <button
+          ref={closeButtonRef}
+          type="button"
+          onClick={onClose}
+          className="absolute right-2 top-2 inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-gray-500 transition hover:bg-gray-100 hover:text-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-gray-300 dark:hover:bg-white/10"
+          aria-label="Close skill details"
+        >
+          ✕
+        </button>
+      </div>
     </div>
   );
 }

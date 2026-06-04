@@ -24,6 +24,7 @@ export default function Navbar() {
   const isDark = mounted && resolvedTheme === 'dark';
   const toggleTheme = () => setTheme(isDark ? 'light' : 'dark');
   const themeTitle = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+  const isCurrent = (href) => router.pathname === href;
   const themeIcon = mounted ? (
     isDark ? <MdLightMode size={20} /> : <MdDarkMode size={20} />
   ) : (
@@ -31,152 +32,176 @@ export default function Navbar() {
   );
 
   return (
-    <nav className="site-nav fixed inset-x-0 top-0 surface-panel backdrop-blur-md border-b shadow-sm z-50 transition-colors duration-300">
-      <div className="safe-x max-w-7xl mx-auto py-4 flex justify-between items-center">
-        <Link href="/" className="flex min-h-11 items-center gap-2 group">
-          <span className="text-xl font-extrabold text-gray-950 dark:text-white tracking-tight">
-            Jerrizzy
-          </span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6 text-gray-700 dark:text-white font-medium">
-          <Link
-            href="/"
-            className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
-              router.pathname === '/' ? 'text-blue-500 dark:text-indigo-400' : ''
-            }`}
-          >
-            Home
+    <header className="site-nav fixed inset-x-0 top-0 surface-panel backdrop-blur-md border-b shadow-sm z-50 transition-colors duration-300">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+      <nav aria-label="Primary">
+        <div className="safe-x max-w-7xl mx-auto py-4 flex justify-between items-center">
+          <Link href="/" className="flex min-h-11 items-center gap-2 group">
+            <span className="text-xl font-extrabold text-gray-950 dark:text-white tracking-tight">
+              Jerrizzy
+            </span>
           </Link>
 
-          <Link
-            href="/project"
-            className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
-              router.pathname === '/project' ? 'text-blue-500 dark:text-indigo-400' : ''
-            }`}
-          >
-            Projects
-          </Link>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-6 text-gray-700 dark:text-white font-medium">
+            <Link
+              href="/"
+              aria-current={isCurrent('/') ? 'page' : undefined}
+              className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+                isCurrent('/') ? 'text-blue-500 dark:text-indigo-400' : ''
+              }`}
+            >
+              Home
+            </Link>
 
-          <Link
-            href="/skills"
-            className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
-              router.pathname === '/skills' ? 'text-blue-500 dark:text-indigo-400' : ''
-            }`}
-          >
-            Skills
-          </Link>
+            <Link
+              href="/project"
+              aria-current={isCurrent('/project') ? 'page' : undefined}
+              className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+                isCurrent('/project') ? 'text-blue-500 dark:text-indigo-400' : ''
+              }`}
+            >
+              Projects
+            </Link>
 
-          <Link
-            href="/about"
-            className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
-              router.pathname === '/about' ? 'text-blue-500 dark:text-indigo-400' : ''
-            }`}
-          >
-            About
-          </Link>
+            <Link
+              href="/skills"
+              aria-current={isCurrent('/skills') ? 'page' : undefined}
+              className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+                isCurrent('/skills') ? 'text-blue-500 dark:text-indigo-400' : ''
+              }`}
+            >
+              Skills
+            </Link>
 
-          <Link
-            href="/contact"
-            className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
-              router.pathname === '/contact' ? 'text-blue-500 dark:text-indigo-400' : ''
-            }`}
-          >
-            Contact
-          </Link>
+            <Link
+              href="/about"
+              aria-current={isCurrent('/about') ? 'page' : undefined}
+              className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+                isCurrent('/about') ? 'text-blue-500 dark:text-indigo-400' : ''
+              }`}
+            >
+              About
+            </Link>
 
-          {/* Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="ml-4 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition disabled:opacity-70"
-            aria-label="Toggle theme"
-            title={themeTitle}
-            disabled={!mounted}
-          >
-            {themeIcon}
-          </button>
+            <Link
+              href="/contact"
+              aria-current={isCurrent('/contact') ? 'page' : undefined}
+              className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
+                isCurrent('/contact') ? 'text-blue-500 dark:text-indigo-400' : ''
+              }`}
+            >
+              Contact
+            </Link>
+
+            {/* Theme Toggle */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="ml-4 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition disabled:opacity-70"
+              aria-label={themeTitle}
+              aria-pressed={isDark}
+              title={themeTitle}
+              disabled={!mounted}
+            >
+              {themeIcon}
+            </button>
+          </div>
+
+          {/* Mobile Hamburger */}
+          <div className="md:hidden flex items-center space-x-2">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition disabled:opacity-70"
+              aria-label={themeTitle}
+              aria-pressed={isDark}
+              title={themeTitle}
+              disabled={!mounted}
+            >
+              {themeIcon}
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleMenu}
+              aria-controls="primary-menu"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+            >
+              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Hamburger */}
-        <div className="md:hidden flex items-center space-x-2">
-          <button
-            onClick={toggleTheme}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition disabled:opacity-70"
-            aria-label="Toggle theme"
-            title={themeTitle}
-            disabled={!mounted}
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div
+            id="primary-menu"
+            className="safe-x md:hidden surface-panel backdrop-blur-md border-t pb-4 flex flex-col space-y-2 text-gray-800 dark:text-white"
           >
-            {themeIcon}
-          </button>
+            <Link
+              href="/"
+              onClick={closeMenu}
+              aria-current={isCurrent('/') ? 'page' : undefined}
+              className={`flex min-h-11 items-center py-2 ${
+                isCurrent('/') ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
+              }`}
+            >
+              Home
+            </Link>
 
-          <button
-            onClick={toggleMenu}
-            aria-label={isOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isOpen}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-          >
-            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
-        </div>
-      </div>
+            <Link
+              href="/project"
+              onClick={closeMenu}
+              aria-current={isCurrent('/project') ? 'page' : undefined}
+              className={`flex min-h-11 items-center py-2 ${
+                isCurrent('/project') ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
+              }`}
+            >
+              Projects
+            </Link>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="safe-x md:hidden surface-panel backdrop-blur-md border-t pb-4 flex flex-col space-y-2 text-gray-800 dark:text-white">
-          <Link
-            href="/"
-            onClick={closeMenu}
-            className={`flex min-h-11 items-center py-2 ${
-              router.pathname === '/' ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
-            }`}
-          >
-            Home
-          </Link>
+            <Link
+              href="/skills"
+              onClick={closeMenu}
+              aria-current={isCurrent('/skills') ? 'page' : undefined}
+              className={`flex min-h-11 items-center py-2 ${
+                isCurrent('/skills') ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
+              }`}
+            >
+              Skills
+            </Link>
 
-          <Link
-            href="/project"
-            onClick={closeMenu}
-            className={`flex min-h-11 items-center py-2 ${
-              router.pathname === '/project' ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
-            }`}
-          >
-            Projects
-          </Link>
+            <Link
+              href="/about"
+              onClick={closeMenu}
+              aria-current={isCurrent('/about') ? 'page' : undefined}
+              className={`flex min-h-11 items-center py-2 ${
+                isCurrent('/about') ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
+              }`}
+            >
+              About
+            </Link>
 
-          <Link
-            href="/skills"
-            onClick={closeMenu}
-            className={`flex min-h-11 items-center py-2 ${
-              router.pathname === '/skills' ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
-            }`}
-          >
-            Skills
-          </Link>
-
-          <Link
-            href="/about"
-            onClick={closeMenu}
-            className={`flex min-h-11 items-center py-2 ${
-              router.pathname === '/about' ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
-            }`}
-          >
-            About
-          </Link>
-
-          <Link
-            href="/contact"
-            onClick={closeMenu}
-            className={`flex min-h-11 items-center py-2 ${
-              router.pathname === '/contact'
-                ? 'text-blue-500 dark:text-indigo-400 font-semibold'
-                : ''
-            }`}
-          >
-            Contact
-          </Link>
-        </div>
-      )}
-    </nav>
+            <Link
+              href="/contact"
+              onClick={closeMenu}
+              aria-current={isCurrent('/contact') ? 'page' : undefined}
+              className={`flex min-h-11 items-center py-2 ${
+                isCurrent('/contact')
+                  ? 'text-blue-500 dark:text-indigo-400 font-semibold'
+                  : ''
+              }`}
+            >
+              Contact
+            </Link>
+          </div>
+        )}
+      </nav>
+    </header>
   );
 }

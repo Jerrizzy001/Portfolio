@@ -14,7 +14,7 @@ export default function About() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
-      <section className="safe-x pt-28 max-w-4xl mx-auto pb-16">
+      <main id="main-content" className="safe-x pt-28 max-w-4xl mx-auto pb-16">
 
         {/* Profile photo */}
         <div
@@ -64,7 +64,7 @@ export default function About() {
             Contact me
           </Link>
         </div>
-      </section>
+      </main>
     </div>
   );
 }

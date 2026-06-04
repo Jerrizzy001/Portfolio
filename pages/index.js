@@ -51,8 +51,8 @@ export default function Home() {
       <Navbar />
 
       {/* HERO */}
-      <section
-        id="home"
+      <main
+        id="main-content"
         className="safe-x relative isolate overflow-hidden pt-28 text-center min-h-screen min-h-[100svh] flex flex-col items-center justify-center"
       >
         <SignalField density="dense" className="z-0" />
@@ -138,7 +138,7 @@ export default function Home() {
             </a>
           </div>
         </motion.div>
-      </section>
+      </main>
     </div>
   );
 }

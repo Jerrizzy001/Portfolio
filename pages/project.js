@@ -1,9 +1,10 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { FaArrowRight, FaExternalLinkAlt, FaGithub, FaTimes } from "react-icons/fa";
 import SignalField from "../components/SignalField";
+import useModalA11y from "../hooks/useModalA11y";
 
 const projects = [
   {
@@ -131,31 +132,13 @@ export default function ProjectPage() {
   const [activeProject, setActiveProject] = useState(null);
   const prefersReducedMotion = useReducedMotion();
   const modalTitleId = useId();
-
-  useEffect(() => {
-    if (!activeProject) return undefined;
-
-    const previousOverflow = document.body.style.overflow;
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        setActiveProject(null);
-      }
-    };
-
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", handleKeyDown, true);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", handleKeyDown, true);
-    };
-  }, [activeProject]);
+  const modalDescriptionId = useId();
 
   return (
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
-      <main className="safe-x relative isolate mx-auto max-w-7xl overflow-hidden pb-20 pt-28">
+      <main id="main-content" className="safe-x relative isolate mx-auto max-w-7xl overflow-hidden pb-20 pt-28">
         <SignalField fill={false} className="inset-x-0 top-0 z-0 h-[54rem] opacity-60" />
 
         <motion.section
@@ -238,6 +221,7 @@ export default function ProjectPage() {
           <ProjectModal
             project={activeProject}
             titleId={modalTitleId}
+            descriptionId={modalDescriptionId}
             onClose={() => setActiveProject(null)}
           />
         )}
@@ -333,12 +317,15 @@ function ProjectCard({ project, onView, index, isFeatured, prefersReducedMotion 
   );
 }
 
-function ProjectModal({ project, titleId, onClose }) {
+function ProjectModal({ project, titleId, descriptionId, onClose }) {
   const dialogRef = useRef(null);
+  const closeButtonRef = useRef(null);
 
-  useEffect(() => {
-    dialogRef.current?.focus();
-  }, []);
+  useModalA11y({
+    dialogRef,
+    initialFocusRef: closeButtonRef,
+    onClose,
+  });
 
   return (
     <motion.div
@@ -359,6 +346,7 @@ function ProjectModal({ project, titleId, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
+        aria-describedby={descriptionId}
         tabIndex={-1}
         initial={{ scale: 0.98, opacity: 0, y: 10 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -381,6 +369,7 @@ function ProjectModal({ project, titleId, onClose }) {
           </div>
 
           <button
+            ref={closeButtonRef}
             type="button"
             onClick={onClose}
             className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-md text-slate-600 transition hover:bg-slate-100 hover:text-slate-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
@@ -394,7 +383,7 @@ function ProjectModal({ project, titleId, onClose }) {
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
           <div>
-            <p className="text-base leading-7 text-slate-700 dark:text-slate-300">
+            <p id={descriptionId} className="text-base leading-7 text-slate-700 dark:text-slate-300">
               {project.description}
             </p>
 

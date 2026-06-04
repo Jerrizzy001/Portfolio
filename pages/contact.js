@@ -38,7 +38,7 @@ export default function Contact() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <Navbar />
 
-      <main className="safe-x pt-28 sm:pt-32 max-w-4xl mx-auto text-center pb-16">
+      <main id="main-content" className="safe-x pt-28 sm:pt-32 max-w-4xl mx-auto text-center pb-16">
         <h1
           className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6"
         >
