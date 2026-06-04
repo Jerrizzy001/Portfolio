@@ -48,8 +48,8 @@ const projects = [
     status: "Active",
     role: "Designer + developer",
     focus: "Theme system, responsive UI, deployment",
-    result: "A direct portfolio built to present technical work without over-selling it.",
-    tech: ["Next.js", "React", "Tailwind CSS", "Framer Motion", "next-themes", "Vercel"],
+    result: "A direct portfolio built around technical proof, current work, and contact paths.",
+    tech: ["Next.js", "React", "Tailwind CSS", "next-themes", "Canvas", "Vercel"],
     description:
       "The site you are reading now: a responsive portfolio with dark and light modes, accessible navigation, project media, and a deployment flow connected to Vercel.",
     liveUrl: null,
@@ -57,8 +57,8 @@ const projects = [
     image: "/projects/portfolio.png",
     details: [
       "Built with Next.js and React for fast static pages and clean route-level structure.",
-      "Uses Tailwind CSS and theme tokens so light and dark modes change the whole surface, not just the text.",
-      "Adds restrained Framer Motion transitions while respecting reduced-motion preferences.",
+      "Uses Tailwind CSS, theme tokens, and next-themes so light and dark modes change the whole surface, not just the text.",
+      "Adds a restrained signal-field canvas, CSS interaction states, and reduced-motion fallbacks without hiding first-paint content.",
       "Keeps the portfolio focused on proof: projects, skills, current role, and contact paths.",
     ],
   },
@@ -143,15 +143,15 @@ export default function ProjectPage() {
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-slate-700 [text-wrap:pretty] dark:text-slate-300 sm:text-lg">
               Practical apps and analysis work, presented with the decisions that matter:
-              what I built, what it proves, and where to inspect the code.
+              what I built, how it works, and where to inspect the code.
             </p>
           </div>
 
           <div className="border-t border-slate-950/10 pt-4 text-sm leading-6 text-slate-700 dark:border-white/10 dark:text-slate-300 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
             <p className="font-semibold text-slate-950 dark:text-white">Current work</p>
             <p>
-              AI systems integration, full-stack interfaces, and automation workflows that
-              reduce manual handoffs.
+              AI systems integration for manual workflows, full-stack interfaces, and
+              automation that reduces handoffs.
             </p>
           </div>
         </section>
