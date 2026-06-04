@@ -59,24 +59,24 @@ export default function Contact() {
           I usually respond fastest there.
         </p>
 
-        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
+        <div className="grid min-w-0 grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2">
           {contacts.map((item) => (
             <a
               key={item.label}
               href={item.href}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-4 p-5 sm:p-6 rounded-lg
+              className="flex min-w-0 max-w-full items-center gap-3 overflow-hidden p-4 sm:gap-4 sm:p-6 rounded-lg
                          surface-panel backdrop-blur
                          border shadow-sm transition hover:-translate-y-1 hover:shadow-md active:translate-y-0"
             >
-              <div className="text-indigo-600 dark:text-indigo-400 shrink-0">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center text-indigo-600 dark:text-indigo-400">
                 {item.icon}
               </div>
 
-              <div className="text-left min-w-0">
-                <p className="font-semibold text-base sm:text-lg">{item.label}</p>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 truncate">
+              <div className="min-w-0 flex-1 text-left">
+                <p className="truncate text-base font-semibold sm:text-lg">{item.label}</p>
+                <p className="block max-w-full truncate text-xs text-slate-600 dark:text-slate-300 sm:text-sm">
                   {item.value}
                 </p>
               </div>
