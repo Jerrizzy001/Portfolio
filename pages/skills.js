@@ -211,7 +211,7 @@ export default function Skills() {
                           : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:border-indigo-400 dark:hover:border-indigo-500'
                       }`}
                     >
-                      <Icon size={20} className="shrink-0" />
+                      <Icon size={20} className="shrink-0" aria-hidden="true" focusable="false" />
                       <span>{name}</span>
                     </button>
                   ))}
