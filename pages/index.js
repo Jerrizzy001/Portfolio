@@ -79,10 +79,7 @@ export default function Home() {
       >
         <SignalField density="dense" className="z-0" />
 
-        <div
-          key={index}
-          className="motion-hero-slide relative z-10 mb-6 max-w-2xl w-full"
-        >
+        <div key={index} className="relative z-10 mb-6 max-w-2xl w-full">
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-tight [text-wrap:balance]">
             {slides[index].title}
           </h1>
@@ -111,7 +108,7 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="motion-rise relative z-10 flex flex-col items-center gap-5">
+        <div className="relative z-10 flex flex-col items-center gap-5">
           <div className="grid w-full max-w-xs gap-3 min-[430px]:max-w-none min-[430px]:grid-cols-2">
             <Link
               href="/project"

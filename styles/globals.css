@@ -76,18 +76,6 @@ body {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .motion-enter {
-    animation: motion-enter 420ms ease-out;
-  }
-
-  .motion-hero-slide {
-    animation: motion-hero-slide 560ms ease-out;
-  }
-
-  .motion-rise {
-    animation: motion-rise 420ms ease-out;
-  }
-
   .motion-card:hover {
     transform: translateY(-4px);
   }
@@ -98,36 +86,6 @@ body {
 
   .motion-modal-panel {
     animation: motion-modal-in 220ms ease-out;
-  }
-}
-
-@keyframes motion-enter {
-  from {
-    transform: translateY(14px);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes motion-hero-slide {
-  from {
-    transform: translateY(24px);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes motion-rise {
-  from {
-    transform: translateY(8px);
-  }
-
-  to {
-    transform: translateY(0);
   }
 }
 
