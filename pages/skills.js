@@ -1,6 +1,7 @@
 import { useId, useRef, useState } from 'react';
 import Navbar from '../components/Navbar';
 import useModalA11y from '../hooks/useModalA11y';
+import PageMeta from '../components/PageMeta';
 
 import {
   SiReact,
@@ -141,22 +142,22 @@ const skillsData = [
 const skillCategories = [
   {
     label: 'Frontend',
-    color: 'text-blue-500 dark:text-blue-400',
+    color: 'text-blue-700 dark:text-blue-300',
     ids: ['react', 'next', 'js', 'html'],
   },
   {
     label: 'Backend',
-    color: 'text-violet-500 dark:text-violet-400',
+    color: 'text-violet-700 dark:text-violet-300',
     ids: ['node', 'python', 'django', 'rest'],
   },
   {
     label: 'Databases',
-    color: 'text-emerald-500 dark:text-emerald-400',
+    color: 'text-emerald-700 dark:text-emerald-300',
     ids: ['mongodb', 'sql'],
   },
   {
     label: 'Tools',
-    color: 'text-orange-500 dark:text-orange-400',
+    color: 'text-orange-700 dark:text-orange-300',
     ids: ['git', 'github', 'aws', 'linux', 'postman', 'vscode'],
   },
 ];
@@ -169,6 +170,12 @@ export default function Skills() {
 
   return (
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
+      <PageMeta
+        title="Technical Skills"
+        description="Jerry Nwachi's technical skills across React, Next.js, Python, Node.js, databases, APIs, GitHub, Linux, and developer tooling."
+        path="/skills"
+        image="/projects/portfolio.png"
+      />
       <Navbar />
 
       <main id="main-content" className="safe-x pt-28 max-w-5xl mx-auto pb-16">
@@ -177,7 +184,7 @@ export default function Skills() {
           className="mb-12 text-center"
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">Technical skills</h1>
-          <p className="mx-auto max-w-xl text-sm sm:text-base text-gray-500 dark:text-gray-400">
+          <p className="mx-auto max-w-xl text-sm sm:text-base text-slate-700 dark:text-slate-300">
             Select a skill to see where it fits in my work.
           </p>
         </div>
@@ -260,7 +267,7 @@ function SkillDialog({ skill, titleId, descriptionId, onClose }) {
           <skill.Icon size={26} className="shrink-0 text-indigo-500" aria-hidden="true" />
           <h2 id={titleId} className="text-xl font-bold">{skill.name}</h2>
         </div>
-        <p id={descriptionId} className="text-sm leading-relaxed text-gray-600 dark:text-gray-300 sm:text-base">
+        <p id={descriptionId} className="text-sm leading-relaxed text-slate-700 dark:text-slate-300 sm:text-base">
           {skill.description}
         </p>
         <button

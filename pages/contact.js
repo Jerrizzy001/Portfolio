@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import PageMeta from "../components/PageMeta";
 import {
   FaGithub,
   FaEnvelope,
@@ -36,6 +37,12 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
+      <PageMeta
+        title="Contact"
+        description="Contact Jerry Nwachi for internships, project work, technical collaboration, or software and AI automation roles."
+        path="/contact"
+        image="/profile.jpg"
+      />
       <Navbar />
 
       <main id="main-content" className="safe-x pt-28 sm:pt-32 max-w-4xl mx-auto text-center pb-16">
@@ -46,7 +53,7 @@ export default function Contact() {
         </h1>
 
         <p
-          className="mx-auto mb-10 max-w-2xl text-base sm:text-lg text-gray-700 dark:text-gray-300 sm:mb-14"
+          className="mx-auto mb-10 max-w-2xl text-base sm:text-lg text-slate-700 dark:text-slate-300 sm:mb-14"
         >
           For internships, project work, or technical collaboration, email me or connect on LinkedIn.
           I usually respond fastest there.
@@ -61,7 +68,7 @@ export default function Contact() {
               rel="noreferrer"
               className="flex items-center gap-4 p-5 sm:p-6 rounded-lg
                          surface-panel backdrop-blur
-                         border shadow-lg transition hover:-translate-y-1 hover:shadow-xl active:translate-y-0"
+                         border shadow-sm transition hover:-translate-y-1 hover:shadow-md active:translate-y-0"
             >
               <div className="text-indigo-600 dark:text-indigo-400 shrink-0">
                 {item.icon}
@@ -69,7 +76,7 @@ export default function Contact() {
 
               <div className="text-left min-w-0">
                 <p className="font-semibold text-base sm:text-lg">{item.label}</p>
-                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 truncate">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 truncate">
                   {item.value}
                 </p>
               </div>

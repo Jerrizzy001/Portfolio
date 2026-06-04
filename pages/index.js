@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import SignalField from "../components/SignalField";
+import PageMeta from "../components/PageMeta";
 
 const slides = [
   {
@@ -48,6 +49,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
+      <PageMeta
+        title="Jerry Nwachi | Software Developer"
+        description="Software Development student and AI Systems Integrator intern in Toronto, building practical web apps, data workflows, and automation systems."
+        path="/"
+        image="/profile.jpg"
+      />
       <Navbar />
 
       {/* HERO */}
@@ -69,7 +76,7 @@ export default function Home() {
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-tight [text-wrap:balance]">
               {slides[index].title}
             </h1>
-            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 px-2">
+            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 px-2">
               {slides[index].description}
             </p>
           </motion.div>
@@ -123,7 +130,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:text-black dark:hover:text-white transition"
             >
               <FaGithub size={22} />
             </a>
@@ -132,7 +139,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:text-indigo-700 dark:hover:text-indigo-300 transition"
             >
               <FaLinkedin size={22} />
             </a>

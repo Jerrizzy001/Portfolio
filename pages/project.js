@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FaArrowRight, FaExternalLinkAlt, FaGithub, FaTimes } from "react-icons/fa";
 import SignalField from "../components/SignalField";
 import useModalA11y from "../hooks/useModalA11y";
+import PageMeta from "../components/PageMeta";
 
 const projects = [
   {
@@ -136,6 +137,12 @@ export default function ProjectPage() {
 
   return (
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
+      <PageMeta
+        title="Projects"
+        description="Selected projects by Jerry Nwachi, including full-stack Next.js work, a portfolio system, machine learning workflows, and data analysis builds."
+        path="/project"
+        image="/projects/portfolio.png"
+      />
       <Navbar />
 
       <main id="main-content" className="safe-x relative isolate mx-auto max-w-7xl overflow-hidden pb-20 pt-28">
@@ -484,7 +491,7 @@ function CardImage({ project, index }) {
   if (!project.image || imgError) {
     return (
       <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-slate-950">
-        <span className="px-4 text-center text-xs font-medium text-white/35">
+        <span className="px-4 text-center text-xs font-medium text-white/70">
           {project.tech.slice(0, 3).join(" / ")}
         </span>
       </div>
@@ -517,7 +524,7 @@ function ModalImage({ project }) {
   if (!project.image || imgError) {
     return (
       <div className="my-5 flex h-44 w-full items-center justify-center rounded-lg border border-white/10 bg-slate-950">
-        <span className="px-4 text-center text-sm font-medium text-white/35">
+        <span className="px-4 text-center text-sm font-medium text-white/70">
           {project.tech.slice(0, 4).join(" / ")}
         </span>
       </div>

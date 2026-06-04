@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '../components/Navbar';
+import PageMeta from '../components/PageMeta';
 
 const aboutParagraphs = [
   "I'm Jerry Nwachi, a Software Development student at Seneca Polytechnic in Toronto. I'm working toward an Honours Bachelor of Technology, expected August 2027. My work spans full-stack apps, data pipelines, REST APIs, and AI-assisted automation.",
@@ -12,6 +13,12 @@ const aboutParagraphs = [
 export default function About() {
   return (
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
+      <PageMeta
+        title="About"
+        description="About Jerry Nwachi, a Software Development student and AI Systems Integrator intern at YarlMetal Fabrications Inc."
+        path="/about"
+        image="/profile.jpg"
+      />
       <Navbar />
 
       <main id="main-content" className="safe-x pt-28 max-w-4xl mx-auto pb-16">
@@ -45,7 +52,7 @@ export default function About() {
         {aboutParagraphs.map((text) => (
           <p
             key={text}
-            className="text-base sm:text-lg leading-relaxed mb-6 text-gray-700 dark:text-gray-300"
+            className="text-base sm:text-lg leading-relaxed mb-6 text-slate-700 dark:text-slate-300"
           >
             {text}
           </p>

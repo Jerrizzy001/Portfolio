@@ -45,12 +45,12 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6 text-gray-700 dark:text-white font-medium">
+          <div className="hidden md:flex items-center space-x-6 text-slate-700 dark:text-white font-medium">
             <Link
               href="/"
               aria-current={isCurrent('/') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
-                isCurrent('/') ? 'text-blue-500 dark:text-indigo-400' : ''
+              className={`inline-flex min-h-11 items-center px-1 hover:text-sky-700 dark:hover:text-sky-300 transition ${
+                isCurrent('/') ? 'text-sky-700 dark:text-sky-300' : ''
               }`}
             >
               Home
@@ -59,8 +59,8 @@ export default function Navbar() {
             <Link
               href="/project"
               aria-current={isCurrent('/project') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
-                isCurrent('/project') ? 'text-blue-500 dark:text-indigo-400' : ''
+              className={`inline-flex min-h-11 items-center px-1 hover:text-sky-700 dark:hover:text-sky-300 transition ${
+                isCurrent('/project') ? 'text-sky-700 dark:text-sky-300' : ''
               }`}
             >
               Projects
@@ -69,8 +69,8 @@ export default function Navbar() {
             <Link
               href="/skills"
               aria-current={isCurrent('/skills') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
-                isCurrent('/skills') ? 'text-blue-500 dark:text-indigo-400' : ''
+              className={`inline-flex min-h-11 items-center px-1 hover:text-sky-700 dark:hover:text-sky-300 transition ${
+                isCurrent('/skills') ? 'text-sky-700 dark:text-sky-300' : ''
               }`}
             >
               Skills
@@ -79,8 +79,8 @@ export default function Navbar() {
             <Link
               href="/about"
               aria-current={isCurrent('/about') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
-                isCurrent('/about') ? 'text-blue-500 dark:text-indigo-400' : ''
+              className={`inline-flex min-h-11 items-center px-1 hover:text-sky-700 dark:hover:text-sky-300 transition ${
+                isCurrent('/about') ? 'text-sky-700 dark:text-sky-300' : ''
               }`}
             >
               About
@@ -89,8 +89,8 @@ export default function Navbar() {
             <Link
               href="/contact"
               aria-current={isCurrent('/contact') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-blue-500 dark:hover:text-indigo-400 transition ${
-                isCurrent('/contact') ? 'text-blue-500 dark:text-indigo-400' : ''
+              className={`inline-flex min-h-11 items-center px-1 hover:text-sky-700 dark:hover:text-sky-300 transition ${
+                isCurrent('/contact') ? 'text-sky-700 dark:text-sky-300' : ''
               }`}
             >
               Contact
@@ -141,14 +141,14 @@ export default function Navbar() {
         {isOpen && (
           <div
             id="primary-menu"
-            className="safe-x md:hidden surface-panel backdrop-blur-md border-t pb-4 flex flex-col space-y-2 text-gray-800 dark:text-white"
+            className="safe-x md:hidden surface-panel backdrop-blur-md border-t pb-4 flex flex-col space-y-2 text-slate-800 dark:text-white"
           >
             <Link
               href="/"
               onClick={closeMenu}
               aria-current={isCurrent('/') ? 'page' : undefined}
               className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/') ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
+                isCurrent('/') ? 'text-sky-700 dark:text-sky-300 font-semibold' : ''
               }`}
             >
               Home
@@ -159,7 +159,7 @@ export default function Navbar() {
               onClick={closeMenu}
               aria-current={isCurrent('/project') ? 'page' : undefined}
               className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/project') ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
+                isCurrent('/project') ? 'text-sky-700 dark:text-sky-300 font-semibold' : ''
               }`}
             >
               Projects
@@ -170,7 +170,7 @@ export default function Navbar() {
               onClick={closeMenu}
               aria-current={isCurrent('/skills') ? 'page' : undefined}
               className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/skills') ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
+                isCurrent('/skills') ? 'text-sky-700 dark:text-sky-300 font-semibold' : ''
               }`}
             >
               Skills
@@ -181,7 +181,7 @@ export default function Navbar() {
               onClick={closeMenu}
               aria-current={isCurrent('/about') ? 'page' : undefined}
               className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/about') ? 'text-blue-500 dark:text-indigo-400 font-semibold' : ''
+                isCurrent('/about') ? 'text-sky-700 dark:text-sky-300 font-semibold' : ''
               }`}
             >
               About
@@ -193,7 +193,7 @@ export default function Navbar() {
               aria-current={isCurrent('/contact') ? 'page' : undefined}
               className={`flex min-h-11 items-center py-2 ${
                 isCurrent('/contact')
-                  ? 'text-blue-500 dark:text-indigo-400 font-semibold'
+                  ? 'text-sky-700 dark:text-sky-300 font-semibold'
                   : ''
               }`}
             >
