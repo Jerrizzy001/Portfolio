@@ -39,7 +39,7 @@ export default function Navbar() {
       <nav aria-label="Primary">
         <div className="safe-x max-w-7xl mx-auto py-4 flex justify-between items-center">
           <Link href="/" className="flex min-h-11 items-center gap-2 group">
-            <span className="text-xl font-extrabold text-gray-950 dark:text-white tracking-tight">
+            <span className="font-display text-xl font-extrabold text-gray-950 dark:text-white tracking-tight">
               Jerrizzy
             </span>
           </Link>

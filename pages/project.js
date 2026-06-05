@@ -135,7 +135,7 @@ export default function ProjectPage() {
 
         <section className="relative z-10 mb-10 grid gap-6 border-b border-slate-950/10 pb-8 dark:border-white/10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
           <div>
-            <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 text-sm font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+            <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
               Selected technical builds
             </p>
             <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white sm:text-5xl lg:text-6xl">
@@ -252,13 +252,13 @@ function ProjectCard({ project, onView, index, isFeatured }) {
           {visibleTech.map((tech) => (
             <span
               key={tech}
-              className="rounded-full border border-slate-950/10 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
+              className="rounded-full border border-slate-950/10 bg-slate-50 px-2.5 py-1 font-mono text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
             >
               {tech}
             </span>
           ))}
           {remainingTech > 0 && (
-            <span className="rounded-full border border-slate-950/10 px-2.5 py-1 text-xs font-medium text-slate-600 dark:border-white/10 dark:text-slate-400">
+            <span className="rounded-full border border-slate-950/10 px-2.5 py-1 font-mono text-xs font-medium text-slate-600 dark:border-white/10 dark:text-slate-400">
               +{remainingTech} more
             </span>
           )}
@@ -383,7 +383,7 @@ function ProjectModal({ project, titleId, descriptionId, onClose }) {
                 {project.tech.map((tech) => (
                   <span
                     key={tech}
-                    className="rounded-full border border-slate-950/10 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
+                    className="rounded-full border border-slate-950/10 bg-slate-50 px-2.5 py-1 font-mono text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
                   >
                     {tech}
                   </span>
@@ -425,7 +425,7 @@ function ProjectModal({ project, titleId, descriptionId, onClose }) {
 function Badge({ children, className = "" }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold ${className || "border-slate-950/10 bg-slate-50 text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"}`}
+      className={`inline-flex items-center rounded-full border px-2.5 py-1 font-mono text-[0.7rem] font-semibold uppercase tracking-wide ${className || "border-slate-950/10 bg-slate-50 text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"}`}
     >
       {children}
     </span>
@@ -435,7 +435,7 @@ function Badge({ children, className = "" }) {
 function MetaItem({ label, value }) {
   return (
     <div>
-      <dt className="text-xs font-semibold text-slate-500 dark:text-slate-400">{label}</dt>
+      <dt className="font-mono text-[0.7rem] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</dt>
       <dd className="mt-1 text-sm font-medium leading-5 text-slate-900 dark:text-slate-100">
         {value}
       </dd>

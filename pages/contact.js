@@ -76,7 +76,7 @@ export default function Contact() {
 
               <div className="min-w-0 flex-1 text-left">
                 <p className="truncate text-base font-semibold sm:text-lg">{item.label}</p>
-                <p className="block max-w-full truncate text-xs text-slate-600 dark:text-slate-300 sm:text-sm">
+                <p className="block max-w-full truncate font-mono text-xs text-slate-600 dark:text-slate-300 sm:text-sm">
                   {item.value}
                 </p>
               </div>

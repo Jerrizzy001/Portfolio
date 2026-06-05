@@ -1,6 +1,24 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --font-sans: var(--font-hanken), system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-display: var(--font-bricolage), var(--font-hanken), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-bricolage), var(--font-hanken), system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
 :root {
   --background: linear-gradient(135deg, #f8fafc 0%, #eef6ff 48%, #fff7ed 100%);
   --foreground: #171717;

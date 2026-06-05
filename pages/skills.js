@@ -197,7 +197,7 @@ export default function Skills() {
               <div
                 key={label}
               >
-                <h2 className={`text-xs font-bold uppercase tracking-widest mb-3 ${color}`}>
+                <h2 className={`font-mono text-xs font-semibold uppercase tracking-widest mb-3 ${color}`}>
                   {label}
                 </h2>
                 <div className="grid grid-cols-1 min-[460px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">

@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="site-footer w-full border-t surface-panel backdrop-blur-sm py-6">
       <div className="safe-x max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-600 dark:text-slate-300">
-        <span className="font-medium">© 2026 Jerry Nwachi</span>
+        <span className="font-mono text-xs tracking-tight">© 2026 Jerry Nwachi</span>
         <div className="flex items-center gap-2">
           <a
             href="https://github.com/Jerrizzy001"
