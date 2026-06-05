@@ -47,14 +47,14 @@ export default function SignalField({ className = "", density = "normal", fill =
 
       return isDark
         ? {
-            accent: "20, 184, 166",
+            accent: "124, 142, 240",
             ink: "148, 163, 184",
-            pulse: "56, 189, 248",
+            pulse: "154, 169, 245",
           }
         : {
-            accent: "2, 132, 199",
+            accent: "47, 67, 217",
             ink: "15, 23, 42",
-            pulse: "13, 148, 136",
+            pulse: "85, 102, 232",
           };
     };
 

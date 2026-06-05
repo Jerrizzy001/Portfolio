@@ -27,7 +27,7 @@ export default function About() {
         <div
           className="flex justify-center mb-8"
         >
-          <div className="relative rounded-full border border-indigo-500/40 p-1 shadow-xl shadow-indigo-300/20 dark:shadow-indigo-900/30">
+          <div className="relative rounded-full border border-primary/40 p-1 shadow-xl shadow-primary/20 dark:shadow-black/40">
             <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden bg-white dark:bg-black">
               <Image
                 src="/profile.jpg"
@@ -65,7 +65,7 @@ export default function About() {
           <Link
             href="/contact"
             className="inline-block px-8 py-3 rounded-full
-                       bg-gray-950 text-white dark:bg-white dark:text-black font-semibold shadow-lg
+                       bg-primary text-primary-contrast font-semibold shadow-lg
                        hover:scale-105 hover:shadow-xl transition"
           >
             Contact me

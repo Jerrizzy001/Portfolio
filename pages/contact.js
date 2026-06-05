@@ -70,7 +70,7 @@ export default function Contact() {
                          surface-panel backdrop-blur
                          border shadow-sm transition hover:-translate-y-1 hover:shadow-md active:translate-y-0"
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center text-indigo-600 dark:text-indigo-400">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center text-primary">
                 {item.icon}
               </div>
 

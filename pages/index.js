@@ -93,14 +93,14 @@ export default function Home() {
             <button
               key={i}
               onClick={() => setIndex(i)}
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full transition hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:hover:bg-white/10"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full transition hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:hover:bg-white/10"
               aria-label={`Show ${slides[i].title}`}
               aria-pressed={index === i}
             >
               <span
                 className={`block h-2.5 w-2.5 rounded-full transition-all ${
                   index === i
-                    ? "bg-black dark:bg-white scale-125"
+                    ? "bg-primary scale-125"
                     : "bg-gray-300 dark:bg-gray-600"
                 }`}
               />
@@ -112,7 +112,7 @@ export default function Home() {
           <div className="grid w-full max-w-xs gap-3 min-[430px]:max-w-none min-[430px]:grid-cols-2">
             <Link
               href="/project"
-              className="inline-flex min-h-11 items-center justify-center bg-black text-white dark:bg-white dark:text-black font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
+              className="inline-flex min-h-11 items-center justify-center bg-primary text-primary-contrast font-semibold px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300"
             >
               View project notes
             </Link>
@@ -140,7 +140,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:text-indigo-700 dark:hover:text-indigo-300 transition"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:text-primary transition"
             >
               <FaLinkedin size={22} />
             </a>

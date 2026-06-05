@@ -11,7 +11,7 @@ export default function Footer() {
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full hover:text-indigo-700 dark:hover:text-indigo-300 transition"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full hover:text-primary transition"
           >
             <FaGithub size={20} />
           </a>
@@ -20,14 +20,14 @@ export default function Footer() {
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full hover:text-indigo-700 dark:hover:text-indigo-300 transition"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full hover:text-primary transition"
           >
             <FaLinkedin size={20} />
           </a>
           <a
             href="mailto:jerrynwachi37@gmail.com"
             aria-label="Email"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full hover:text-indigo-700 dark:hover:text-indigo-300 transition"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full hover:text-primary transition"
           >
             <FaEnvelope size={20} />
           </a>

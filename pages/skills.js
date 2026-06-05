@@ -142,22 +142,22 @@ const skillsData = [
 const skillCategories = [
   {
     label: 'Frontend',
-    color: 'text-blue-700 dark:text-blue-300',
+    color: 'text-slate-500 dark:text-slate-400',
     ids: ['react', 'next', 'js', 'html'],
   },
   {
     label: 'Backend',
-    color: 'text-violet-700 dark:text-violet-300',
+    color: 'text-slate-500 dark:text-slate-400',
     ids: ['node', 'python', 'django', 'rest'],
   },
   {
     label: 'Databases',
-    color: 'text-emerald-700 dark:text-emerald-300',
+    color: 'text-slate-500 dark:text-slate-400',
     ids: ['mongodb', 'sql'],
   },
   {
     label: 'Tools',
-    color: 'text-orange-700 dark:text-orange-300',
+    color: 'text-slate-500 dark:text-slate-400',
     ids: ['git', 'github', 'aws', 'linux', 'postman', 'vscode'],
   },
 ];
@@ -207,8 +207,8 @@ export default function Skills() {
                       onClick={() => setActive(id)}
                       className={`flex items-center gap-3 px-4 py-3 rounded-lg border text-sm font-medium transition hover:shadow-md ${
                         active === id
-                          ? 'bg-indigo-600 text-white border-indigo-600 dark:bg-indigo-500 dark:border-indigo-500'
-                          : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:border-indigo-400 dark:hover:border-indigo-500'
+                          ? 'bg-primary text-primary-contrast border-primary'
+                          : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:border-primary'
                       }`}
                     >
                       <Icon size={20} className="shrink-0" aria-hidden="true" focusable="false" />
@@ -264,7 +264,7 @@ function SkillDialog({ skill, titleId, descriptionId, onClose }) {
         className="surface-panel relative max-h-[calc(100svh-1.5rem)] w-full max-w-md overflow-y-auto rounded-t-lg border p-6 shadow-2xl sm:rounded-lg"
       >
         <div className="mb-3 flex items-center gap-3 pr-11">
-          <skill.Icon size={26} className="shrink-0 text-indigo-500" aria-hidden="true" />
+          <skill.Icon size={26} className="shrink-0 text-primary" aria-hidden="true" />
           <h2 id={titleId} className="text-xl font-bold">{skill.name}</h2>
         </div>
         <p id={descriptionId} className="text-sm leading-relaxed text-slate-700 dark:text-slate-300 sm:text-base">
@@ -274,7 +274,7 @@ function SkillDialog({ skill, titleId, descriptionId, onClose }) {
           ref={closeButtonRef}
           type="button"
           onClick={onClose}
-          className="absolute right-2 top-2 inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-gray-500 transition hover:bg-gray-100 hover:text-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-gray-300 dark:hover:bg-white/10"
+          className="absolute right-2 top-2 inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-gray-500 transition hover:bg-gray-100 hover:text-rose-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:text-gray-300 dark:hover:bg-white/10"
           aria-label="Close skill details"
         >
           ✕

@@ -9,6 +9,15 @@
     Consolas, monospace;
 }
 
+/* Cobalt brand color, mapped to dark-mode-aware semantic vars so
+   bg-primary / text-primary / border-primary / ring-primary flip with the theme. */
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-contrast: var(--primary-contrast);
+  --color-surface-border: var(--surface-border);
+}
+
 @layer base {
   h1,
   h2,
@@ -20,17 +29,26 @@
 }
 
 :root {
-  --background: linear-gradient(135deg, #f8fafc 0%, #eef6ff 48%, #fff7ed 100%);
-  --foreground: #171717;
-  --surface: rgba(255, 255, 255, 0.82);
-  --surface-border: rgba(15, 23, 42, 0.1);
+  /* Committed cobalt brand, hue 264, in OKLCH. */
+  --background: oklch(98.5% 0.004 264);
+  --foreground: oklch(22% 0.02 264);
+  --surface: oklch(99% 0.004 264 / 0.82);
+  --surface-border: oklch(45% 0.04 264 / 0.12);
+
+  --primary: oklch(48% 0.2 264);
+  --primary-hover: oklch(42% 0.19 264);
+  --primary-contrast: oklch(99% 0 0);
 }
 
 html.dark {
-  --background: linear-gradient(135deg, #080a12 0%, #111827 48%, #1f172a 100%);
-  --foreground: #ededed;
-  --surface: rgba(8, 10, 18, 0.72);
-  --surface-border: rgba(255, 255, 255, 0.12);
+  --background: oklch(16% 0.022 264);
+  --foreground: oklch(93% 0.012 264);
+  --surface: oklch(21% 0.03 264 / 0.72);
+  --surface-border: oklch(82% 0.03 264 / 0.14);
+
+  --primary: oklch(72% 0.15 264);
+  --primary-hover: oklch(80% 0.13 264);
+  --primary-contrast: oklch(18% 0.04 264);
   color-scheme: dark;
 }
 
@@ -78,7 +96,7 @@ body {
 
 .skip-link:focus {
   transform: translateY(0);
-  outline: 2px solid #38bdf8;
+  outline: 2px solid oklch(72% 0.15 264);
   outline-offset: 2px;
 }
 
@@ -160,8 +178,8 @@ body {
 .signal-field__static {
   z-index: 0;
   background:
-    radial-gradient(circle at 18% 22%, rgba(14, 165, 233, 0.16), transparent 28%),
-    radial-gradient(circle at 78% 32%, rgba(20, 184, 166, 0.14), transparent 24%),
+    radial-gradient(circle at 18% 22%, oklch(48% 0.2 264 / 0.16), transparent 28%),
+    radial-gradient(circle at 78% 32%, oklch(58% 0.19 264 / 0.13), transparent 24%),
     linear-gradient(90deg, rgba(15, 23, 42, 0.08) 1px, transparent 1px),
     linear-gradient(0deg, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
   background-size: auto, auto, 42px 42px, 42px 42px;
@@ -170,8 +188,8 @@ body {
 
 html.dark .signal-field__static {
   background:
-    radial-gradient(circle at 18% 22%, rgba(56, 189, 248, 0.18), transparent 28%),
-    radial-gradient(circle at 78% 32%, rgba(45, 212, 191, 0.14), transparent 24%),
+    radial-gradient(circle at 18% 22%, oklch(72% 0.15 264 / 0.2), transparent 28%),
+    radial-gradient(circle at 78% 32%, oklch(66% 0.16 264 / 0.15), transparent 24%),
     linear-gradient(90deg, rgba(226, 232, 240, 0.08) 1px, transparent 1px),
     linear-gradient(0deg, rgba(226, 232, 240, 0.06) 1px, transparent 1px);
 }

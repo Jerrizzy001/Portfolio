@@ -49,8 +49,8 @@ export default function Navbar() {
             <Link
               href="/"
               aria-current={isCurrent('/') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-sky-700 dark:hover:text-sky-300 transition ${
-                isCurrent('/') ? 'text-sky-700 dark:text-sky-300' : ''
+              className={`inline-flex min-h-11 items-center px-1 hover:text-primary transition ${
+                isCurrent('/') ? 'text-primary' : ''
               }`}
             >
               Home
@@ -59,8 +59,8 @@ export default function Navbar() {
             <Link
               href="/project"
               aria-current={isCurrent('/project') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-sky-700 dark:hover:text-sky-300 transition ${
-                isCurrent('/project') ? 'text-sky-700 dark:text-sky-300' : ''
+              className={`inline-flex min-h-11 items-center px-1 hover:text-primary transition ${
+                isCurrent('/project') ? 'text-primary' : ''
               }`}
             >
               Projects
@@ -69,8 +69,8 @@ export default function Navbar() {
             <Link
               href="/skills"
               aria-current={isCurrent('/skills') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-sky-700 dark:hover:text-sky-300 transition ${
-                isCurrent('/skills') ? 'text-sky-700 dark:text-sky-300' : ''
+              className={`inline-flex min-h-11 items-center px-1 hover:text-primary transition ${
+                isCurrent('/skills') ? 'text-primary' : ''
               }`}
             >
               Skills
@@ -79,8 +79,8 @@ export default function Navbar() {
             <Link
               href="/about"
               aria-current={isCurrent('/about') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-sky-700 dark:hover:text-sky-300 transition ${
-                isCurrent('/about') ? 'text-sky-700 dark:text-sky-300' : ''
+              className={`inline-flex min-h-11 items-center px-1 hover:text-primary transition ${
+                isCurrent('/about') ? 'text-primary' : ''
               }`}
             >
               About
@@ -89,8 +89,8 @@ export default function Navbar() {
             <Link
               href="/contact"
               aria-current={isCurrent('/contact') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-sky-700 dark:hover:text-sky-300 transition ${
-                isCurrent('/contact') ? 'text-sky-700 dark:text-sky-300' : ''
+              className={`inline-flex min-h-11 items-center px-1 hover:text-primary transition ${
+                isCurrent('/contact') ? 'text-primary' : ''
               }`}
             >
               Contact
@@ -148,7 +148,7 @@ export default function Navbar() {
               onClick={closeMenu}
               aria-current={isCurrent('/') ? 'page' : undefined}
               className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/') ? 'text-sky-700 dark:text-sky-300 font-semibold' : ''
+                isCurrent('/') ? 'text-primary font-semibold' : ''
               }`}
             >
               Home
@@ -159,7 +159,7 @@ export default function Navbar() {
               onClick={closeMenu}
               aria-current={isCurrent('/project') ? 'page' : undefined}
               className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/project') ? 'text-sky-700 dark:text-sky-300 font-semibold' : ''
+                isCurrent('/project') ? 'text-primary font-semibold' : ''
               }`}
             >
               Projects
@@ -170,7 +170,7 @@ export default function Navbar() {
               onClick={closeMenu}
               aria-current={isCurrent('/skills') ? 'page' : undefined}
               className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/skills') ? 'text-sky-700 dark:text-sky-300 font-semibold' : ''
+                isCurrent('/skills') ? 'text-primary font-semibold' : ''
               }`}
             >
               Skills
@@ -181,7 +181,7 @@ export default function Navbar() {
               onClick={closeMenu}
               aria-current={isCurrent('/about') ? 'page' : undefined}
               className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/about') ? 'text-sky-700 dark:text-sky-300 font-semibold' : ''
+                isCurrent('/about') ? 'text-primary font-semibold' : ''
               }`}
             >
               About
@@ -193,7 +193,7 @@ export default function Navbar() {
               aria-current={isCurrent('/contact') ? 'page' : undefined}
               className={`flex min-h-11 items-center py-2 ${
                 isCurrent('/contact')
-                  ? 'text-sky-700 dark:text-sky-300 font-semibold'
+                  ? 'text-primary font-semibold'
                   : ''
               }`}
             >
