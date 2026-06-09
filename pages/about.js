@@ -5,7 +5,7 @@ import PageMeta from '../components/PageMeta';
 
 const aboutParagraphs = [
   "I'm Jerry Nwachi, an AI Engineer and Software Development student at Seneca Polytechnic in Toronto. I'm working toward an Honours Bachelor of Technology, expected August 2027. My work spans full-stack apps, data pipelines, REST APIs, and AI-powered automation.",
-  "I work mainly with Python and JavaScript: React and Next.js on the frontend, Node.js and FastAPI on the backend, and MySQL or MongoDB for data. I use GitHub Copilot, Claude, and Cursor to move faster while keeping the code reviewable.",
+  "I work mainly with Python and JavaScript: React and Next.js on the frontend, Node.js and FastAPI on the backend, and MySQL or MongoDB for data. I use GitHub Copilot, Claude, Cursor, and structured prompting to move faster while keeping the code reviewable.",
   "Before my current internship, I worked as a Junior IT Support Helpdesk contractor at the City of Markham. I documented technical procedures, gathered requirements from cross-functional teams, and coordinated system deployments. I also hold certifications in Data Visualization with Power BI and Harvard's Introduction to AI with Python.",
   "Right now, I'm an AI Engineer Intern at YarlMetal Fabrications Inc. I design and build AI-powered tools that turn manual operations workflows into structured, reviewable, and automated software systems.",
 ];

@@ -19,9 +19,37 @@ import {
   SiPostman,
 } from 'react-icons/si';
 
-import { FaAws, FaCode, FaServer } from 'react-icons/fa';
+import { FaAws, FaBrain, FaCode, FaProjectDiagram, FaRobot, FaServer, FaTools } from 'react-icons/fa';
 
 const skillsData = [
+  {
+    id: 'prompt-engineering',
+    name: 'Prompt Engineering',
+    description:
+      'I write clear prompts, constraints, examples, and review loops that turn vague ideas into usable AI outputs.',
+    Icon: FaBrain,
+  },
+  {
+    id: 'ai-assisted-dev',
+    name: 'AI-Assisted Software Engineering',
+    description:
+      'I use AI tools to plan, build, debug, refactor, and verify software while keeping the code understandable and owned by me.',
+    Icon: FaRobot,
+  },
+  {
+    id: 'llm-workflows',
+    name: 'LLM Workflow Design',
+    description:
+      'I design AI workflows that connect messy inputs, structured data, human review, and automation into practical systems.',
+    Icon: FaProjectDiagram,
+  },
+  {
+    id: 'ai-prototyping',
+    name: 'Rapid AI Prototyping',
+    description:
+      'I can turn a workflow problem into a working AI-powered prototype quickly, then tighten it into maintainable software.',
+    Icon: FaTools,
+  },
   {
     id: 'react',
     name: 'React.js',
@@ -141,6 +169,11 @@ const skillsData = [
 
 const skillCategories = [
   {
+    label: 'AI Engineering',
+    color: 'text-slate-500 dark:text-slate-400',
+    ids: ['prompt-engineering', 'ai-assisted-dev', 'llm-workflows', 'ai-prototyping'],
+  },
+  {
     label: 'Frontend',
     color: 'text-slate-500 dark:text-slate-400',
     ids: ['react', 'next', 'js', 'html'],
@@ -172,7 +205,7 @@ export default function Skills() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <PageMeta
         title="Technical Skills"
-        description="Jerry Nwachi's technical skills across React, Next.js, Python, Node.js, databases, APIs, GitHub, Linux, and developer tooling."
+        description="Jerry Nwachi's technical skills across AI engineering, prompt engineering, React, Next.js, Python, Node.js, databases, APIs, GitHub, Linux, and developer tooling."
         path="/skills"
         image="/projects/portfolio.png"
       />
@@ -185,7 +218,7 @@ export default function Skills() {
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">Technical skills</h1>
           <p className="mx-auto max-w-xl text-sm sm:text-base text-slate-700 dark:text-slate-300">
-            Select a skill to see where it fits in my work.
+            Select a skill to see where it fits in my work, from AI-assisted builds to full-stack systems.
           </p>
         </div>
 

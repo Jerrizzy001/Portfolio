@@ -9,7 +9,7 @@ const slides = [
   {
     title: "Jerry Nwachi",
     description:
-      "AI Engineer and Software Development student building practical web apps, data workflows, and automation systems in Toronto.",
+      "AI Engineer and Software Development student using AI-assisted workflows to build practical web apps, data systems, and automation tools in Toronto.",
   },
   {
     title: "Current work",
@@ -19,7 +19,7 @@ const slides = [
   {
     title: "How I build",
     description:
-      "Clear interfaces, reliable APIs, readable code, and systems that make work easier to repeat.",
+      "Structured prompts, clear interfaces, reliable APIs, readable code, and systems that make work easier to repeat.",
   },
   {
     title: "Project focus",
@@ -66,7 +66,7 @@ export default function Home() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <PageMeta
         title="Jerry Nwachi | AI Engineer"
-        description="AI Engineer and Software Development student in Toronto, building practical web apps, data workflows, and automation systems."
+        description="AI Engineer and Software Development student in Toronto, using AI-assisted workflows to build practical web apps, data systems, and automation tools."
         path="/"
         image="/profile.jpg"
       />
