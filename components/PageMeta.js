@@ -2,10 +2,10 @@ import Head from "next/head";
 
 const siteUrl = "https://www.jerrizzy.ca";
 const defaultDescription =
-  "Jerry Nwachi is a software development student and AI Systems Integrator intern building practical web apps, data workflows, and automation systems.";
+  "Jerry Nwachi is an AI Engineer and software development student building practical web apps, data workflows, and automation systems.";
 
 export default function PageMeta({
-  title = "Jerry Nwachi | Software Developer",
+  title = "Jerry Nwachi | AI Engineer",
   description = defaultDescription,
   path = "/",
   image = "/projects/portfolio.png",

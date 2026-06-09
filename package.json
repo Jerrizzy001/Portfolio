@@ -2,7 +2,7 @@
   "name": "jerrizzy-portfolio",
   "version": "0.1.0",
   "private": true,
-  "description": "Portfolio site for Jerry Nwachi, a software development student and AI Systems Integrator intern building web apps, data workflows, and automation systems.",
+  "description": "Portfolio site for Jerry Nwachi, an AI Engineer and software development student building web apps, data workflows, and automation systems.",
   "author": "Jerry Nwachi",
   "license": "UNLICENSED",
   "homepage": "https://www.jerrizzy.ca",
@@ -34,7 +34,6 @@
     "@tailwindcss/postcss": "^4.1.11",
     "autoprefixer": "^10.4.21",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.2.7",
     "postcss": "8.5.15",
     "tailwindcss": "^4.1.11"
   },

@@ -39,7 +39,7 @@ export default function Contact() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <PageMeta
         title="Contact"
-        description="Contact Jerry Nwachi for internships, project work, technical collaboration, or software and AI automation roles."
+        description="Contact Jerry Nwachi for AI engineering internships, project work, technical collaboration, or software automation roles."
         path="/contact"
         image="/profile.jpg"
       />
@@ -55,7 +55,7 @@ export default function Contact() {
         <p
           className="mx-auto mb-10 max-w-2xl text-base sm:text-lg text-slate-700 dark:text-slate-300 sm:mb-14"
         >
-          For internships, project work, or technical collaboration, email me or connect on LinkedIn.
+          For AI engineering internships, project work, or technical collaboration, email me or connect on LinkedIn.
           I usually respond fastest there.
         </p>
 

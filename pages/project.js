@@ -150,8 +150,8 @@ export default function ProjectPage() {
           <div className="border-t border-slate-950/10 pt-4 text-sm leading-6 text-slate-700 dark:border-white/10 dark:text-slate-300 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
             <p className="font-semibold text-slate-950 dark:text-white">Current work</p>
             <p>
-              AI systems integration for manual workflows, full-stack interfaces, and
-              automation that reduces handoffs.
+              AI engineering for manual workflows, full-stack interfaces, and software
+              that reduces handoffs.
             </p>
           </div>
         </section>

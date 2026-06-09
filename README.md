@@ -1,13 +1,13 @@
 # Jerry Nwachi Portfolio
 
-Portfolio site for Jerry Nwachi, a Software Development student and AI Systems Integrator intern in Toronto.
+Portfolio site for Jerry Nwachi, an AI Engineer and Software Development student in Toronto.
 
 Live site: [jerrizzy.ca](https://www.jerrizzy.ca)
 
 ## Focus
 
 - Practical full-stack and data projects
-- Current AI systems integration internship work
+- Current AI engineering internship work
 - Accessible light and dark themes
 - Responsive project, skills, about, and contact pages
 

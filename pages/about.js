@@ -4,10 +4,10 @@ import Navbar from '../components/Navbar';
 import PageMeta from '../components/PageMeta';
 
 const aboutParagraphs = [
-  "I'm Jerry Nwachi, a Software Development student at Seneca Polytechnic in Toronto. I'm working toward an Honours Bachelor of Technology, expected August 2027. My work spans full-stack apps, data pipelines, REST APIs, and AI-assisted automation.",
+  "I'm Jerry Nwachi, an AI Engineer and Software Development student at Seneca Polytechnic in Toronto. I'm working toward an Honours Bachelor of Technology, expected August 2027. My work spans full-stack apps, data pipelines, REST APIs, and AI-powered automation.",
   "I work mainly with Python and JavaScript: React and Next.js on the frontend, Node.js and FastAPI on the backend, and MySQL or MongoDB for data. I use GitHub Copilot, Claude, and Cursor to move faster while keeping the code reviewable.",
   "Before my current internship, I worked as a Junior IT Support Helpdesk contractor at the City of Markham. I documented technical procedures, gathered requirements from cross-functional teams, and coordinated system deployments. I also hold certifications in Data Visualization with Power BI and Harvard's Introduction to AI with Python.",
-  "Right now, I'm an AI Systems Integrator intern at YarlMetal Fabrications Inc. I map manual workflows across their operations, identify repetitive bottlenecks, and build automations that make the team's process easier to track, repeat, and scale.",
+  "Right now, I'm an AI Engineer Intern at YarlMetal Fabrications Inc. I design and build AI-powered tools that turn manual operations workflows into structured, reviewable, and automated software systems.",
 ];
 
 export default function About() {
@@ -15,7 +15,7 @@ export default function About() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <PageMeta
         title="About"
-        description="About Jerry Nwachi, a Software Development student and AI Systems Integrator intern at YarlMetal Fabrications Inc."
+        description="About Jerry Nwachi, an AI Engineer and Software Development student building AI-powered workflow tools at YarlMetal Fabrications Inc."
         path="/about"
         image="/profile.jpg"
       />

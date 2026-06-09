@@ -1,6 +1,3 @@
-import nextPlugin from "@next/eslint-plugin-next";
-import globals from "globals";
-
 const eslintConfig = [
   {
     files: ["**/*.{js,mjs,jsx}"],
@@ -23,16 +20,17 @@ const eslintConfig = [
         },
       },
       globals: {
-        ...globals.browser,
-        ...globals.node,
+        clearInterval: "readonly",
+        document: "readonly",
+        HTMLElement: "readonly",
+        IntersectionObserver: "readonly",
+        ResizeObserver: "readonly",
+        setInterval: "readonly",
+        window: "readonly",
       },
     },
-    plugins: {
-      "@next/next": nextPlugin,
-    },
     rules: {
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
+      "no-undef": "error",
     },
   },
   {
