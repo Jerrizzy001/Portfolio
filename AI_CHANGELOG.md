@@ -36,3 +36,11 @@ AI agents must read this file before changing the project and append an entry af
 
 - **Verification:** GitHub Actions passed `npm ci`, `npm run lint`, and `npm run build` for the human-copy update on commit `024f08b`.
 - **Limitations and follow-up:** No code, layout, link, or build issue was found during CI; production wording still requires a final browser check after merge and deployment.
+
+## 2026-07-17 - Verify the core page redesign on GitHub
+
+- **Goal:** Verify the Home, About, and Contact redesign through GitHub before releasing it to production.
+- **Changes:** Moved the existing redesign onto the fresh `codex/redesign-home-about-contact` branch based on current `origin/main`, committed only the three redesigned pages and their existing change-log entry, and opened GitHub pull request #3. No additional application behavior or dependencies were changed during release preparation.
+- **Important files:** `pages/index.js`, `pages/about.js`, `pages/contact.js`, and `AI_CHANGELOG.md`.
+- **Verification:** `git diff --check` passed locally. GitHub Actions passed `npm ci`, `npm run lint`, and `npm run build` on both the branch-push run and pull-request run for commit `0010122`. Both Vercel preview deployments attached to pull request #3 completed successfully.
+- **Limitations and follow-up:** The production domain still requires a final live browser and route check after the pull request is merged and Vercel finishes the production deployment.
