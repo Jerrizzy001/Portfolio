@@ -16,3 +16,10 @@ AI agents must read this file before changing the project and append an entry af
 - **Changes:** Updated `actions/checkout` and `actions/setup-node` to their current v7 releases after GitHub reported that the v4 actions used the deprecated Node.js 20 action runtime.
 - **Verification:** GitHub Actions passed `npm ci`, `npm run lint`, and `npm run build` on both the branch-push and pull-request runs for commit `f1972ef`.
 - **Limitations and follow-up:** The repository can still be moved out of the iCloud-backed Documents path to make future local Node.js checks more reliable; no remaining code or CI failure is known for this update.
+
+## 2026-07-17 - Rewrite project copy in a human voice
+
+- **Goal:** Replace architecture-heavy portfolio language with clear descriptions that sound like a person explaining what each project does and why it was built.
+- **Changes:** Rewrote the subtitles, focus lines, results, descriptions, and detail notes for all seven projects in `pages/project.js`. JARVIS now leads with its real use as a bedroom assistant built with a friend; the other projects lead with the user problem or question they address. Renamed “Build notes” to “What I built,” “Project facts” to “At a glance,” and simplified the Projects page introduction.
+- **Verification:** `git diff --check` passed. The content will receive final lint and production-build verification through the repository's GitHub Actions workflow because the local checkout remains on an iCloud-backed path.
+- **Limitations and follow-up:** This is a copy-only update; project links, screenshots, stack tags, card behavior, and layout are unchanged.
