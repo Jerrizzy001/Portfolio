@@ -2,6 +2,14 @@
 
 AI agents must read this file before changing the project and append an entry after completing their work. Keep this history append-only and never include secrets, credentials, private customer data, or sensitive environment values.
 
+## 2026-07-17 - Redesign Home, About, and Contact pages
+
+- **Goal:** Redesign the frontend focused on the Home, About, and Contact pages, replacing the auto-rotating hero carousel with content-rich layouts that surface more real detail (YarlMetal internship, Seneca degree, City of Markham role, certifications, stack, AI-assisted workflow, project highlights).
+- **Changes:** Rewrote `pages/index.js` (split hero with profile card and "Currently" panel, at-a-glance facts strip, selected-work cards, "How I build" section with stack chips, contact CTA band; carousel and its state removed entirely), `pages/about.js` (photo header, story with facts sidebar, experience timeline, education and certification sections, "How I work" section with stack chips, dual CTA), and `pages/contact.js` (header with availability line, restyled contact cards with context notes, "Good reasons to reach out" side panel with location and fastest-reply info; `target="_blank"` now applied only to external links). All pages reuse the project-page visual vocabulary (mono eyebrow pills, hairline borders, meta `dl` grids) and keep the existing cobalt brand tokens, SignalField, and light/dark themes. Projects, Skills, Navbar, Footer, and theme files are unchanged.
+- **Important files:** `pages/index.js`, `pages/about.js`, `pages/contact.js`, `AI_CHANGELOG.md`.
+- **Verification:** Local `npm run lint` was started but stopped at the user's request because this iCloud-backed checkout makes local Node runs slow. Lint and production-build verification are left to the repository's GitHub Actions CI, per the precedent in earlier entries.
+- **Limitations and follow-up:** New markup has not been browser-checked; after CI passes and the deploy lands, verify the three pages at mobile and desktop widths in both themes.
+
 ## 2026-07-17 - Add missing pinned GitHub projects
 
 - **Goal:** Bring the Projects page up to date by adding the missing pinned repositories, their real screenshots, links, stacks, and project details while preserving the existing design.
