@@ -10,12 +10,12 @@ const projects = [
   {
     id: "met-art-explorer",
     title: "Met Art Explorer",
-    subtitle: "Full-stack Next.js app",
+    subtitle: "Museum art search app",
     category: "Web Dev",
     status: "Live",
     role: "Full-stack developer",
-    focus: "API search, auth, saved state",
-    result: "A searchable museum artwork app with protected favourites and search history.",
+    focus: "Artwork search, accounts, favourites",
+    result: "A simpler way to explore The Met collection and keep track of the pieces you like.",
     tech: [
       "Next.js",
       "React",
@@ -29,116 +29,116 @@ const projects = [
       "Git",
     ],
     description:
-      "An art discovery app powered by The Met Museum API. Visitors can search by country or location, refine results, open artwork detail pages, and save favourites after signing in.",
+      "I built this app to make exploring The Met's collection feel easier. You can search for artwork by country or location, open a piece to learn more, and save your favourites after signing in.",
     liveUrl: "https://assignment6-bti.vercel.app",
     repoUrl: "https://github.com/Jerrizzy001/Full-stack-developer-Next.js-project-",
     image: "/projects/NextJS.jpg",
     details: [
-      "Built the search and detail flow around The Met Museum API, including location-based queries and filtered results.",
-      "Added account-aware features for favourites and search history, so the app keeps useful context between visits.",
-      "Used Jotai and SWR to keep client state predictable while still fetching fresh artwork data.",
-      "Structured the project as a complete browsing path: search, inspect, save, return.",
+      "I connected the app to The Met Museum API so people can search the museum's collection without manually digging through thousands of records.",
+      "I added accounts, favourites, and search history so you can leave the site and come back without losing the artwork you found.",
+      "I used SWR and Jotai to keep searches fast and make sure saved information stays in sync while you move around the app.",
+      "The full experience follows a simple path: search for art, open a piece, save it, and return to it later.",
     ],
   },
   {
     id: "portfolio-website",
     title: "Portfolio Website",
-    subtitle: "Personal site",
+    subtitle: "My personal website",
     category: "Web Dev",
     status: "Active",
     role: "Designer + developer",
-    focus: "Theme system, responsive UI, deployment",
-    result: "A direct portfolio built around technical proof, current work, and contact paths.",
+    focus: "Design, accessibility, deployment",
+    result: "One place to see what I build, what I know, and how to reach me.",
     tech: ["Next.js", "React", "Tailwind CSS", "next-themes", "Canvas", "Vercel"],
     description:
-      "The site you are reading now: a responsive portfolio with dark and light modes, accessible navigation, project media, and a deployment flow connected to Vercel.",
+      "This is the site you are on right now. I built it to give people a quick, honest look at my projects, skills, experience, and the kind of software I enjoy working on.",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001/Portfolio",
     image: "/projects/portfolio.png",
     details: [
-      "Built with Next.js and React for fast static pages and clean route-level structure.",
-      "Uses Tailwind CSS, theme tokens, and next-themes so light and dark modes change the whole surface, not just the text.",
-      "Adds a restrained signal-field canvas, CSS interaction states, and reduced-motion fallbacks without hiding first-paint content.",
-      "Keeps the portfolio focused on proof: projects, skills, current role, and contact paths.",
+      "I built the site with Next.js and React so every page loads quickly and is easy for me to update as my work changes.",
+      "It has full light and dark themes, responsive layouts, and keyboard-friendly navigation instead of treating accessibility as an afterthought.",
+      "I added small visual details and motion to give the site personality, while still respecting people who prefer reduced motion.",
+      "The site is connected to GitHub and Vercel, so tested updates can move from the repository to the live portfolio without a manual upload.",
     ],
   },
   {
     id: "fraud-detection-system",
     title: "Fraud Detection System",
-    subtitle: "Machine learning project",
+    subtitle: "Machine learning experiment",
     category: "Data Science",
     status: "Repository",
     role: "ML developer",
-    focus: "Classification, feature prep, evaluation",
-    result: "A supervised model workflow for flagging suspicious transaction patterns.",
+    focus: "Spotting suspicious transactions",
+    result: "A model that helps flag transactions worth a closer look.",
     tech: ["Python", "Machine Learning", "Scikit-learn", "Pandas", "NumPy", "Data Analysis"],
     description:
-      "A fraud detection workflow that analyses transaction data, prepares features, trains classification models, and evaluates suspicious-activity detection with practical metrics.",
+      "I built this project to see how machine learning can help spot transactions that do not look normal. The goal is not to automatically accuse anyone—it is to help a person find the transactions that deserve a closer review.",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001/Fraud-Detection-System",
     image: "/projects/fraud-detection.svg",
     details: [
-      "Prepared labelled transaction data for supervised classification, including scaling and imbalance handling.",
-      "Compared model options such as Logistic Regression and Random Forest before selecting the strongest performer.",
-      "Used precision, recall, F1-score, and ROC-AUC to judge the model beyond simple accuracy.",
-      "Framed the project around a real operational question: which transactions deserve human review?",
+      "I cleaned and prepared labelled transaction data, including the class imbalance that happens because real fraud cases are much rarer than normal payments.",
+      "I compared models such as Logistic Regression and Random Forest instead of assuming the most complicated option would be the best one.",
+      "I measured precision, recall, F1-score, and ROC-AUC because a model can look accurate while still missing the fraud cases that matter.",
+      "I kept the final question practical: which transactions should be placed in front of a human reviewer?",
     ],
   },
   {
     id: "hr-analytics-dashboard",
     title: "HR Analytics Dashboard",
-    subtitle: "Analysis notebook",
+    subtitle: "Workforce data project",
     category: "Data Science",
     status: "Repository",
     role: "Data analyst",
-    focus: "EDA, visualisation, workforce signals",
-    result: "A dashboard-style analysis for attrition, department patterns, and salary distribution.",
+    focus: "Attrition, pay, and team trends",
+    result: "A clearer picture of where employees were leaving and what might be driving it.",
     tech: ["Python", "Data Analysis", "Pandas", "Matplotlib", "Seaborn", "Jupyter Notebook"],
     description:
-      "An HR analytics project that turns workforce data into readable charts covering attrition, department performance, salary distribution, and hiring trends.",
+      "I used a workforce dataset to explore why employees were leaving, how pay differed across teams, and where the company might need to look more closely. I turned the findings into charts that are easier to understand than a spreadsheet full of rows.",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001/HR-Analysis-Dashboard",
     image: "/projects/hr-analytics.jpg",
     details: [
-      "Analysed HR data to identify patterns in attrition, tenure, salary bands, and department-level headcount.",
-      "Built stakeholder-readable charts with Matplotlib and Seaborn instead of leaving insights buried in tables.",
-      "Used correlation analysis and feature importance to point at likely attrition drivers.",
-      "Organised the work in a Jupyter Notebook so the analysis can be reviewed and reproduced.",
+      "I looked at employee turnover, time at the company, salary ranges, and department sizes to find patterns that were easy to miss in the raw data.",
+      "I built the charts with Matplotlib and Seaborn so someone in HR could understand the story without needing to read Python code.",
+      "I used correlations and feature importance as clues about what might be connected to attrition, without presenting them as proof of cause.",
+      "I kept the work in a Jupyter Notebook so another person can follow the analysis from the original data to the final charts.",
     ],
   },
   {
     id: "email-to-erp-automation",
     title: "Email-to-ERP Automation",
-    subtitle: "Sanitized RFQ workflow demo",
+    subtitle: "Quote-request automation demo",
     category: "Automation",
     status: "Live",
     role: "Automation developer",
-    focus: "Email parsing, duplicate checks, workflow payloads",
-    result: "Turns sanitized quote-request emails into validated, workflow-ready records.",
+    focus: "Reading emails and preparing quotes",
+    result: "Takes a quote-request email and turns it into a clean record someone can review.",
     tech: ["JavaScript", "HTML", "CSS", "Node.js", "GitHub Actions", "GitHub Pages"],
     description:
-      "A public, sanitized automation demo that parses inbound RFQ emails, checks for duplicates, matches mock business records, scores confidence, and prepares a clean ERP-style workflow payload.",
+      "I made this public demo to show how a quote-request email can move from an inbox into a clean business record. It reads the request, pulls out the important details, checks whether it has already been handled, and prepares the information for review.",
     liveUrl: "https://jerrizzy001.github.io/Email-to-ERP-system/",
     repoUrl: "https://github.com/Jerrizzy001/Email-to-ERP-system",
     image: "/projects/email-to-erp.jpg",
     imageAlt:
       "Email-to-ERP dashboard showing a sample RFQ email, parsed fields, and workflow payload",
     details: [
-      "Parses sanitized email and attachment evidence into normalized RFQ fields such as customer, part, quantity, due date, and shipping method.",
-      "Builds a deterministic fingerprint for duplicate detection before a quote request can move further into the workflow.",
-      "Matches extracted values against fictional customer, part, and carrier records, then reports a confidence score for review.",
-      "Keeps the public demo safe with mock data, a credential-pattern scan, automated tests, and a preview-only payload instead of a production write.",
+      "The demo reads a sample email and attachment, then pulls out details such as the customer, part number, quantity, due date, and shipping method.",
+      "It creates a repeatable ID for each request so the same email does not accidentally become two quotes.",
+      "It checks the extracted details against sample customer, part, and carrier records, then shows how confident the matches are.",
+      "Everything in the public version is fictional. It previews the record instead of writing to a real company system, and automated checks help keep private data out of the repository.",
     ],
   },
   {
     id: "taskflow",
     title: "Taskflow",
-    subtitle: "Privacy-first AI goal planner",
+    subtitle: "Mobile goal-planning app",
     category: "Mobile",
     status: "Active",
     role: "Mobile app developer",
-    focus: "AI planning, local data, notifications",
-    result: "Turns large goals into scheduled small steps with private, on-device progress.",
+    focus: "Small steps, reminders, and progress",
+    result: "Helps turn an overwhelming goal into something you can start today.",
     tech: [
       "TypeScript",
       "Expo",
@@ -150,41 +150,41 @@ const projects = [
       "Notifications",
     ],
     description:
-      "A mobile goal-planning app that breaks meaningful goals into smaller actions, schedules reminders, tracks momentum, and keeps personal planning data local by default.",
+      "I built Taskflow for the moment when a goal feels too big and you do not know where to start. The app breaks it into smaller steps, reminds you what to do next, and helps you see the progress you are making.",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001/taskflow",
     image: "/projects/taskflow.png",
     imageAlt:
       "Taskflow mobile Goals screen showing active goals, progress, and suggested next steps",
     details: [
-      "Uses Expo Router to connect Today, Goals, Progress, Affirmations, Profile, and focused reminder screens into one mobile workflow.",
-      "Stores goals, progress, reminders, and AI-generated plans on-device with Expo SQLite while keeping the user's API key in SecureStore.",
-      "Schedules local notifications that return the user to the right goal and next action instead of stopping at a static task list.",
-      "Keeps shared app state predictable with Zustand and uses reusable theme, card, motion, and accessibility patterns across the interface.",
+      "The Today screen keeps the next step in front of you, while the Goals and Progress screens show how the larger plan is moving forward.",
+      "You can ask the app to help break a goal into weekly milestones and small actions instead of planning every step from scratch.",
+      "Goals, reminders, progress, and personal notes stay on the phone, and the user's AI key is kept in secure device storage.",
+      "I added local notifications, affirmations, and progress feedback to help people return to a goal after the first burst of motivation wears off.",
     ],
   },
   {
     id: "jarvis",
     title: "JARVIS",
-    subtitle: "Governed local-first AI room OS",
+    subtitle: "Bedroom AI assistant",
     category: "AI Systems",
     status: "Active",
     role: "Co-developer",
-    focus: "Human approval, local AI, auditability",
-    result: "Keeps every state-changing AI action behind one explicit human approval gate.",
+    focus: "Voice, desktop, and room assistance",
+    result: "A personal assistant for my bedroom workspace that helps without taking control away from me.",
     tech: ["Next.js", "React", "TypeScript", "Zod", "SQLite", "Vitest", "MCP", "Local AI"],
     description:
-      "A collaborative local-first AI operating environment that can inspect projects, work with room and desktop capabilities, and propose actions while keeping execution under human control.",
+      "JARVIS is a bedroom assistant I built with my friend. It can listen and speak, open files, control apps, help with projects, and manage parts of the room. Before it does anything important, it shows us what it wants to do and waits for approval.",
     liveUrl: null,
     repoUrl: "https://github.com/Jerrizzy001/JARVIS",
     image: "/projects/jarvis.jpg",
     imageAlt:
       "JARVIS Working Cockpit showing chat, Human Gate approval, room state, cost, and activity panels",
     details: [
-      "Routes every state-changing capability through a Human Gate so agents can propose work but cannot silently execute it.",
-      "Uses local-first model routing, optional voice and vision capabilities, and fail-closed policies for features that are not explicitly enabled.",
-      "Validates system contracts with Zod and records metadata-only audit events so decisions and execution paths remain inspectable.",
-      "Tests governance invariants with Vitest and exposes a local MCP gateway for governed reads and proposals without adding another mutation path.",
+      "We built it around the way I actually use my bedroom: as a place to study, code, work, and relax.",
+      "I can talk to it, ask it to open a file or app, summarize a document, check a project, or change a room setting.",
+      "It tries to run everyday AI tasks on the computer first, so they do not always need to be sent to a cloud service.",
+      "Before it changes a file, runs a command, or controls something in the room, JARVIS pauses and asks for approval.",
     ],
   },
 ];
@@ -223,22 +223,23 @@ export default function ProjectPage() {
         <section className="relative z-10 mb-10 grid gap-6 border-b border-slate-950/10 pb-8 dark:border-white/10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
           <div>
             <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
-              Selected technical builds
+              Things I've built
             </p>
             <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white sm:text-5xl lg:text-6xl">
               Projects
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-slate-700 [text-wrap:pretty] dark:text-slate-300 sm:text-lg">
-              Practical apps and analysis work, presented with the decisions that matter:
-              what I built, how it works, and where to inspect the code.
+              These are some of the apps and tools I've built—from a museum search app
+              and mobile goal planner to email automation and a bedroom AI assistant.
+              Open any project to see what it does and how I made it.
             </p>
           </div>
 
           <div className="border-t border-slate-950/10 pt-4 text-sm leading-6 text-slate-700 dark:border-white/10 dark:text-slate-300 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
             <p className="font-semibold text-slate-950 dark:text-white">Current work</p>
             <p>
-              AI engineering for manual workflows, full-stack interfaces, and software
-              that reduces handoffs.
+              I'm most interested in using AI to remove repetitive work and build tools
+              that people can actually use.
             </p>
           </div>
         </section>
@@ -440,7 +441,7 @@ function ProjectModal({ project, titleId, descriptionId, onClose }) {
             </p>
 
             <h3 className="mt-6 text-base font-semibold text-slate-950 dark:text-white">
-              Build notes
+              What I built
             </h3>
             <ul className="mt-3 space-y-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
               {project.details.map((detail) => (
@@ -455,7 +456,7 @@ function ProjectModal({ project, titleId, descriptionId, onClose }) {
           <aside className="space-y-4 border-t border-slate-950/10 pt-5 dark:border-white/10 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0">
             <div>
               <h3 className="text-sm font-semibold text-slate-950 dark:text-white">
-                Project facts
+                At a glance
               </h3>
               <dl className="mt-3 space-y-3 text-sm">
                 <MetaItem label="Role" value={project.role} />
