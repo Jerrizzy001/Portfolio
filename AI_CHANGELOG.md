@@ -52,3 +52,11 @@ AI agents must read this file before changing the project and append an entry af
 - **Important files:** `pages/index.js`, `pages/about.js`, `pages/contact.js`, and `AI_CHANGELOG.md`.
 - **Verification:** `git diff --check` passed locally. GitHub Actions passed `npm ci`, `npm run lint`, and `npm run build` on both the branch-push run and pull-request run for commit `0010122`. Both Vercel preview deployments attached to pull request #3 completed successfully.
 - **Limitations and follow-up:** The production domain still requires a final live browser and route check after the pull request is merged and Vercel finishes the production deployment.
+
+## 2026-07-17 - Verify the Projects page redesign on GitHub
+
+- **Goal:** Verify the redesigned Projects page through GitHub before releasing it to production.
+- **Changes:** Moved the Projects page update onto `codex/redesign-projects-page`, committed only `pages/project.js` and its existing change-log entry, and opened GitHub pull request #4. No project records, dependencies, images, or deployment configuration were changed during release preparation.
+- **Important files:** `pages/project.js` and `AI_CHANGELOG.md`.
+- **Verification:** `git diff --check` passed locally. GitHub Actions passed `npm ci`, `npm run lint`, and `npm run build` on both the branch-push and pull-request runs for commit `a81e5c3`. Both Vercel preview deployments attached to pull request #4 completed successfully.
+- **Limitations and follow-up:** Vercel preview protection redirected direct browser visits to its login page, so the category filters, featured card, modal behavior, image loading, and responsive overflow still require live verification on the public production route after merge.
