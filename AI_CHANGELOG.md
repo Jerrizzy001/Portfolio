@@ -2,6 +2,14 @@
 
 AI agents must read this file before changing the project and append an entry after completing their work. Keep this history append-only and never include secrets, credentials, private customer data, or sensitive environment values.
 
+## 2026-07-17 - Redesign Projects page
+
+- **Goal:** Redesign the Projects page to match the new Home/About/Contact design language and make seven projects easier to browse, without changing any project data.
+- **Changes:** Rewrote `pages/project.js`: added a dedicated featured-project card (Email-to-ERP Automation, chosen for its live demo and direct relevance to the YarlMetal automation work) showing the first two detail bullets; added a category filter bar with counts, `aria-pressed` state, and an `aria-live` result count; converted the header "Current work" sidebar into a bordered panel matching the redesigned pages; equalized card heights with card buttons pinned to the bottom (`mt-auto`); separated image priority handling from list index via a `priority` prop on `CardImage`. Project data, detail modal, accessibility hook (`useModalA11y`), badges, and GitHub CTA section are unchanged in behavior.
+- **Important files:** `pages/project.js`, `AI_CHANGELOG.md`.
+- **Verification:** Not run locally — the user asked to skip local Node checks because this iCloud-backed checkout makes them slow. Lint and production-build verification are left to the repository's GitHub Actions CI.
+- **Limitations and follow-up:** Filtering, the featured card, and equal-height rows have not been browser-checked; verify at mobile and desktop widths in both themes after CI passes and the deploy lands.
+
 ## 2026-07-17 - Redesign Home, About, and Contact pages
 
 - **Goal:** Redesign the frontend focused on the Home, About, and Contact pages, replacing the auto-rotating hero carousel with content-rich layouts that surface more real detail (YarlMetal internship, Seneca degree, City of Markham role, certifications, stack, AI-assisted workflow, project highlights).

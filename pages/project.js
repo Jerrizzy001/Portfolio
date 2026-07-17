@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from "react";
+import { useId, useMemo, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import Image from "next/image";
 import { FaArrowRight, FaExternalLinkAlt, FaGithub, FaTimes } from "react-icons/fa";
@@ -189,6 +189,8 @@ const projects = [
   },
 ];
 
+const featuredId = "email-to-erp-automation";
+
 const categoryTone = {
   "Data Science":
     "border-emerald-300/70 bg-emerald-50 text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-200",
@@ -204,8 +206,23 @@ const categoryTone = {
 
 export default function ProjectPage() {
   const [activeProject, setActiveProject] = useState(null);
+  const [filter, setFilter] = useState("All");
   const modalTitleId = useId();
   const modalDescriptionId = useId();
+
+  const categories = useMemo(() => {
+    const counts = new Map();
+    for (const project of projects) {
+      counts.set(project.category, (counts.get(project.category) || 0) + 1);
+    }
+    return ["All", ...counts.keys()];
+  }, []);
+
+  const featuredProject = projects.find((project) => project.id === featuredId);
+  const visibleProjects =
+    filter === "All"
+      ? projects.filter((project) => project.id !== featuredId)
+      : projects.filter((project) => project.category === filter);
 
   return (
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
@@ -220,7 +237,8 @@ export default function ProjectPage() {
       <main id="main-content" className="safe-x relative isolate mx-auto max-w-7xl overflow-hidden pb-20 pt-28">
         <SignalField fill={false} className="inset-x-0 top-0 z-0 h-[54rem] opacity-60" />
 
-        <section className="relative z-10 mb-10 grid gap-6 border-b border-slate-950/10 pb-8 dark:border-white/10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
+        {/* HEADER */}
+        <section className="relative z-10 mb-10 grid gap-6 border-b border-slate-950/10 pb-10 dark:border-white/10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
           <div>
             <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
               Things I've built
@@ -235,30 +253,94 @@ export default function ProjectPage() {
             </p>
           </div>
 
-          <div className="border-t border-slate-950/10 pt-4 text-sm leading-6 text-slate-700 dark:border-white/10 dark:text-slate-300 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
-            <p className="font-semibold text-slate-950 dark:text-white">Current work</p>
-            <p>
-              I'm most interested in using AI to remove repetitive work and build tools
-              that people can actually use.
+          <aside className="h-fit rounded-lg border border-slate-950/10 bg-white/88 p-5 dark:border-white/10 dark:bg-slate-950/72">
+            <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              Current focus
             </p>
-          </div>
+            <p className="mt-2 text-sm font-medium leading-6 text-slate-900 dark:text-slate-100">
+              Using AI to remove repetitive work
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
+              The same thing I build at YarlMetal: tools people can actually use,
+              review, and trust.
+            </p>
+          </aside>
         </section>
 
+        {/* FEATURED PROJECT */}
+        {filter === "All" && featuredProject && (
+          <section aria-label="Featured project" className="relative z-10 mb-12">
+            <FeaturedCard
+              project={featuredProject}
+              onView={() => setActiveProject(featuredProject)}
+            />
+          </section>
+        )}
+
+        {/* FILTER BAR */}
+        <section className="relative z-10 mb-6" aria-label="Browse projects">
+          <div
+            className="flex flex-wrap items-center gap-2"
+            role="group"
+            aria-label="Filter projects by category"
+          >
+            {categories.map((category) => {
+              const isActive = filter === category;
+              const count =
+                category === "All"
+                  ? projects.length
+                  : projects.filter((project) => project.category === category).length;
+
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setFilter(category)}
+                  aria-pressed={isActive}
+                  className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                    isActive
+                      ? "border-primary bg-primary text-primary-contrast"
+                      : "border-slate-950/10 bg-white/70 text-slate-700 hover:border-primary hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:text-white"
+                  }`}
+                >
+                  {category}
+                  <span
+                    className={`font-mono text-[0.7rem] ${
+                      isActive ? "opacity-80" : "text-slate-500 dark:text-slate-400"
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <p
+            aria-live="polite"
+            className="mt-4 font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400"
+          >
+            {filter === "All"
+              ? `${projects.length} projects`
+              : `Showing ${visibleProjects.length} of ${projects.length} projects`}
+          </p>
+        </section>
+
+        {/* PROJECT GRID */}
         <section
           className="relative z-10 grid grid-cols-1 gap-5 md:grid-cols-2"
           aria-label="Project list"
         >
-          {projects.map((project, index) => (
+          {visibleProjects.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}
-              index={index}
-              isFeatured={index === 0}
               onView={() => setActiveProject(project)}
             />
           ))}
         </section>
 
+        {/* GITHUB CTA */}
         <section className="relative z-10 mt-16 flex flex-col gap-5 border-t border-slate-950/10 pt-8 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
@@ -294,22 +376,18 @@ export default function ProjectPage() {
   );
 }
 
-function ProjectCard({ project, onView, index, isFeatured }) {
-  const visibleTech = project.tech.slice(0, isFeatured ? 6 : 4);
-  const remainingTech = project.tech.length - visibleTech.length;
-
+function FeaturedCard({ project, onView }) {
   return (
-    <article
-      className={`motion-card group overflow-hidden rounded-lg border border-slate-950/10 bg-white/88 transition-colors hover:border-slate-950/25 dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25 ${
-        isFeatured ? "md:col-span-2 lg:grid lg:grid-cols-[1.1fr_0.9fr]" : ""
-      }`}
-    >
-      <div className={`relative bg-slate-950 ${isFeatured ? "h-64 sm:h-72 md:h-80 lg:h-auto lg:min-h-full" : "h-52 sm:h-60"}`}>
-        <CardImage project={project} index={index} />
+    <article className="motion-card group overflow-hidden rounded-lg border border-slate-950/10 bg-white/88 transition-colors hover:border-slate-950/25 dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25 lg:grid lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative h-64 bg-slate-950 sm:h-72 lg:h-auto lg:min-h-full">
+        <CardImage project={project} priority />
       </div>
 
-      <div className={`flex flex-col p-5 sm:p-6 ${isFeatured ? "lg:p-8" : ""}`}>
+      <div className="flex flex-col p-5 sm:p-6 lg:p-8">
         <div className="mb-4 flex flex-wrap items-center gap-2">
+          <Badge className="border-primary/40 bg-primary/10 text-primary dark:border-primary/45 dark:bg-primary/15">
+            Featured
+          </Badge>
           <Badge className={categoryTone[project.category]}>{project.category}</Badge>
           <Badge>{project.status}</Badge>
         </div>
@@ -324,6 +402,79 @@ function ProjectCard({ project, onView, index, isFeatured }) {
         </div>
 
         <p className="text-sm leading-6 text-slate-700 [text-wrap:pretty] dark:text-slate-300 sm:text-base">
+          {project.description}
+        </p>
+
+        <ul className="mt-5 space-y-2.5 border-y border-slate-950/10 py-4 dark:border-white/10">
+          {project.details.slice(0, 2).map((detail) => (
+            <li
+              key={detail}
+              className="flex gap-3 text-sm leading-6 text-slate-700 dark:text-slate-300"
+            >
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-950 dark:bg-white" />
+              <span>{detail}</span>
+            </li>
+          ))}
+        </ul>
+
+        <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+          <MetaItem label="Role" value={project.role} />
+          <MetaItem label="Focus" value={project.focus} />
+        </dl>
+
+        <div className="mt-6 grid gap-3 min-[420px]:flex min-[420px]:flex-wrap">
+          <button
+            type="button"
+            onClick={onView}
+            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-primary-contrast transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 min-[420px]:w-auto"
+          >
+            Open details
+            <FaArrowRight size={13} aria-hidden="true" />
+          </button>
+
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md border border-slate-950/15 px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-950/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:text-white dark:hover:bg-white/10 dark:focus-visible:ring-offset-slate-950 min-[420px]:w-auto"
+            >
+              <FaExternalLinkAlt size={13} aria-hidden="true" />
+              Open live demo
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ProjectCard({ project, onView }) {
+  const visibleTech = project.tech.slice(0, 4);
+  const remainingTech = project.tech.length - visibleTech.length;
+
+  return (
+    <article className="motion-card group flex flex-col overflow-hidden rounded-lg border border-slate-950/10 bg-white/88 transition-colors hover:border-slate-950/25 dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25">
+      <div className="relative h-52 bg-slate-950 sm:h-56">
+        <CardImage project={project} />
+      </div>
+
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <Badge className={categoryTone[project.category]}>{project.category}</Badge>
+          <Badge>{project.status}</Badge>
+        </div>
+
+        <div className="mb-4">
+          <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+            {project.subtitle}
+          </p>
+          <h2 className="mt-1 text-2xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white">
+            {project.title}
+          </h2>
+        </div>
+
+        <p className="text-sm leading-6 text-slate-700 [text-wrap:pretty] dark:text-slate-300">
           {project.description}
         </p>
 
@@ -352,7 +503,7 @@ function ProjectCard({ project, onView, index, isFeatured }) {
           )}
         </div>
 
-        <div className="mt-6 grid gap-3 min-[420px]:flex min-[420px]:flex-wrap">
+        <div className="mt-auto grid gap-3 pt-6 min-[420px]:flex min-[420px]:flex-wrap">
           <button
             type="button"
             onClick={onView}
@@ -531,7 +682,7 @@ function MetaItem({ label, value }) {
   );
 }
 
-function CardImage({ project, index }) {
+function CardImage({ project, priority = false }) {
   const [imgError, setImgError] = useState(false);
 
   if (!project.image || imgError) {
@@ -544,10 +695,9 @@ function CardImage({ project, index }) {
     );
   }
 
-  const sizes =
-    index === 0
-      ? "(min-width: 1280px) 672px, (min-width: 1024px) 54vw, (min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)"
-      : "(min-width: 1280px) 592px, (min-width: 1024px) 48vw, (min-width: 768px) calc((100vw - 68px) / 2), calc(100vw - 32px)";
+  const sizes = priority
+    ? "(min-width: 1280px) 672px, (min-width: 1024px) 54vw, (min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)"
+    : "(min-width: 1280px) 592px, (min-width: 1024px) 48vw, (min-width: 768px) calc((100vw - 68px) / 2), calc(100vw - 32px)";
 
   return (
     <Image
@@ -556,7 +706,7 @@ function CardImage({ project, index }) {
       fill
       className="object-contain p-2"
       sizes={sizes}
-      priority={index === 0}
+      priority={priority}
       quality={78}
       unoptimized={project.image.endsWith(".svg")}
       onError={() => setImgError(true)}
