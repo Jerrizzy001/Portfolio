@@ -9,3 +9,10 @@ AI agents must read this file before changing the project and append an entry af
 - **Important files:** Updated `pages/project.js`; added `public/projects/email-to-erp.jpg`, `public/projects/taskflow.png`, and `public/projects/jarvis.jpg`; added `.github/workflows/ci.yml` to run install, lint, and build checks on pushes and pull requests.
 - **Verification:** `npm ci` completed with zero reported vulnerabilities. Project-data verification confirmed seven cards, all six pinned repository links, and all three new image assets. Browser checks confirmed the cards, descriptive alt text, live/source link behavior, modal content, Escape and close-button handling, lazy-loaded images, light/dark themes, and no horizontal overflow at 375px, 768px, 1024px, and 1440px. A full lint and production build passed before the final one-line card-layout correction.
 - **Limitations and follow-up:** Final local lint/build reruns stalled before compilation because this checkout is backed by iCloud and file access became idle. The new GitHub Actions CI workflow is intended to run those final checks on GitHub; rerun `npm run lint && npm run build` locally after moving the repository out of the iCloud-backed path.
+
+## 2026-07-17 - GitHub CI follow-up
+
+- **Goal:** Complete final verification on GitHub after the iCloud-backed local checkout stalled.
+- **Changes:** Updated `actions/checkout` and `actions/setup-node` to their current v7 releases after GitHub reported that the v4 actions used the deprecated Node.js 20 action runtime.
+- **Verification:** GitHub Actions passed `npm ci`, `npm run lint`, and `npm run build` on both the branch-push and pull-request runs for commit `f1972ef`.
+- **Limitations and follow-up:** The repository can still be moved out of the iCloud-backed Documents path to make future local Node.js checks more reliable; no remaining code or CI failure is known for this update.
