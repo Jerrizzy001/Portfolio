@@ -23,3 +23,8 @@ AI agents must read this file before changing the project and append an entry af
 - **Changes:** Rewrote the subtitles, focus lines, results, descriptions, and detail notes for all seven projects in `pages/project.js`. JARVIS now leads with its real use as a bedroom assistant built with a friend; the other projects lead with the user problem or question they address. Renamed “Build notes” to “What I built,” “Project facts” to “At a glance,” and simplified the Projects page introduction.
 - **Verification:** `git diff --check` passed. The content will receive final lint and production-build verification through the repository's GitHub Actions workflow because the local checkout remains on an iCloud-backed path.
 - **Limitations and follow-up:** This is a copy-only update; project links, screenshots, stack tags, card behavior, and layout are unchanged.
+
+## 2026-07-17 - Human project copy CI follow-up
+
+- **Verification:** GitHub Actions passed `npm ci`, `npm run lint`, and `npm run build` for the human-copy update on commit `024f08b`.
+- **Limitations and follow-up:** No code, layout, link, or build issue was found during CI; production wording still requires a final browser check after merge and deployment.
