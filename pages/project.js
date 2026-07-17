@@ -53,7 +53,7 @@ const projects = [
     description:
       "The site you are reading now: a responsive portfolio with dark and light modes, accessible navigation, project media, and a deployment flow connected to Vercel.",
     liveUrl: null,
-    repoUrl: "https://github.com/Jerrizzy001",
+    repoUrl: "https://github.com/Jerrizzy001/Portfolio",
     image: "/projects/portfolio.png",
     details: [
       "Built with Next.js and React for fast static pages and clean route-level structure.",
@@ -106,6 +106,87 @@ const projects = [
       "Organised the work in a Jupyter Notebook so the analysis can be reviewed and reproduced.",
     ],
   },
+  {
+    id: "email-to-erp-automation",
+    title: "Email-to-ERP Automation",
+    subtitle: "Sanitized RFQ workflow demo",
+    category: "Automation",
+    status: "Live",
+    role: "Automation developer",
+    focus: "Email parsing, duplicate checks, workflow payloads",
+    result: "Turns sanitized quote-request emails into validated, workflow-ready records.",
+    tech: ["JavaScript", "HTML", "CSS", "Node.js", "GitHub Actions", "GitHub Pages"],
+    description:
+      "A public, sanitized automation demo that parses inbound RFQ emails, checks for duplicates, matches mock business records, scores confidence, and prepares a clean ERP-style workflow payload.",
+    liveUrl: "https://jerrizzy001.github.io/Email-to-ERP-system/",
+    repoUrl: "https://github.com/Jerrizzy001/Email-to-ERP-system",
+    image: "/projects/email-to-erp.jpg",
+    imageAlt:
+      "Email-to-ERP dashboard showing a sample RFQ email, parsed fields, and workflow payload",
+    details: [
+      "Parses sanitized email and attachment evidence into normalized RFQ fields such as customer, part, quantity, due date, and shipping method.",
+      "Builds a deterministic fingerprint for duplicate detection before a quote request can move further into the workflow.",
+      "Matches extracted values against fictional customer, part, and carrier records, then reports a confidence score for review.",
+      "Keeps the public demo safe with mock data, a credential-pattern scan, automated tests, and a preview-only payload instead of a production write.",
+    ],
+  },
+  {
+    id: "taskflow",
+    title: "Taskflow",
+    subtitle: "Privacy-first AI goal planner",
+    category: "Mobile",
+    status: "Active",
+    role: "Mobile app developer",
+    focus: "AI planning, local data, notifications",
+    result: "Turns large goals into scheduled small steps with private, on-device progress.",
+    tech: [
+      "TypeScript",
+      "Expo",
+      "React Native",
+      "Expo Router",
+      "SQLite",
+      "Zustand",
+      "SecureStore",
+      "Notifications",
+    ],
+    description:
+      "A mobile goal-planning app that breaks meaningful goals into smaller actions, schedules reminders, tracks momentum, and keeps personal planning data local by default.",
+    liveUrl: null,
+    repoUrl: "https://github.com/Jerrizzy001/taskflow",
+    image: "/projects/taskflow.png",
+    imageAlt:
+      "Taskflow mobile Goals screen showing active goals, progress, and suggested next steps",
+    details: [
+      "Uses Expo Router to connect Today, Goals, Progress, Affirmations, Profile, and focused reminder screens into one mobile workflow.",
+      "Stores goals, progress, reminders, and AI-generated plans on-device with Expo SQLite while keeping the user's API key in SecureStore.",
+      "Schedules local notifications that return the user to the right goal and next action instead of stopping at a static task list.",
+      "Keeps shared app state predictable with Zustand and uses reusable theme, card, motion, and accessibility patterns across the interface.",
+    ],
+  },
+  {
+    id: "jarvis",
+    title: "JARVIS",
+    subtitle: "Governed local-first AI room OS",
+    category: "AI Systems",
+    status: "Active",
+    role: "Co-developer",
+    focus: "Human approval, local AI, auditability",
+    result: "Keeps every state-changing AI action behind one explicit human approval gate.",
+    tech: ["Next.js", "React", "TypeScript", "Zod", "SQLite", "Vitest", "MCP", "Local AI"],
+    description:
+      "A collaborative local-first AI operating environment that can inspect projects, work with room and desktop capabilities, and propose actions while keeping execution under human control.",
+    liveUrl: null,
+    repoUrl: "https://github.com/Jerrizzy001/JARVIS",
+    image: "/projects/jarvis.jpg",
+    imageAlt:
+      "JARVIS Working Cockpit showing chat, Human Gate approval, room state, cost, and activity panels",
+    details: [
+      "Routes every state-changing capability through a Human Gate so agents can propose work but cannot silently execute it.",
+      "Uses local-first model routing, optional voice and vision capabilities, and fail-closed policies for features that are not explicitly enabled.",
+      "Validates system contracts with Zod and records metadata-only audit events so decisions and execution paths remain inspectable.",
+      "Tests governance invariants with Vitest and exposes a local MCP gateway for governed reads and proposals without adding another mutation path.",
+    ],
+  },
 ];
 
 const categoryTone = {
@@ -113,6 +194,12 @@ const categoryTone = {
     "border-emerald-300/70 bg-emerald-50 text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-200",
   "Web Dev":
     "border-primary/30 bg-primary/10 text-primary dark:border-primary/35 dark:bg-primary/15 dark:text-primary",
+  Automation:
+    "border-sky-300/70 bg-sky-50 text-sky-900 dark:border-sky-400/30 dark:bg-sky-400/10 dark:text-sky-200",
+  Mobile:
+    "border-amber-300/70 bg-amber-50 text-amber-900 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-200",
+  "AI Systems":
+    "border-violet-300/70 bg-violet-50 text-violet-900 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-200",
 };
 
 export default function ProjectPage() {
@@ -124,7 +211,7 @@ export default function ProjectPage() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <PageMeta
         title="Projects"
-        description="Selected projects by Jerry Nwachi, including full-stack Next.js work, a portfolio system, machine learning workflows, and data analysis builds."
+        description="Selected projects by Jerry Nwachi across full-stack development, mobile apps, workflow automation, local-first AI systems, machine learning, and data analysis."
         path="/project"
         image="/projects/portfolio.png"
       />
@@ -220,7 +307,7 @@ function ProjectCard({ project, onView, index, isFeatured }) {
         <CardImage project={project} index={index} />
       </div>
 
-      <div className={`flex h-full flex-col p-5 sm:p-6 ${isFeatured ? "lg:p-8" : ""}`}>
+      <div className={`flex flex-col p-5 sm:p-6 ${isFeatured ? "lg:p-8" : ""}`}>
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <Badge className={categoryTone[project.category]}>{project.category}</Badge>
           <Badge>{project.status}</Badge>
@@ -464,7 +551,7 @@ function CardImage({ project, index }) {
   return (
     <Image
       src={project.image}
-      alt={`${project.title} project preview`}
+      alt={project.imageAlt || `${project.title} project preview`}
       fill
       className="object-contain p-2"
       sizes={sizes}
@@ -493,7 +580,7 @@ function ModalImage({ project }) {
     <div className="relative my-5 h-48 w-full overflow-hidden rounded-lg border border-slate-950/10 bg-slate-950 dark:border-white/10 sm:h-60">
       <Image
         src={project.image}
-        alt={`${project.title} project preview`}
+        alt={project.imageAlt || `${project.title} project preview`}
         fill
         className="object-contain p-2"
         sizes="(min-width: 1024px) 856px, calc(100vw - 40px)"
