@@ -2,6 +2,14 @@
 
 AI agents must read this file before changing the project and append an entry after completing their work. Keep this history append-only and never include secrets, credentials, private customer data, or sensitive environment values.
 
+## 2026-07-17 - Deep redesign of the Projects page
+
+- **Goal:** Replace the card-grid Projects page with a visually distinctive layout after the first redesign pass was judged too close to the original; remove the "Current focus / AI" header panel; keep all project thumbnails prominent.
+- **Changes:** Rewrote `pages/project.js` again: deleted the header "Current focus" aside panel; oversized editorial header ("Projects /07" with mono count); added a permanently dark "featured exhibit" tile (slate-950 with cobalt glow, always-dark badge tones via a new `categoryToneDark` map, bordered result callout, role/focus strip, stack chips, details and live-demo buttons) for Email-to-ERP Automation; replaced the card grid with an editorial numbered index — hairline rows with mono ordinals, always-visible thumbnails, category badge plus status dot, whole-row click via stretched-button pattern, external live-app quick link kept above the stretched layer, and hover treatments (row tint, title/number accent, thumbnail zoom, arrow rotate). Filter pills restyled to mono uppercase and kept. Project data, detail modal, and GitHub CTA unchanged.
+- **Important files:** `pages/project.js`, `AI_CHANGELOG.md`.
+- **Verification:** Not run locally at the user's request (iCloud-backed checkout makes local Node runs slow); lint and production-build verification left to GitHub Actions CI.
+- **Limitations and follow-up:** The dark exhibit, row hover/focus states, and stretched-button behavior have not been browser-checked; verify keyboard focus visibility on rows and both themes at mobile and desktop widths after CI passes and the deploy lands.
+
 ## 2026-07-17 - Redesign Projects page
 
 - **Goal:** Redesign the Projects page to match the new Home/About/Contact design language and make seven projects easier to browse, without changing any project data.

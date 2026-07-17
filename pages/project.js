@@ -204,6 +204,21 @@ const categoryTone = {
     "border-violet-300/70 bg-violet-50 text-violet-900 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-200",
 };
 
+/* Always-dark variants, used inside the dark featured exhibit. */
+const categoryToneDark = {
+  "Data Science": "border-emerald-500/30 bg-emerald-500/10 text-emerald-200",
+  "Web Dev": "border-indigo-400/35 bg-indigo-400/15 text-indigo-200",
+  Automation: "border-sky-400/30 bg-sky-400/10 text-sky-200",
+  Mobile: "border-amber-400/30 bg-amber-400/10 text-amber-200",
+  "AI Systems": "border-violet-400/30 bg-violet-400/10 text-violet-200",
+};
+
+const statusDotTone = {
+  Live: "bg-emerald-500",
+  Active: "bg-primary",
+  Repository: "bg-slate-400",
+};
+
 export default function ProjectPage() {
   const [activeProject, setActiveProject] = useState(null);
   const [filter, setFilter] = useState("All");
@@ -238,39 +253,29 @@ export default function ProjectPage() {
         <SignalField fill={false} className="inset-x-0 top-0 z-0 h-[54rem] opacity-60" />
 
         {/* HEADER */}
-        <section className="relative z-10 mb-10 grid gap-6 border-b border-slate-950/10 pb-10 dark:border-white/10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
-          <div>
-            <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
-              Things I've built
-            </p>
-            <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white sm:text-5xl lg:text-6xl">
+        <section className="relative z-10 mb-10 border-b border-slate-950/10 pb-10 dark:border-white/10">
+          <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+            Things I've built
+          </p>
+          <div className="flex flex-wrap items-end gap-x-5 gap-y-2">
+            <h1 className="text-5xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white sm:text-6xl lg:text-7xl">
               Projects
             </h1>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-700 [text-wrap:pretty] dark:text-slate-300 sm:text-lg">
-              These are some of the apps and tools I've built—from a museum search app
-              and mobile goal planner to email automation and a bedroom AI assistant.
-              Open any project to see what it does and how I made it.
-            </p>
+            <span className="mb-2 font-mono text-sm tracking-widest text-slate-500 dark:text-slate-400 sm:mb-3">
+              /{String(projects.length).padStart(2, "0")}
+            </span>
           </div>
-
-          <aside className="h-fit rounded-lg border border-slate-950/10 bg-white/88 p-5 dark:border-white/10 dark:bg-slate-950/72">
-            <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-              Current focus
-            </p>
-            <p className="mt-2 text-sm font-medium leading-6 text-slate-900 dark:text-slate-100">
-              Using AI to remove repetitive work
-            </p>
-            <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
-              The same thing I build at YarlMetal: tools people can actually use,
-              review, and trust.
-            </p>
-          </aside>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700 [text-wrap:pretty] dark:text-slate-300 sm:text-lg">
+            From workflow automation and a bedroom AI assistant to a museum
+            search app and ML experiments. Pick a category, or open any project
+            to see what it does and how I made it.
+          </p>
         </section>
 
-        {/* FEATURED PROJECT */}
+        {/* FEATURED EXHIBIT */}
         {filter === "All" && featuredProject && (
-          <section aria-label="Featured project" className="relative z-10 mb-12">
-            <FeaturedCard
+          <section aria-label="Featured project" className="relative z-10 mb-14">
+            <FeaturedExhibit
               project={featuredProject}
               onView={() => setActiveProject(featuredProject)}
             />
@@ -278,7 +283,7 @@ export default function ProjectPage() {
         )}
 
         {/* FILTER BAR */}
-        <section className="relative z-10 mb-6" aria-label="Browse projects">
+        <section className="relative z-10 mb-2" aria-label="Browse projects">
           <div
             className="flex flex-wrap items-center gap-2"
             role="group"
@@ -297,18 +302,14 @@ export default function ProjectPage() {
                   type="button"
                   onClick={() => setFilter(category)}
                   aria-pressed={isActive}
-                  className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wide transition focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     isActive
                       ? "border-primary bg-primary text-primary-contrast"
-                      : "border-slate-950/10 bg-white/70 text-slate-700 hover:border-primary hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:text-white"
+                      : "border-slate-950/10 bg-white/70 text-slate-600 hover:border-primary hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:text-white"
                   }`}
                 >
                   {category}
-                  <span
-                    className={`font-mono text-[0.7rem] ${
-                      isActive ? "opacity-80" : "text-slate-500 dark:text-slate-400"
-                    }`}
-                  >
+                  <span className={isActive ? "opacity-80" : "text-slate-400 dark:text-slate-500"}>
                     {count}
                   </span>
                 </button>
@@ -321,20 +322,18 @@ export default function ProjectPage() {
             className="mt-4 font-mono text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400"
           >
             {filter === "All"
-              ? `${projects.length} projects`
-              : `Showing ${visibleProjects.length} of ${projects.length} projects`}
+              ? `${String(projects.length).padStart(2, "0")} projects`
+              : `Showing ${visibleProjects.length} of ${String(projects.length).padStart(2, "0")}`}
           </p>
         </section>
 
-        {/* PROJECT GRID */}
-        <section
-          className="relative z-10 grid grid-cols-1 gap-5 md:grid-cols-2"
-          aria-label="Project list"
-        >
-          {visibleProjects.map((project) => (
-            <ProjectCard
+        {/* PROJECT INDEX */}
+        <section aria-label="Project index" className="relative z-10">
+          {visibleProjects.map((project, index) => (
+            <ProjectRow
               key={project.id}
               project={project}
+              number={String(index + 1).padStart(2, "0")}
               onView={() => setActiveProject(project)}
             />
           ))}
@@ -376,157 +375,185 @@ export default function ProjectPage() {
   );
 }
 
-function FeaturedCard({ project, onView }) {
+function FeaturedExhibit({ project, onView }) {
   return (
-    <article className="motion-card group overflow-hidden rounded-lg border border-slate-950/10 bg-white/88 transition-colors hover:border-slate-950/25 dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25 lg:grid lg:grid-cols-[1.05fr_0.95fr]">
-      <div className="relative h-64 bg-slate-950 sm:h-72 lg:h-auto lg:min-h-full">
-        <CardImage project={project} priority />
-      </div>
+    <article className="group relative overflow-hidden rounded-lg border border-slate-950/10 bg-slate-950 text-white dark:border-white/10">
+      {/* Cobalt glow */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-primary/25 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-32 -left-16 h-64 w-64 rounded-full bg-indigo-500/15 blur-3xl"
+      />
 
-      <div className="flex flex-col p-5 sm:p-6 lg:p-8">
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <Badge className="border-primary/40 bg-primary/10 text-primary dark:border-primary/45 dark:bg-primary/15">
-            Featured
-          </Badge>
-          <Badge className={categoryTone[project.category]}>{project.category}</Badge>
-          <Badge>{project.status}</Badge>
+      <div className="relative grid lg:grid-cols-2">
+        {/* Thumbnail */}
+        <div className="relative h-56 border-b border-white/10 sm:h-72 lg:h-auto lg:min-h-full lg:border-b-0 lg:border-r">
+          <ThumbImage project={project} priority />
         </div>
 
-        <div className="mb-4">
-          <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+        {/* Content */}
+        <div className="flex flex-col p-6 sm:p-8 lg:p-10">
+          <div className="mb-5 flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-2.5 py-1 font-mono text-[0.7rem] font-semibold uppercase tracking-wide text-white">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+              Featured
+            </span>
+            <span
+              className={`inline-flex items-center rounded-full border px-2.5 py-1 font-mono text-[0.7rem] font-semibold uppercase tracking-wide ${categoryToneDark[project.category]}`}
+            >
+              {project.category}
+            </span>
+            <StatusText status={project.status} dark />
+          </div>
+
+          <p className="font-mono text-xs uppercase tracking-widest text-slate-400">
             {project.subtitle}
           </p>
-          <h2 className="mt-1 text-2xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white sm:text-3xl">
+          <h2 className="mt-2 text-3xl font-bold tracking-tight [text-wrap:balance] sm:text-4xl">
             {project.title}
           </h2>
-        </div>
 
-        <p className="text-sm leading-6 text-slate-700 [text-wrap:pretty] dark:text-slate-300 sm:text-base">
-          {project.description}
-        </p>
+          <p className="mt-4 text-sm leading-6 text-slate-300 [text-wrap:pretty] sm:text-base sm:leading-7">
+            {project.description}
+          </p>
 
-        <ul className="mt-5 space-y-2.5 border-y border-slate-950/10 py-4 dark:border-white/10">
-          {project.details.slice(0, 2).map((detail) => (
-            <li
-              key={detail}
-              className="flex gap-3 text-sm leading-6 text-slate-700 dark:text-slate-300"
+          <p className="mt-5 border-l-2 border-primary pl-4 text-sm font-medium leading-6 text-slate-200">
+            {project.result}
+          </p>
+
+          <dl className="mt-6 grid gap-3 border-y border-white/10 py-4 text-sm sm:grid-cols-2">
+            <div>
+              <dt className="font-mono text-[0.7rem] font-semibold uppercase tracking-wide text-slate-400">
+                Role
+              </dt>
+              <dd className="mt-1 font-medium leading-5 text-slate-100">{project.role}</dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[0.7rem] font-semibold uppercase tracking-wide text-slate-400">
+                Focus
+              </dt>
+              <dd className="mt-1 font-medium leading-5 text-slate-100">{project.focus}</dd>
+            </div>
+          </dl>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {project.tech.slice(0, 5).map((tech) => (
+              <span
+                key={tech}
+                className="rounded-full border border-white/15 bg-white/5 px-2.5 py-1 font-mono text-xs font-medium text-slate-300"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-7 grid gap-3 min-[420px]:flex min-[420px]:flex-wrap">
+            <button
+              type="button"
+              onClick={onView}
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-contrast transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary min-[420px]:w-auto"
             >
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-950 dark:bg-white" />
-              <span>{detail}</span>
-            </li>
-          ))}
-        </ul>
+              Open details
+              <FaArrowRight size={13} aria-hidden="true" />
+            </button>
 
-        <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
-          <MetaItem label="Role" value={project.role} />
-          <MetaItem label="Focus" value={project.focus} />
-        </dl>
-
-        <div className="mt-6 grid gap-3 min-[420px]:flex min-[420px]:flex-wrap">
-          <button
-            type="button"
-            onClick={onView}
-            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-primary-contrast transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 min-[420px]:w-auto"
-          >
-            Open details
-            <FaArrowRight size={13} aria-hidden="true" />
-          </button>
-
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md border border-slate-950/15 px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-950/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:text-white dark:hover:bg-white/10 dark:focus-visible:ring-offset-slate-950 min-[420px]:w-auto"
-            >
-              <FaExternalLinkAlt size={13} aria-hidden="true" />
-              Open live demo
-            </a>
-          )}
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md border border-white/20 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary min-[420px]:w-auto"
+              >
+                <FaExternalLinkAlt size={13} aria-hidden="true" />
+                Open live demo
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </article>
   );
 }
 
-function ProjectCard({ project, onView }) {
-  const visibleTech = project.tech.slice(0, 4);
-  const remainingTech = project.tech.length - visibleTech.length;
-
+function ProjectRow({ project, number, onView }) {
   return (
-    <article className="motion-card group flex flex-col overflow-hidden rounded-lg border border-slate-950/10 bg-white/88 transition-colors hover:border-slate-950/25 dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25">
-      <div className="relative h-52 bg-slate-950 sm:h-56">
-        <CardImage project={project} />
-      </div>
+    <article className="group relative border-t border-slate-950/10 py-5 transition-colors last:border-b hover:bg-slate-950/[0.03] dark:border-white/10 dark:hover:bg-white/5 sm:py-6">
+      <div className="grid items-center gap-4 sm:grid-cols-[2.5rem_11rem_minmax(0,1fr)_auto] sm:gap-6">
+        <span
+          aria-hidden="true"
+          className="hidden font-mono text-sm text-slate-400 transition-colors group-hover:text-primary dark:text-slate-500 sm:block"
+        >
+          {number}
+        </span>
 
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <Badge className={categoryTone[project.category]}>{project.category}</Badge>
-          <Badge>{project.status}</Badge>
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-md border border-slate-950/10 bg-slate-950 dark:border-white/10 sm:w-44">
+          <ThumbImage project={project} />
         </div>
 
-        <div className="mb-4">
-          <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
-            {project.subtitle}
-          </p>
-          <h2 className="mt-1 text-2xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white">
-            {project.title}
-          </h2>
-        </div>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <Badge className={categoryTone[project.category]}>{project.category}</Badge>
+            <StatusText status={project.status} />
+          </div>
 
-        <p className="text-sm leading-6 text-slate-700 [text-wrap:pretty] dark:text-slate-300">
-          {project.description}
-        </p>
-
-        <dl className="mt-5 grid gap-3 border-y border-slate-950/10 py-4 text-sm dark:border-white/10 sm:grid-cols-2">
-          <MetaItem label="Role" value={project.role} />
-          <MetaItem label="Focus" value={project.focus} />
-        </dl>
-
-        <p className="mt-4 text-sm font-medium leading-6 text-slate-900 dark:text-slate-100">
-          {project.result}
-        </p>
-
-        <div className="mt-5 flex flex-wrap gap-2">
-          {visibleTech.map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full border border-slate-950/10 bg-slate-50 px-2.5 py-1 font-mono text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
+          <h3 className="mt-2 text-xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-2xl">
+            <button
+              type="button"
+              onClick={onView}
+              className="rounded-sm text-left transition-colors after:absolute after:inset-0 after:content-[''] group-hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              {tech}
-            </span>
-          ))}
-          {remainingTech > 0 && (
-            <span className="rounded-full border border-slate-950/10 px-2.5 py-1 font-mono text-xs font-medium text-slate-600 dark:border-white/10 dark:text-slate-400">
-              +{remainingTech} more
-            </span>
-          )}
+              {project.title}
+            </button>
+          </h3>
+
+          <p className="mt-1 text-sm leading-6 text-slate-600 [text-wrap:pretty] dark:text-slate-400">
+            {project.result}
+          </p>
         </div>
 
-        <div className="mt-auto grid gap-3 pt-6 min-[420px]:flex min-[420px]:flex-wrap">
-          <button
-            type="button"
-            onClick={onView}
-            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-primary-contrast transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 min-[420px]:w-auto"
-          >
-            Open details
-            <FaArrowRight size={13} aria-hidden="true" />
-          </button>
-
+        <div className="flex items-center gap-2 justify-self-end">
           {project.liveUrl && (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md border border-slate-950/15 px-4 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-950/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:text-white dark:hover:bg-white/10 dark:focus-visible:ring-offset-slate-950 min-[420px]:w-auto"
+              aria-label={`Open live app for ${project.title}`}
+              className="relative z-10 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-slate-950/10 text-slate-600 transition hover:border-primary hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-white/10 dark:text-slate-300"
             >
-              <FaExternalLinkAlt size={13} aria-hidden="true" />
-              Open live app
+              <FaExternalLinkAlt size={14} aria-hidden="true" />
             </a>
           )}
+          <span
+            aria-hidden="true"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-950/10 text-slate-500 transition-all group-hover:border-primary group-hover:bg-primary group-hover:text-primary-contrast dark:border-white/10 dark:text-slate-400"
+          >
+            <FaArrowRight
+              size={14}
+              className="transition-transform group-hover:-rotate-45"
+            />
+          </span>
         </div>
       </div>
     </article>
+  );
+}
+
+function StatusText({ status, dark = false }) {
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 font-mono text-[0.7rem] font-semibold uppercase tracking-wide ${
+        dark ? "text-slate-400" : "text-slate-500 dark:text-slate-400"
+      }`}
+    >
+      <span
+        className={`h-1.5 w-1.5 rounded-full ${statusDotTone[status] || "bg-slate-400"}`}
+        aria-hidden="true"
+      />
+      {status}
+    </span>
   );
 }
 
@@ -682,7 +709,7 @@ function MetaItem({ label, value }) {
   );
 }
 
-function CardImage({ project, priority = false }) {
+function ThumbImage({ project, priority = false }) {
   const [imgError, setImgError] = useState(false);
 
   if (!project.image || imgError) {
@@ -696,15 +723,15 @@ function CardImage({ project, priority = false }) {
   }
 
   const sizes = priority
-    ? "(min-width: 1280px) 672px, (min-width: 1024px) 54vw, (min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)"
-    : "(min-width: 1280px) 592px, (min-width: 1024px) 48vw, (min-width: 768px) calc((100vw - 68px) / 2), calc(100vw - 32px)";
+    ? "(min-width: 1024px) 50vw, calc(100vw - 32px)"
+    : "(min-width: 640px) 176px, calc(100vw - 32px)";
 
   return (
     <Image
       src={project.image}
       alt={project.imageAlt || `${project.title} project preview`}
       fill
-      className="object-contain p-2"
+      className="object-contain p-2 transition-transform duration-300 group-hover:scale-[1.03]"
       sizes={sizes}
       priority={priority}
       quality={78}
