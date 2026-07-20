@@ -2,6 +2,14 @@
 
 AI agents must read this file before changing the project and append an entry after completing their work. Keep this history append-only and never include secrets, credentials, private customer data, or sensitive environment values.
 
+## 2026-07-20 - Expand Home with experience and certifications
+
+- **Goal:** Make the Home page give visitors a fuller picture of Jerry's work history, education, certifications, and technical range without requiring them to open the About page first.
+- **Changes:** Updated `pages/index.js` with a two-role experience timeline, a certifications and Seneca education panel, an expanded stack list, and clearer language in the “How I build” section. The existing navigation, featured projects, contact calls to action, theme behavior, and project data are unchanged.
+- **Important files:** `pages/index.js` and `AI_CHANGELOG.md`.
+- **Verification:** `git diff --check` passed before release preparation. Full clean-install, lint, and production-build verification are delegated to the repository's GitHub Actions workflow because the checkout remains iCloud-backed.
+- **Limitations and follow-up:** The new Home sections still require production browser verification at desktop and mobile widths in light and dark themes after Vercel completes the deployment.
+
 ## 2026-07-17 - Deep redesign of the Projects page
 
 - **Goal:** Replace the card-grid Projects page with a visually distinctive layout after the first redesign pass was judged too close to the original; remove the "Current focus / AI" header panel; keep all project thumbnails prominent.
@@ -76,3 +84,11 @@ AI agents must read this file before changing the project and append an entry af
 - **Important files:** `pages/project.js` and `AI_CHANGELOG.md`.
 - **Verification:** `git diff --check` passed locally. GitHub Actions passed `npm ci`, `npm run lint`, and `npm run build` on both the branch-push run and pull-request run for commit `236e03c`. Both Vercel preview deployments attached to pull request #5 completed successfully.
 - **Limitations and follow-up:** The public production route still requires live verification after merge, including the dark featured exhibit, numbered rows, stretched row buttons, external-link click layer, filters, modal focus handling, images, and responsive overflow.
+
+## 2026-07-20 - Verify the Home experience expansion on GitHub
+
+- **Goal:** Verify the expanded Home page before releasing it to production.
+- **Changes:** Moved the update onto `codex/expand-home-experience`, committed only `pages/index.js` and its change-log entry, and opened GitHub pull request #6. No dependencies, project data, images, navigation, or deployment configuration were changed during release preparation.
+- **Important files:** `pages/index.js` and `AI_CHANGELOG.md`.
+- **Verification:** `git diff --check` passed locally. GitHub Actions passed `npm ci`, `npm run lint`, and `npm run build` on both the branch-push run and pull-request run for commit `98ee29a`. Both Vercel preview deployments attached to pull request #6 completed successfully.
+- **Limitations and follow-up:** The public Home page still requires live verification after merge, including the experience timeline, certifications panel, theme contrast, images, and responsive overflow.

@@ -45,6 +45,28 @@ const featuredProjects = [
   },
 ];
 
+const experience = [
+  {
+    period: "Current",
+    role: "AI Engineer Intern",
+    org: "YarlMetal Fabrications Inc.",
+    summary:
+      "Designing and building AI-powered tools that turn manual operations workflows into structured, reviewable, automated software.",
+  },
+  {
+    period: "Previously",
+    role: "Junior IT Support Helpdesk (Contract)",
+    org: "City of Markham",
+    summary:
+      "Documented technical procedures, gathered requirements from cross-functional teams, and coordinated system deployments.",
+  },
+];
+
+const certifications = [
+  "Harvard — Introduction to AI with Python",
+  "Data Visualization with Power BI",
+];
+
 const stackChips = [
   "Python",
   "JavaScript / TypeScript",
@@ -52,8 +74,12 @@ const stackChips = [
   "Next.js",
   "Node.js",
   "FastAPI",
+  "Django",
   "MySQL",
   "MongoDB",
+  "Git",
+  "Linux",
+  "AWS",
 ];
 
 export default function Home() {
@@ -231,6 +257,70 @@ export default function Home() {
           </div>
         </section>
 
+        {/* EXPERIENCE + CERTIFICATIONS */}
+        <section className="border-t border-slate-950/10 dark:border-white/10">
+          <div className="safe-x mx-auto grid max-w-7xl gap-10 py-16 lg:grid-cols-[minmax(0,1fr)_20rem]">
+            <div>
+              <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+                Experience
+              </p>
+              <h2 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-3xl">
+                Where I&apos;ve worked
+              </h2>
+
+              <div className="mt-6">
+                {experience.map((job) => (
+                  <article
+                    key={job.role}
+                    className="grid gap-2 border-t border-slate-950/10 py-5 first:border-t-0 first:pt-0 dark:border-white/10 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-6"
+                  >
+                    <p className="font-mono text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 sm:pt-1">
+                      {job.period}
+                    </p>
+                    <div>
+                      <h3 className="text-base font-semibold tracking-tight text-slate-950 dark:text-white">
+                        {job.role} · {job.org}
+                      </h3>
+                      <p className="mt-1.5 max-w-2xl text-sm leading-6 text-slate-700 [text-wrap:pretty] dark:text-slate-300">
+                        {job.summary}
+                      </p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <Link
+                href="/about"
+                className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-semibold text-primary transition hover:text-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                More about me
+                <FaArrowRight size={13} aria-hidden="true" />
+              </Link>
+            </div>
+
+            <aside className="h-fit rounded-lg border border-slate-950/10 bg-white/88 p-5 dark:border-white/10 dark:bg-slate-950/72">
+              <h2 className="font-mono text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                Certifications
+              </h2>
+              <ul className="mt-3 space-y-3">
+                {certifications.map((cert) => (
+                  <li
+                    key={cert}
+                    className="flex gap-3 text-sm leading-6 text-slate-700 dark:text-slate-300"
+                  >
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-950 dark:bg-white" />
+                    <span>{cert}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 border-t border-slate-950/10 pt-4 text-sm leading-6 text-slate-700 dark:border-white/10 dark:text-slate-300">
+                Honours Bachelor of Technology — Software Development, Seneca
+                Polytechnic. Expected August 2027.
+              </p>
+            </aside>
+          </div>
+        </section>
+
         {/* HOW I BUILD */}
         <section className="border-t border-slate-950/10 dark:border-white/10">
           <div className="safe-x mx-auto grid max-w-7xl gap-8 py-16 lg:grid-cols-[minmax(0,1fr)_22rem]">
@@ -244,8 +334,10 @@ export default function Home() {
               <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700 [text-wrap:pretty] dark:text-slate-300">
                 I use structured prompts, clear interfaces, and tools like
                 GitHub Copilot, Claude, and Cursor to move faster — while
-                keeping the code readable, verified, and owned by me. The goal
-                is always the same: systems that make work easier to repeat.
+                keeping the code readable, verified, and owned by me. I care
+                about writing code that actually works, not just code that
+                looks good in a README. The goal is always the same: systems
+                that make work easier to repeat.
               </p>
               <Link
                 href="/skills"
