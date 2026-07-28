@@ -92,3 +92,11 @@ AI agents must read this file before changing the project and append an entry af
 - **Important files:** `pages/index.js` and `AI_CHANGELOG.md`.
 - **Verification:** `git diff --check` passed locally. GitHub Actions passed `npm ci`, `npm run lint`, and `npm run build` on both the branch-push run and pull-request run for commit `98ee29a`. Both Vercel preview deployments attached to pull request #6 completed successfully.
 - **Limitations and follow-up:** The public Home page still requires live verification after merge, including the experience timeline, certifications panel, theme contrast, images, and responsive overflow.
+
+## 2026-07-28 - Add production engineering skills
+
+- **Goal:** Update the portfolio Skills page to reflect the production engineering work completed in Estimate Cockpit, including CI/CD and release practices that were not represented before.
+- **Changes:** Added PostgreSQL / Supabase, CI/CD (GitHub Actions), Production Release Engineering, Automated Testing & Quality Gates, and Application Security. Reorganized the list into Databases, Cloud & Delivery, Quality & Security, and Developer Tools so delivery and production skills are easy to find. Updated the Skills-page metadata to include the added areas.
+- **Important files:** `pages/skills.js` and `AI_CHANGELOG.md`.
+- **Verification:** `npm run lint`, `npm run build`, and `git diff --check` passed locally.
+- **Limitations and follow-up:** The descriptions deliberately summarize reusable practices and do not expose project credentials, customer data, or deployment-specific configuration. A live visual check can be performed after the portfolio's next deployment.

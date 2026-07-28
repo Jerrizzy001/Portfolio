@@ -16,10 +16,22 @@ import {
   SiMysql,
   SiLinux,
   SiGithub,
+  SiGithubactions,
   SiPostman,
+  SiSupabase,
 } from 'react-icons/si';
 
-import { FaAws, FaBrain, FaCode, FaProjectDiagram, FaRobot, FaServer, FaTools } from 'react-icons/fa';
+import {
+  FaAws,
+  FaBrain,
+  FaCode,
+  FaProjectDiagram,
+  FaRobot,
+  FaServer,
+  FaShieldAlt,
+  FaTools,
+  FaVial,
+} from 'react-icons/fa';
 
 const skillsData = [
   {
@@ -100,6 +112,13 @@ const skillsData = [
     Icon: SiMysql,
   },
   {
+    id: 'postgres-supabase',
+    name: 'PostgreSQL / Supabase',
+    description:
+      'I use PostgreSQL and Supabase for relational data, private file storage, row-level security, forward migrations, and safe production schema rehearsals.',
+    Icon: SiSupabase,
+  },
+  {
     id: 'js',
     name: 'JavaScript',
     description:
@@ -129,6 +148,34 @@ const skillsData = [
     description:
       'I use GitHub for repositories, issues, pull requests, and deployment-linked workflows.',
     Icon: SiGithub,
+  },
+  {
+    id: 'ci-cd',
+    name: 'CI/CD (GitHub Actions)',
+    description:
+      'I build CI/CD pipelines that install locked dependencies, run lint, type, build, and test gates, scan for secrets, and publish release evidence.',
+    Icon: SiGithubactions,
+  },
+  {
+    id: 'production-release-engineering',
+    name: 'Production Release Engineering',
+    description:
+      'I promote applications through verified builds, deployment provenance, health and readiness checks, and clear rollback anchors across Vercel and Render services.',
+    Icon: FaServer,
+  },
+  {
+    id: 'automated-testing',
+    name: 'Automated Testing & Quality Gates',
+    description:
+      'I combine unit, integration, browser, type, and production-build checks so changes are verified before they move to production.',
+    Icon: FaVial,
+  },
+  {
+    id: 'application-security',
+    name: 'Application Security',
+    description:
+      'I keep secrets out of code and logs, use least-privilege service boundaries, and protect production data with authorization, audit trails, and safe retention rules.',
+    Icon: FaShieldAlt,
   },
   {
     id: 'linux',
@@ -186,12 +233,22 @@ const skillCategories = [
   {
     label: 'Databases',
     color: 'text-slate-500 dark:text-slate-400',
-    ids: ['mongodb', 'sql'],
+    ids: ['mongodb', 'sql', 'postgres-supabase'],
   },
   {
-    label: 'Tools',
+    label: 'Cloud & Delivery',
     color: 'text-slate-500 dark:text-slate-400',
-    ids: ['git', 'github', 'aws', 'linux', 'postman', 'vscode'],
+    ids: ['github', 'ci-cd', 'production-release-engineering', 'aws', 'linux'],
+  },
+  {
+    label: 'Quality & Security',
+    color: 'text-slate-500 dark:text-slate-400',
+    ids: ['automated-testing', 'application-security'],
+  },
+  {
+    label: 'Developer Tools',
+    color: 'text-slate-500 dark:text-slate-400',
+    ids: ['git', 'postman', 'vscode'],
   },
 ];
 
@@ -205,7 +262,7 @@ export default function Skills() {
     <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
       <PageMeta
         title="Technical Skills"
-        description="Jerry Nwachi's technical skills across AI engineering, prompt engineering, React, Next.js, Python, Node.js, databases, APIs, GitHub, Linux, and developer tooling."
+        description="Jerry Nwachi's technical skills across AI engineering, full-stack development, PostgreSQL and Supabase, CI/CD, production release engineering, testing, security, and developer tooling."
         path="/skills"
         image="/projects/portfolio.png"
       />
