@@ -1,204 +1,49 @@
-import { useState, useSyncExternalStore } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import { useTheme } from 'next-themes';
-import { MdDarkMode, MdLightMode } from 'react-icons/md';
+import { FiMenu, FiX } from 'react-icons/fi';
 
-const subscribe = () => () => {};
-const getClientSnapshot = () => true;
-const getServerSnapshot = () => false;
+const links = [
+  { href: '/work', label: 'Work' },
+  { href: '/services', label: 'Services' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
 
-function useMounted() {
-  return useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
-}
-
-export default function Navbar() {
+export default function Navbar({ overlay = false }) {
   const [isOpen, setIsOpen] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
-  const mounted = useMounted();
-  const router = useRouter();
+  const menuButton = useRef(null);
+  const { asPath } = useRouter();
+  const isCurrent = (href) => asPath === href || asPath.startsWith(`${href}/`);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
-  const isDark = mounted && resolvedTheme === 'dark';
-  const toggleTheme = () => setTheme(isDark ? 'light' : 'dark');
-  const themeTitle = isDark ? 'Switch to light mode' : 'Switch to dark mode';
-  const isCurrent = (href) => router.pathname === href;
-  const themeIcon = mounted ? (
-    isDark ? <MdLightMode size={20} /> : <MdDarkMode size={20} />
-  ) : (
-    <span className="block h-5 w-5" aria-hidden="true" />
-  );
+  function handleKeyDown(event) {
+    if (event.key === 'Escape' && isOpen) {
+      setIsOpen(false);
+      menuButton.current?.focus();
+    }
+  }
 
   return (
-    <header className="site-nav fixed inset-x-0 top-0 surface-panel backdrop-blur-md border-b shadow-sm z-50 transition-colors duration-300">
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
-      <nav aria-label="Primary">
-        <div className="safe-x max-w-7xl mx-auto py-4 flex justify-between items-center">
-          <Link href="/" className="flex min-h-11 items-center gap-2 group">
-            <span className="font-display text-xl font-extrabold text-gray-950 dark:text-white tracking-tight">
-              Jerrizzy
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6 text-slate-700 dark:text-white font-medium">
-            <Link
-              href="/"
-              aria-current={isCurrent('/') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-primary transition ${
-                isCurrent('/') ? 'text-primary' : ''
-              }`}
-            >
-              Home
-            </Link>
-
-            <Link
-              href="/project"
-              aria-current={isCurrent('/project') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-primary transition ${
-                isCurrent('/project') ? 'text-primary' : ''
-              }`}
-            >
-              Projects
-            </Link>
-
-            <Link
-              href="/skills"
-              aria-current={isCurrent('/skills') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-primary transition ${
-                isCurrent('/skills') ? 'text-primary' : ''
-              }`}
-            >
-              Skills
-            </Link>
-
-            <Link
-              href="/about"
-              aria-current={isCurrent('/about') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-primary transition ${
-                isCurrent('/about') ? 'text-primary' : ''
-              }`}
-            >
-              About
-            </Link>
-
-            <Link
-              href="/contact"
-              aria-current={isCurrent('/contact') ? 'page' : undefined}
-              className={`inline-flex min-h-11 items-center px-1 hover:text-primary transition ${
-                isCurrent('/contact') ? 'text-primary' : ''
-              }`}
-            >
-              Contact
-            </Link>
-
-            {/* Theme Toggle */}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="ml-4 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition disabled:opacity-70"
-              aria-label={themeTitle}
-              aria-pressed={isDark}
-              title={themeTitle}
-              disabled={!mounted}
-            >
-              {themeIcon}
-            </button>
-          </div>
-
-          {/* Mobile Hamburger */}
-          <div className="md:hidden flex items-center space-x-2">
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition disabled:opacity-70"
-              aria-label={themeTitle}
-              aria-pressed={isDark}
-              title={themeTitle}
-              disabled={!mounted}
-            >
-              {themeIcon}
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleMenu}
-              aria-controls="primary-menu"
-              aria-label={isOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={isOpen}
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-            >
-              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-            </button>
-          </div>
+    <header className={`site-nav${overlay ? ' site-nav--overlay' : ''}`} onKeyDown={handleKeyDown}>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <nav className="page-container nav-inner" aria-label="Primary">
+        <Link href="/" className="brand-lockup" onClick={() => setIsOpen(false)} aria-label="Jerry Nwachi — home">
+          <span>Jerry Nwachi</span>
+          <span className="brand-subtitle">Jerrizzy</span>
+        </Link>
+        <div className="desktop-nav">
+          {links.map(({ href, label }) => (
+            <Link key={href} href={href} className={href === '/contact' ? 'nav-contact' : 'nav-link'} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</Link>
+          ))}
         </div>
-
-        {/* Mobile Menu */}
+        <button ref={menuButton} className="mobile-menu-button" type="button" onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? 'Close menu' : 'Open menu'} aria-controls="primary-menu" aria-expanded={isOpen}>
+          {isOpen ? <FiX size={24} aria-hidden="true" /> : <FiMenu size={24} aria-hidden="true" />}
+        </button>
         {isOpen && (
-          <div
-            id="primary-menu"
-            className="safe-x md:hidden surface-panel backdrop-blur-md border-t pb-4 flex flex-col space-y-2 text-slate-800 dark:text-white"
-          >
-            <Link
-              href="/"
-              onClick={closeMenu}
-              aria-current={isCurrent('/') ? 'page' : undefined}
-              className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/') ? 'text-primary font-semibold' : ''
-              }`}
-            >
-              Home
-            </Link>
-
-            <Link
-              href="/project"
-              onClick={closeMenu}
-              aria-current={isCurrent('/project') ? 'page' : undefined}
-              className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/project') ? 'text-primary font-semibold' : ''
-              }`}
-            >
-              Projects
-            </Link>
-
-            <Link
-              href="/skills"
-              onClick={closeMenu}
-              aria-current={isCurrent('/skills') ? 'page' : undefined}
-              className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/skills') ? 'text-primary font-semibold' : ''
-              }`}
-            >
-              Skills
-            </Link>
-
-            <Link
-              href="/about"
-              onClick={closeMenu}
-              aria-current={isCurrent('/about') ? 'page' : undefined}
-              className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/about') ? 'text-primary font-semibold' : ''
-              }`}
-            >
-              About
-            </Link>
-
-            <Link
-              href="/contact"
-              onClick={closeMenu}
-              aria-current={isCurrent('/contact') ? 'page' : undefined}
-              className={`flex min-h-11 items-center py-2 ${
-                isCurrent('/contact')
-                  ? 'text-primary font-semibold'
-                  : ''
-              }`}
-            >
-              Contact
-            </Link>
+          <div className="mobile-nav" id="primary-menu">
+            {links.map(({ href, label }) => (
+              <Link key={href} href={href} aria-current={isCurrent(href) ? 'page' : undefined} onClick={() => setIsOpen(false)}>{label}</Link>
+            ))}
           </div>
         )}
       </nav>

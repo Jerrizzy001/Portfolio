@@ -2,7 +2,7 @@
   "name": "jerrizzy-portfolio",
   "version": "0.1.0",
   "private": true,
-  "description": "Portfolio site for Jerry Nwachi, an AI Engineer and software development student building web apps, data workflows, and automation systems.",
+  "description": "Custom software, websites, and connected workflows by Jerry Nwachi.",
   "author": "Jerry Nwachi",
   "license": "UNLICENSED",
   "homepage": "https://www.jerrizzy.ca",
@@ -17,7 +17,8 @@
     "dev": "NEXT_TELEMETRY_DISABLED=1 next dev",
     "build": "NEXT_TELEMETRY_DISABLED=1 next build",
     "start": "next start",
-    "lint": "eslint pages components hooks eslint.config.mjs postcss.config.mjs --max-warnings=0"
+    "lint": "eslint pages components hooks content lib tests eslint.config.mjs postcss.config.mjs --max-warnings=0",
+    "test": "node --test tests/*.test.mjs tests/demos/*.test.mjs"
   },
   "dependencies": {
     "next": "16.2.7",

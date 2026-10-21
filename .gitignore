@@ -46,3 +46,7 @@ next-env.d.ts
 .cursor/
 .impeccable/
 PRODUCT.md
+
+# Local review evidence
+.design/
+design-qa.md

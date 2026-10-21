@@ -1,0 +1,3 @@
+import Link from 'next/link';
+import SiteLayout from '../components/SiteLayout';
+export default function NotFound(){return <SiteLayout title="Page not found" path="/404"><div className="page-container"><header className="page-intro"><p className="section-label">PAGE NOT FOUND</p><h1>Let’s get you back to the work.</h1><p>This page may have moved. Explore the case studies or tell me what you’re looking for.</p><div className="hero-actions"><Link className="button-primary" href="/work">Explore my work</Link><Link className="button-secondary" href="/contact">Contact Jerry</Link></div></header></div></SiteLayout>;}

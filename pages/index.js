@@ -1,402 +1,82 @@
-import Image from "next/image";
-import Link from "next/link";
-import { FaArrowRight, FaGithub, FaLinkedin } from "react-icons/fa";
-import SignalField from "../components/SignalField";
-import Navbar from "../components/Navbar";
-import PageMeta from "../components/PageMeta";
+import Image from 'next/image';
+import Link from 'next/link';
+import { FiArrowRight } from 'react-icons/fi';
+import Navbar from '../components/Navbar';
+import PageMeta from '../components/PageMeta';
+import EstimatorDemo from '../components/demos/EstimatorDemo';
+import { featuredProjects } from '../content/projects';
 
-const glanceItems = [
-  {
-    label: "Current role",
-    value: "AI Engineer Intern at YarlMetal Fabrications Inc.",
-  },
-  {
-    label: "Education",
-    value: "Honours Bachelor of Technology, Seneca Polytechnic — expected Aug 2027",
-  },
-  {
-    label: "Focus",
-    value: "AI workflow automation, full-stack web apps, and data systems",
-  },
-  {
-    label: "Previously",
-    value: "Junior IT Support Helpdesk (contract), City of Markham",
-  },
-];
+const workHeadlines = {
+  estimator: 'A clearer path from request to estimate.',
+  'email-to-erp': 'Turn incoming requests into useful records.',
+  'sop-converter': 'Give everyday procedures a consistent format.',
+};
 
-const featuredProjects = [
-  {
-    title: "Email-to-ERP Automation",
-    category: "Automation",
-    result:
-      "Turns a quote-request email into a clean business record someone can review.",
-  },
-  {
-    title: "JARVIS",
-    category: "AI Systems",
-    result:
-      "A bedroom AI assistant that listens, helps with projects, and asks before it acts.",
-  },
-  {
-    title: "Taskflow",
-    category: "Mobile",
-    result:
-      "A goal-planning app that breaks overwhelming goals into steps you can start today.",
-  },
-];
-
-const experience = [
-  {
-    period: "Current",
-    role: "AI Engineer Intern",
-    org: "YarlMetal Fabrications Inc.",
-    summary:
-      "Designing and building AI-powered tools that turn manual operations workflows into structured, reviewable, automated software.",
-  },
-  {
-    period: "Previously",
-    role: "Junior IT Support Helpdesk (Contract)",
-    org: "City of Markham",
-    summary:
-      "Documented technical procedures, gathered requirements from cross-functional teams, and coordinated system deployments.",
-  },
-];
-
-const certifications = [
-  "Harvard — Introduction to AI with Python",
-  "Data Visualization with Power BI",
-];
-
-const stackChips = [
-  "Python",
-  "JavaScript / TypeScript",
-  "React",
-  "Next.js",
-  "Node.js",
-  "FastAPI",
-  "Django",
-  "MySQL",
-  "MongoDB",
-  "Git",
-  "Linux",
-  "AWS",
-];
+const selectedWork = featuredProjects.map((project, index) => ({
+  ...project,
+  number: String(index + 1).padStart(2, '0'),
+  headline: workHeadlines[project.slug],
+  href: `/work/${project.slug}`,
+}));
 
 export default function Home() {
   return (
-    <div className="min-h-screen page-shell text-black dark:text-white transition-colors duration-300">
-      <PageMeta
-        title="Jerry Nwachi | AI Engineer"
-        description="Jerry Nwachi is an AI Engineer Intern at YarlMetal Fabrications and a Software Development student at Seneca Polytechnic in Toronto, building AI-powered automation, web apps, and data systems."
-        path="/"
-        image="/profile.jpg"
-      />
-      <Navbar />
-
+    <div className="home-page">
+      <PageMeta title="Jerry Nwachi | Custom Software, Websites & Automation" description="Custom software, websites, and connected workflows built around your business. Explore Jerry Nwachi’s work and discuss a practical first project." path="/" />
+      <Navbar overlay />
       <main id="main-content">
-        {/* HERO */}
-        <section className="relative isolate overflow-hidden">
-          <SignalField density="dense" className="z-0" />
-
-          <div className="safe-x relative z-10 mx-auto grid max-w-7xl gap-10 pb-16 pt-28 sm:pt-32 lg:min-h-[calc(100svh-1px)] lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-center lg:gap-14 lg:pb-20">
-            <div>
-              <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
-                AI Engineer · Toronto, ON
-              </p>
-
-              <h1 className="text-4xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white sm:text-5xl lg:text-6xl">
-                Jerry Nwachi
-              </h1>
-
-              <p className="mt-4 max-w-2xl text-lg font-medium leading-7 text-slate-900 dark:text-slate-100">
-                AI Engineer Intern at YarlMetal Fabrications · Software
-                Development student at Seneca Polytechnic
-              </p>
-
-              <p className="mt-3 max-w-2xl text-base leading-7 text-slate-700 [text-wrap:pretty] dark:text-slate-300">
-                I build practical tools with AI-assisted workflows — web apps,
-                data systems, and automation that turn manual work into
-                structured, reviewable software.
-              </p>
-
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Link
-                  href="/project"
-                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-semibold text-primary-contrast transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950"
-                >
-                  View projects
-                  <FaArrowRight size={13} aria-hidden="true" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-slate-950/15 px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-950/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-white/15 dark:text-white dark:hover:bg-white/10 dark:focus-visible:ring-offset-slate-950"
-                >
-                  Contact me
-                </Link>
-
-                <div className="flex items-center gap-1">
-                  <a
-                    href="https://github.com/Jerrizzy001"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="GitHub"
-                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-slate-600 transition hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:text-slate-300 dark:hover:text-white"
-                  >
-                    <FaGithub size={22} />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/jerry-nwachi-398a93258"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="LinkedIn"
-                    className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-slate-600 transition hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:text-slate-300"
-                  >
-                    <FaLinkedin size={22} />
-                  </a>
-                </div>
-              </div>
+        <section className="home-hero" aria-labelledby="hero-title">
+          <div className="hero-heading page-container">
+            <div className="hero-byline">
+              <Image src="/jerry-nwachi.jpg" alt="Jerry Nwachi" width={56} height={56} className="hero-portrait" priority />
+              <p>Independent developer <span aria-hidden="true">·</span> Toronto <span aria-hidden="true">·</span> Working remotely worldwide</p>
             </div>
-
-            {/* Profile + current status */}
-            <aside className="w-full max-w-sm rounded-lg border border-slate-950/10 bg-white/88 p-5 shadow-sm dark:border-white/10 dark:bg-slate-950/72 lg:justify-self-end">
-              <div className="relative mb-5 aspect-square w-full overflow-hidden rounded-md bg-slate-950">
-                <Image
-                  src="/profile.jpg"
-                  alt="Portrait of Jerry Nwachi"
-                  fill
-                  sizes="(min-width: 1024px) 320px, (min-width: 640px) 384px, calc(100vw - 72px)"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-
-              <h2 className="font-mono text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
-                Currently
-              </h2>
-              <dl className="mt-3 space-y-3">
-                <MetaItem
-                  label="Role"
-                  value="AI Engineer Intern · YarlMetal Fabrications Inc."
-                />
-                <MetaItem
-                  label="Studying"
-                  value="Software Development · Seneca Polytechnic"
-                />
-                <MetaItem label="Based in" value="Toronto, Ontario" />
-              </dl>
-            </aside>
+            <h1 id="hero-title">Turn a complicated process<br className="hero-line-break" /> into a <span>useful tool.</span></h1>
+            <p className="hero-description">Custom software, websites, and connected workflows—built around your business.</p>
+            <div className="hero-actions">
+              <Link href="/contact" className="button-primary">Discuss a project <FiArrowRight aria-hidden="true" /></Link>
+              <Link href="/work" className="hero-work-link">Explore my work <FiArrowRight aria-hidden="true" /></Link>
+            </div>
           </div>
+          <div className="hero-demo page-container"><EstimatorDemo /></div>
         </section>
 
-        {/* AT A GLANCE */}
-        <section
-          aria-label="At a glance"
-          className="border-y border-slate-950/10 dark:border-white/10"
-        >
-          <dl className="safe-x mx-auto grid max-w-7xl gap-6 py-8 sm:grid-cols-2 lg:grid-cols-4">
-            {glanceItems.map((item) => (
-              <div key={item.label}>
-                <dt className="font-mono text-[0.7rem] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-                  {item.label}
-                </dt>
-                <dd className="mt-2 text-sm font-medium leading-6 text-slate-900 dark:text-slate-100">
-                  {item.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
+        <section className="home-capabilities page-container" aria-labelledby="capabilities-title">
+          <div className="capabilities-copy">
+            <h2 id="capabilities-title">Tools that fit your team.<br /><span>Websites that serve your customers.</span></h2>
+            <p>From internal tools and automations to customer-facing websites,<br className="desktop-break" /> I help small businesses work more smoothly with practical, reliable software.</p>
+            <div className="capabilities-links">
+              <Link href="/work/email-to-erp" className="text-link">Email-to-ERP workflow <FiArrowRight aria-hidden="true" /></Link>
+              <Link href="/work/sop-converter" className="text-link">SOP document converter <FiArrowRight aria-hidden="true" /></Link>
+            </div>
+          </div>
+          <div className="capabilities-art"><Image src="/assets/workflow-illustration.webp" alt="" fill sizes="(max-width: 760px) 80vw, 360px" /></div>
         </section>
 
-        {/* SELECTED WORK */}
-        <section className="safe-x mx-auto max-w-7xl py-16">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
-                Selected work
-              </p>
-              <h2 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-3xl">
-                What I work on
-              </h2>
-            </div>
-
-            <Link
-              href="/project"
-              className="inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-semibold text-primary transition hover:text-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            >
-              All projects
-              <FaArrowRight size={13} aria-hidden="true" />
-            </Link>
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <Link
-                key={project.title}
-                href="/project"
-                className="motion-card group flex flex-col rounded-lg border border-slate-950/10 bg-white/88 p-5 transition-colors hover:border-slate-950/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:border-white/10 dark:bg-slate-950/72 dark:hover:border-white/25"
-              >
-                <span className="max-w-max rounded-full border border-slate-950/10 bg-slate-50 px-2.5 py-1 font-mono text-[0.7rem] font-semibold uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
-                  {project.category}
-                </span>
-                <h3 className="mt-3 text-lg font-semibold tracking-tight text-slate-950 dark:text-white">
-                  {project.title}
-                </h3>
-                <p className="mt-2 flex-1 text-sm leading-6 text-slate-700 [text-wrap:pretty] dark:text-slate-300">
-                  {project.result}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                  Open projects
-                  <FaArrowRight
-                    size={12}
-                    aria-hidden="true"
-                    className="transition-transform group-hover:translate-x-0.5"
-                  />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* EXPERIENCE + CERTIFICATIONS */}
-        <section className="border-t border-slate-950/10 dark:border-white/10">
-          <div className="safe-x mx-auto grid max-w-7xl gap-10 py-16 lg:grid-cols-[minmax(0,1fr)_20rem]">
-            <div>
-              <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
-                Experience
-              </p>
-              <h2 className="text-2xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-3xl">
-                Where I&apos;ve worked
-              </h2>
-
-              <div className="mt-6">
-                {experience.map((job) => (
-                  <article
-                    key={job.role}
-                    className="grid gap-2 border-t border-slate-950/10 py-5 first:border-t-0 first:pt-0 dark:border-white/10 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-6"
-                  >
-                    <p className="font-mono text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 sm:pt-1">
-                      {job.period}
-                    </p>
-                    <div>
-                      <h3 className="text-base font-semibold tracking-tight text-slate-950 dark:text-white">
-                        {job.role} · {job.org}
-                      </h3>
-                      <p className="mt-1.5 max-w-2xl text-sm leading-6 text-slate-700 [text-wrap:pretty] dark:text-slate-300">
-                        {job.summary}
-                      </p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-
-              <Link
-                href="/about"
-                className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-semibold text-primary transition hover:text-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              >
-                More about me
-                <FaArrowRight size={13} aria-hidden="true" />
-              </Link>
-            </div>
-
-            <aside className="h-fit rounded-lg border border-slate-950/10 bg-white/88 p-5 dark:border-white/10 dark:bg-slate-950/72">
-              <h2 className="font-mono text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
-                Certifications
-              </h2>
-              <ul className="mt-3 space-y-3">
-                {certifications.map((cert) => (
-                  <li
-                    key={cert}
-                    className="flex gap-3 text-sm leading-6 text-slate-700 dark:text-slate-300"
-                  >
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-950 dark:bg-white" />
-                    <span>{cert}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4 border-t border-slate-950/10 pt-4 text-sm leading-6 text-slate-700 dark:border-white/10 dark:text-slate-300">
-                Honours Bachelor of Technology — Software Development, Seneca
-                Polytechnic. Expected August 2027.
-              </p>
-            </aside>
-          </div>
-        </section>
-
-        {/* HOW I BUILD */}
-        <section className="border-t border-slate-950/10 dark:border-white/10">
-          <div className="safe-x mx-auto grid max-w-7xl gap-8 py-16 lg:grid-cols-[minmax(0,1fr)_22rem]">
-            <div>
-              <p className="mb-4 max-w-max rounded-full border border-slate-950/10 bg-white/70 px-3 py-1 font-mono text-xs uppercase tracking-wide text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
-                How I build
-              </p>
-              <h2 className="text-2xl font-bold tracking-tight text-slate-950 [text-wrap:balance] dark:text-white sm:text-3xl">
-                AI-assisted, reviewable, repeatable.
-              </h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700 [text-wrap:pretty] dark:text-slate-300">
-                I use structured prompts, clear interfaces, and tools like
-                GitHub Copilot, Claude, and Cursor to move faster — while
-                keeping the code readable, verified, and owned by me. I care
-                about writing code that actually works, not just code that
-                looks good in a README. The goal is always the same: systems
-                that make work easier to repeat.
-              </p>
-              <Link
-                href="/skills"
-                className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-semibold text-primary transition hover:text-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              >
-                See technical skills
-                <FaArrowRight size={13} aria-hidden="true" />
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap content-start gap-2">
-              {stackChips.map((chip) => (
-                <span
-                  key={chip}
-                  className="rounded-full border border-slate-950/10 bg-slate-50 px-2.5 py-1 font-mono text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
-                >
-                  {chip}
-                </span>
-              ))}
+        <section className="home-work" aria-labelledby="selected-work-title">
+          <div className="page-container">
+            <div className="section-heading-row"><div><p className="section-label">Selected work</p><h2 id="selected-work-title">Built around real tasks.</h2></div><Link className="text-link" href="/work">See all work <FiArrowRight aria-hidden="true" /></Link></div>
+            <div className="work-list">
+              {selectedWork.map((project) => <article className="work-row" key={project.href}>
+                <div className="work-row-category"><span className="work-number">{project.number}</span><span>{project.title}</span><span className="work-status">{project.status}</span></div>
+                <div className="work-row-description"><h3><Link href={project.href}>{project.headline}</Link></h3><p>{project.summary}</p></div>
+                <Link href={project.href} className="work-row-link" aria-label={`Read the ${project.title} case study`}><FiArrowRight aria-hidden="true" /></Link>
+              </article>)}
             </div>
           </div>
         </section>
 
-        {/* CONTACT CTA */}
-        <section className="border-t border-slate-950/10 dark:border-white/10">
-          <div className="safe-x mx-auto flex max-w-7xl flex-col gap-5 py-14 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
-                Want to work together?
-              </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-700 dark:text-slate-300">
-                If the work fits what your team needs, email or LinkedIn is the
-                fastest way to reach me.
-              </p>
-            </div>
-
-            <Link
-              href="/contact"
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-contrast transition hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-950 sm:w-auto"
-            >
-              Contact me
-              <FaArrowRight size={13} aria-hidden="true" />
-            </Link>
-          </div>
+        <section className="home-process page-container" aria-labelledby="process-title">
+          <div><p className="section-label">A practical first step</p><h2 id="process-title">Start with one thing<br />you want to improve.</h2><p className="process-intro">You bring the problem and the context. I work with you to find a useful, achievable first project.</p><Link href="/services" className="text-link">How we can work together <FiArrowRight aria-hidden="true" /></Link></div>
+          <ol className="process-steps">
+            <li><span>01</span><div><h3>Understand the work</h3><p>A short introductory conversation about your team, your tools, and where the process gets difficult.</p></div></li>
+            <li><span>02</span><div><h3>Agree on a focused project</h3><p>A clear scope, price, and definition of what a successful result looks like before building begins.</p></div></li>
+            <li><span>03</span><div><h3>Build, test, and hand over</h3><p>A solution you can review and use, with instructions and optional ongoing maintenance.</p></div></li>
+          </ol>
         </section>
+
+        <section className="home-contact" aria-labelledby="home-contact-title"><div className="page-container"><p className="section-label">Let’s work together</p><h2 id="home-contact-title">What could work better<br />in your business?</h2><p>Tell me about the task, the idea, or the tool you wish you had.</p><Link href="/contact" className="button-primary">Discuss a project <FiArrowRight aria-hidden="true" /></Link></div></section>
       </main>
-    </div>
-  );
-}
-
-function MetaItem({ label, value }) {
-  return (
-    <div>
-      <dt className="font-mono text-[0.7rem] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-        {label}
-      </dt>
-      <dd className="mt-1 text-sm font-medium leading-5 text-slate-900 dark:text-slate-100">
-        {value}
-      </dd>
     </div>
   );
 }

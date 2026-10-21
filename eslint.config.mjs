@@ -21,6 +21,10 @@ const eslintConfig = [
       },
       globals: {
         clearInterval: "readonly",
+        navigator: "readonly",
+        requestAnimationFrame: "readonly",
+        URL: "readonly",
+        URLSearchParams: "readonly",
         document: "readonly",
         HTMLElement: "readonly",
         IntersectionObserver: "readonly",

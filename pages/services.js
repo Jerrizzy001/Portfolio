@@ -1,0 +1,27 @@
+import Link from 'next/link';
+import { FiArrowRight, FiGrid, FiGlobe, FiGitMerge, FiCpu } from 'react-icons/fi';
+import SiteLayout from '../components/SiteLayout';
+import styles from '../styles/content.module.css';
+
+const services = [
+  { title: 'Custom internal tools', Icon: FiGrid, description: 'Give your team a tool that fits the work: the right information, useful checks, and a clear next step.', examples: ['Estimators and calculators', 'Dashboards and review screens', 'Team applications and document tools'], link: '/work/estimator', label: 'See the estimating tool' },
+  { title: 'Websites and web applications', Icon: FiGlobe, description: 'Build a clear online experience for your customers, from explaining your business to helping them complete a task.', examples: ['Business websites', 'Customer-facing forms and workflows', 'Custom web applications'], link: '/work', label: 'Explore my work' },
+  { title: 'Automation and integrations', Icon: FiGitMerge, description: 'Connect the steps between your existing tools and reduce repetitive handling of the same information.', examples: ['Email and document workflows', 'Connections through supported APIs', 'Approvals, checks, and reporting'], link: '/work/email-to-erp', label: 'See an integration example' },
+  { title: 'Practical AI features', Icon: FiCpu, description: 'Use AI for a specific job where it can help, with review and verification designed into the process.', examples: ['Extracting information from documents', 'Classifying incoming requests', 'Search, drafting, and assistants'], link: '/work/estimator', label: 'See document processing in context' },
+];
+const phases = [
+  { title: 'Understand the task', description: 'A free introductory conversation about one problem, your current tools, and the result you need.' },
+  { title: 'Agree on a first project', description: 'Define the deliverable, scope, price, required access, and what successful completion means before building.' },
+  { title: 'Build, review, and hand over', description: 'Work through the agreed workflow together, verify the result, and provide the information needed to use it.' },
+];
+const questions = [
+  ['Can you work with the tools we already use?', 'We start by checking how those tools can connect, including available APIs, file exports, permissions, and access restrictions. The proposal will describe what is feasible and any dependencies.'],
+  ['Does every project need AI?', 'No. A reliable calculation, form, integration, or script may solve the problem. AI is an option when the task benefits from it.'],
+  ['How is a project priced?', 'After the introductory conversation, I propose a specific scope and price. The proposal also identifies any hosting, software, or third-party service costs.'],
+  ['What happens after handover?', 'Optional monthly maintenance and small improvements can be agreed separately, with defined responsibilities, included work, and support limits.'],
+  ['Can we work together remotely?', 'Yes. I am based in Toronto and work primarily remotely with clients in Canada and internationally. We agree on communication and review arrangements at the start.'],
+];
+
+export default function Services() {
+  return <SiteLayout title="Services" description="Custom software, websites, workflow integrations, and practical AI features for small businesses. Work with Jerry Nwachi on a clearly scoped first project." path="/services"><div className={`page-container ${styles.page}`}><header className="page-intro"><p className="section-label">How I can help</p><h1>Build around the way your business works.</h1><p>Custom tools for your team. Clear experiences for your customers. Connected workflows that make everyday work easier.</p><div className={styles.actions}><Link href="/contact" className="button-primary">Discuss a project <FiArrowRight aria-hidden="true" /></Link><Link href="/work" className="text-link">See examples of my work</Link></div></header><div>{services.map(({title,Icon,description,examples,link,label}) => <section className={styles.service} key={title}><Icon className={styles.serviceIcon} aria-hidden="true" /><div><h2>{title}</h2><p>{description}</p><div className={styles.actions}><Link className="text-link" href={link}>{label} <FiArrowRight aria-hidden="true" /></Link></div></div><ul aria-label={`${title} examples`}>{examples.map(example => <li key={example}>{example}</li>)}</ul></section>)}</div><section className={styles.section}><p className={styles.label}>A manageable first step</p><h2>Start with one useful improvement.</h2><p>You do not need a complete technical specification. Bring a recurring task, a difficult handoff, or an idea you want to make real.</p><ol className={styles.steps}>{phases.map((phase,index) => <li key={phase.title}><span className={styles.stepNumber}>0{index+1}</span><h3>{phase.title}</h3><p>{phase.description}</p></li>)}</ol></section><section className={styles.section}><h2>A few practical questions.</h2>{questions.map(([question,answer]) => <details className={styles.faq} key={question}><summary>{question}</summary><p>{answer}</p></details>)}</section><section className={styles.callout}><h2>Show me where the work gets difficult.</h2><p>Tell me what happens today and what you would like to improve. We will start by finding out whether there is a useful project we can work on together.</p><div className={styles.actions}><Link className="button-primary" href="/contact">Start a conversation <FiArrowRight aria-hidden="true" /></Link></div></section></div></SiteLayout>;
+}
